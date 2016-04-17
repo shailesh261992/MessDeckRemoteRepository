@@ -14,8 +14,8 @@ public class VenderDAO {
 	@Autowired
 	private HibernateTemplate template;
 
-	public void create(Vendor obj) {
-		template.save(obj);
+	public Long create(Vendor obj) {
+		return (Long) template.save(obj);
 	}
 
 	public void delete(Vendor obj) {
@@ -23,9 +23,8 @@ public class VenderDAO {
 
 	}
 
-	public void update(Vendor obj) {
-		template.update(obj);
-
+	public void update(Vendor vendor) {
+		template.update(vendor);
 	}
 
 	public Vendor read(long id) {

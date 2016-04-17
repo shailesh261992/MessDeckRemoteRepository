@@ -15,7 +15,6 @@ public class Address {
 	private String state;
 	private String country;
 	private String pinCode;
-	
 
 	public Address() {
 	}
@@ -66,6 +65,12 @@ public class Address {
 
 	public void setPinCode(String pinCode) {
 		this.pinCode = pinCode;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state + ", country="
+				+ country + ", pinCode=" + pinCode + "]";
 	}
 
 }

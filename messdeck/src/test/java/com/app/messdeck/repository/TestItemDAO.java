@@ -1,5 +1,6 @@
 package com.app.messdeck.repository;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ public class TestItemDAO {
 	private ItemDAO dao;
 
 	@Test
+	@Ignore
 	public void test() {
 		Item item1 = new Item("Rajama");
 		Item item2 = new Item("Chaval");

@@ -1,0 +1,29 @@
+{
+ 
+  "name": "Sai Mess",
+  "vendorddress": {
+    "street": null,
+    "city": "pune",
+    "state": null,
+    "country": null,
+    "pinCode": null
+  },
+  "owner": {
+    "name": {
+      "firstName": "Shailesh",
+      "lastName": "Kadam"
+    },
+    "address": {
+      "street": null,
+      "city": "pimpari",
+      "state": null,
+      "country": null,
+      "pinCode": null
+    },
+    "mobileNo": "7276248187",
+    "emailID": {
+      "emailId": "shailesh261992@gmail.com"
+    },
+    "gender": "MALE"
+  }
+}

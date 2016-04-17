@@ -1,38 +1,29 @@
-package com.app.messdeck.model;
+package com.app.messdeck.model.dto;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import com.app.messdeck.model.Address;
+import com.app.messdeck.model.Customer;
+import com.app.messdeck.model.MessDeckService;
+import com.app.messdeck.model.Owner;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Entity
-public class Vendor {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+@JsonInclude(Include.NON_EMPTY)
+public class VendorDTO {
+
 	private long id;
 	private String name;
 
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "addressID",nullable=false)
 	private Address vendorddress;
 
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "ownerID",nullable=false)
 	private Owner owner;
 
-	@OneToMany(mappedBy = "vendor")
 	private List<Customer> customers;
 
-	@OneToMany(mappedBy = "vendor")
 	private List<MessDeckService> services;
 
-	public Vendor() {
+	public VendorDTO() {
 	}
 
 	public long getId() {
@@ -106,7 +97,7 @@ public class Vendor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Vendor other = (Vendor) obj;
+		VendorDTO other = (VendorDTO) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;

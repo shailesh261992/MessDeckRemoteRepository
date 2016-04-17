@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class TestMessDeckServiceDAO {
 	@Autowired
 	private MessageDeckServiceDAO dao;
 
+	@Ignore
 	@Test
 	public void test() {
 		Item item1 = new Item("Rajama");
@@ -47,7 +49,7 @@ public class TestMessDeckServiceDAO {
 
 		Address address = new Address();
 		address.setCity("pune");
-		v.setAddress(address);
+		//v.setAddress(address);
 		v.setOwner(o);
 
 		 vdao.create(v);

@@ -16,11 +16,13 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.app.messdeck.repository" />
+	<context:component-scan base-package="com.app.messdeck.controller" />
+	<context:component-scan base-package="com.app.messdeck.service" />
 
 	<tx:annotation-driven transaction-manager="txManager"
 		mode="proxy" />
 
-
+     
 
 	<!-- <mvc:resources location="/ChainSystem/" mapping="/resource/**" /> -->
 

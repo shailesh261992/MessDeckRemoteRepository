@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -19,11 +20,17 @@ public class Person {
 	@Column(name = "PersonID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
 	@Embedded
 	private Name name;
-	@OneToOne(cascade=CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(nullable = false)
 	private Address address;
+
+	@Column(nullable = false)
 	private String mobileNo;
+
 	@Embedded
 	private EmailID emailID;
 	private Gender gender;
@@ -72,7 +79,7 @@ public class Person {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = (int) (prime * result + id);
+		result = prime * result + ((emailID == null) ? 0 : emailID.hashCode());
 		return result;
 	}
 
@@ -85,10 +92,10 @@ public class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		if (other.getId() == 0) {
-			return false;
-		}
-		if (id != other.id)
+		if (emailID == null) {
+			if (other.emailID != null)
+				return false;
+		} else if (!emailID.equals(other.emailID))
 			return false;
 		return true;
 	}
@@ -103,7 +110,8 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [Id = " + id + " ]";
+		return "Person [id=" + id + ", name=" + name + ", address=" + address + ", mobileNo=" + mobileNo + ", emailID="
+				+ emailID + ", gender=" + gender + "]";
 	}
 
 	public void copyFrom(Person person) {
