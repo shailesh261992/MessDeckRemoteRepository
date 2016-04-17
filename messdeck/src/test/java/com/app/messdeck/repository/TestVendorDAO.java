@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.app.messdeck.configuration.MessDeckConfiguration;
 import com.app.messdeck.model.Address;
 import com.app.messdeck.model.EmailID;
 import com.app.messdeck.model.Gender;
@@ -16,36 +17,35 @@ import com.app.messdeck.model.Owner;
 import com.app.messdeck.model.Vendor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:DefaultServlet-servlet.xml" })
+@ContextConfiguration(classes = { MessDeckConfiguration.class })
 public class TestVendorDAO {
 
 	@Autowired
 	private VenderDAO dao;
+	
 	private Vendor mess;
 	private Long generatedMessId;
 
-
-
-//	private Vendor createAndhraVendor() {
-//		Vendor andhraMess = new Vendor();
-//		andhraMess.setName("Andhra Mess");
-//
-//		Owner saiMessOwner = new Owner();
-//		saiMessOwner.setName(new Name("Nikunj", "Viramgama"));
-//		saiMessOwner.setEmailID(new EmailID("nikunj.virmgama@gmail.com"));
-//		saiMessOwner.setMobileNo("7030239888");
-//		Address ownerAddress = new Address();
-//		ownerAddress.setCity("pimplae-saudagar");
-//		saiMessOwner.setAddress(ownerAddress);
-//		saiMessOwner.setGender(Gender.MALE);
-//
-//		Address vendorAddress = new Address();
-//		vendorAddress.setCity("Hinjewadi");
-//
-//		andhraMess.setAddress(vendorAddress);
-//		andhraMess.setOwner(saiMessOwner);
-//		return andhraMess;
-//	}
+	// private Vendor createAndhraVendor() {
+	// Vendor andhraMess = new Vendor();
+	// andhraMess.setName("Andhra Mess");
+	//
+	// Owner saiMessOwner = new Owner();
+	// saiMessOwner.setName(new Name("Nikunj", "Viramgama"));
+	// saiMessOwner.setEmailID(new EmailID("nikunj.virmgama@gmail.com"));
+	// saiMessOwner.setMobileNo("7030239888");
+	// Address ownerAddress = new Address();
+	// ownerAddress.setCity("pimplae-saudagar");
+	// saiMessOwner.setAddress(ownerAddress);
+	// saiMessOwner.setGender(Gender.MALE);
+	//
+	// Address vendorAddress = new Address();
+	// vendorAddress.setCity("Hinjewadi");
+	//
+	// andhraMess.setAddress(vendorAddress);
+	// andhraMess.setOwner(saiMessOwner);
+	// return andhraMess;
+	// }
 
 	private Vendor createSaiVendor() {
 		Vendor saiMess = new Vendor();
@@ -73,17 +73,14 @@ public class TestVendorDAO {
 		mess = createSaiVendor();
 		generatedMessId = dao.create(mess);
 		mess.setId(generatedMessId);
-				assertEquals(mess, dao.read(generatedMessId));
-				
+		assertEquals(mess, dao.read(generatedMessId));
+
 		mess.setName("Sai Mess Services");
 		dao.update(mess);
 		assertEquals(mess, dao.read(generatedMessId));
-		
+
 		dao.delete(mess);
 		assertEquals(null, dao.read(generatedMessId));
-
-		
-		
 
 	}
 }
