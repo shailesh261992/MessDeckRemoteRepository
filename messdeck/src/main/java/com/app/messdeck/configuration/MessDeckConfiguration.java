@@ -57,7 +57,7 @@ public class MessDeckConfiguration {
 	}
 
 	@Bean
-	public SessionFactory sessionFactory() {
+	public LocalSessionFactoryBean sessionFactory() {
 
 		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
 		localSessionFactoryBean.setDataSource(dataSource());
@@ -71,20 +71,20 @@ public class MessDeckConfiguration {
 
 		localSessionFactoryBean.setHibernateProperties(hibernateProperties);
 
-		return localSessionFactoryBean.getObject();
+		return localSessionFactoryBean;
 	}
 
 	@Bean
 	public HibernateTransactionManager txManager() {
 		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
-		hibernateTransactionManager.setSessionFactory(sessionFactory());
+		hibernateTransactionManager.setSessionFactory((SessionFactory) sessionFactory());
 		return hibernateTransactionManager;
 	}
 
 	@Bean
 	public HibernateTemplate template() {
 		HibernateTemplate hibernateTemplate = new HibernateTemplate();
-		hibernateTemplate.setSessionFactory(sessionFactory());
+		hibernateTemplate.setSessionFactory((SessionFactory) sessionFactory());
 		return hibernateTemplate;
 	}
 
