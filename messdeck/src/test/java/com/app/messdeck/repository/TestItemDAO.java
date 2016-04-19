@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.app.messdeck.configuration.MessDeckConfiguration;
-import com.app.messdeck.model.Item;
+import com.app.messdeck.entity.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { MessDeckConfiguration.class })

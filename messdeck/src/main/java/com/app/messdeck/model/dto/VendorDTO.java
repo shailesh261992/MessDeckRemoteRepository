@@ -2,10 +2,10 @@ package com.app.messdeck.model.dto;
 
 import java.util.List;
 
-import com.app.messdeck.model.Address;
-import com.app.messdeck.model.Customer;
-import com.app.messdeck.model.MessDeckService;
-import com.app.messdeck.model.Owner;
+import com.app.messdeck.entity.Address;
+import com.app.messdeck.entity.Customer;
+import com.app.messdeck.entity.MessDeckService;
+import com.app.messdeck.entity.Owner;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 

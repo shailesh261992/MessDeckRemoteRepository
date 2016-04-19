@@ -1,4 +1,4 @@
-package com.app.messdeck.model;
+package com.app.messdeck.entity;
 
 public enum ServiceType {
 	TIFFIN, LUNCH, DINNER

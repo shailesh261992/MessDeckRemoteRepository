@@ -1,4 +1,4 @@
-package com.app.messdeck.model;
+package com.app.messdeck.entity;
 
 import javax.persistence.Entity;
 

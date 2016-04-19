@@ -5,7 +5,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.app.messdeck.model.Customer;
+import com.app.messdeck.entity.Customer;
 
 @Repository
 @Transactional

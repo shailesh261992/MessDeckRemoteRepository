@@ -1,4 +1,4 @@
-package com.app.messdeck.model;
+package com.app.messdeck.entity;
 
 import java.util.Date;
 import java.util.List;

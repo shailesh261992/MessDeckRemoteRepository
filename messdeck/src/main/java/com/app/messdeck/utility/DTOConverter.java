@@ -1,6 +1,6 @@
 package com.app.messdeck.utility;
 
-import com.app.messdeck.model.Vendor;
+import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.VendorDTO;
 
 public class DTOConverter {

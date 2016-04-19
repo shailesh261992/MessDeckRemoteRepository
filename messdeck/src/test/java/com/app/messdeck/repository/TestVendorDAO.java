@@ -7,17 +7,21 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.configuration.MessDeckConfiguration;
-import com.app.messdeck.model.Address;
-import com.app.messdeck.model.EmailID;
-import com.app.messdeck.model.Gender;
-import com.app.messdeck.model.Name;
-import com.app.messdeck.model.Owner;
-import com.app.messdeck.model.Vendor;
+import com.app.messdeck.configuration.MessDeckInitializer;
+import com.app.messdeck.entity.Address;
+import com.app.messdeck.entity.EmailID;
+import com.app.messdeck.entity.Gender;
+import com.app.messdeck.entity.Name;
+import com.app.messdeck.entity.Owner;
+import com.app.messdeck.entity.Vendor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { MessDeckConfiguration.class })
+@WebAppConfiguration
 public class TestVendorDAO {
 
 	@Autowired

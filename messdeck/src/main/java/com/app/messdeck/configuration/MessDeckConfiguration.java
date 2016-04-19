@@ -1,12 +1,17 @@
 package com.app.messdeck.configuration;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
@@ -15,77 +20,74 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.app.messdeck.model.Address;
-import com.app.messdeck.model.Customer;
-import com.app.messdeck.model.EmailID;
-import com.app.messdeck.model.Item;
-import com.app.messdeck.model.MessDeckService;
-import com.app.messdeck.model.Name;
-import com.app.messdeck.model.Owner;
-import com.app.messdeck.model.Person;
-import com.app.messdeck.model.Vendor;
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.app.messdeck.repository", "com.app.messdeck.controller",
 		"com.app.messdeck.service" })
-@EnableTransactionManagement
+@EnableTransactionManagement()
+@PropertySource("classpath:db.properties")
 public class MessDeckConfiguration {
+
+	@Autowired
+	private Environment env;
 
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		// viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
-
 		return viewResolver;
 	}
 
 	@Bean
 	public BasicDataSource dataSource() {
 		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		basicDataSource.setUrl("jdbc:mysql://localhost:3306/messdeck");
-		basicDataSource.setUsername("root");
-		basicDataSource.setPassword("Welcome@1");
+		basicDataSource.setDriverClassName(env.getProperty("db.driverClassName"));
+		basicDataSource.setUrl(env.getProperty("db.url"));
+		basicDataSource.setUsername(env.getProperty("db.userName"));
+		basicDataSource.setPassword(env.getProperty("db.password"));
 		basicDataSource.setInitialSize(2);
 		basicDataSource.setMaxActive(5);
-
 		return basicDataSource;
 
 	}
 
 	@Bean
-	public LocalSessionFactoryBean sessionFactory() {
+	public SessionFactory sessionFactory() throws IOException {
 
 		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
 		localSessionFactoryBean.setDataSource(dataSource());
-		localSessionFactoryBean.setAnnotatedClasses(Person.class, Customer.class, Address.class, Name.class,
-				EmailID.class, Owner.class, Vendor.class, Item.class, MessDeckService.class);
-
-		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create");
-		hibernateProperties.setProperty("hibernate.show_sql", "true");
-
-		localSessionFactoryBean.setHibernateProperties(hibernateProperties);
-
-		return localSessionFactoryBean;
+		localSessionFactoryBean.setPackagesToScan(new String[] { "com.app.messdeck.entity" });
+		localSessionFactoryBean.setHibernateProperties(hibernateProperties());
+		localSessionFactoryBean.afterPropertiesSet();
+		return localSessionFactoryBean.getObject();
 	}
 
 	@Bean
-	public HibernateTransactionManager txManager() {
+	public HibernateTransactionManager txManager() throws IOException {
 		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
-		hibernateTransactionManager.setSessionFactory((SessionFactory) sessionFactory());
+		hibernateTransactionManager.setSessionFactory(sessionFactory());
+
 		return hibernateTransactionManager;
 	}
 
 	@Bean
-	public HibernateTemplate template() {
-		HibernateTemplate hibernateTemplate = new HibernateTemplate();
-		hibernateTemplate.setSessionFactory((SessionFactory) sessionFactory());
+	public HibernateTemplate template() throws IOException {
+		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory());
 		return hibernateTemplate;
+	}
+
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+
+	private Properties hibernateProperties() {
+		Properties hibernateProperties = new Properties();
+		hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.hbm2ddl.auto"));
+		return hibernateProperties;
 	}
 
 }
