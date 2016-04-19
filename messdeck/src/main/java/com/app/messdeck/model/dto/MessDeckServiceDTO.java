@@ -1,44 +1,35 @@
-package com.app.messdeck.model;
+package com.app.messdeck.model.dto;
 
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import com.app.messdeck.model.Customer;
+import com.app.messdeck.model.Item;
+import com.app.messdeck.model.ServiceType;
+import com.app.messdeck.model.Vendor;
 
-@Entity
-public class MessDeckService {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+public class MessDeckServiceDTO {
+	
 	private long id;
-	@ManyToOne
+	
 
-	@JoinColumn(nullable = false, name = "vendorID")
 	private Vendor vendor;
 
-	@Column(nullable = false)
+	
 	private ServiceType serviceType;
-
-	@Column(nullable = false)
+	
+	
 	private Date date;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Service_ItemList")
+	
+	
 	private List<Item> meal;
 	private double cost;
 
-	@ManyToMany(mappedBy = "subscribedServices")
+	
 	private List<Customer> subscribers;
 
-	public MessDeckService(Vendor vendor, ServiceType serviceType, Date date, List<Item> meal, double cost) {
+	public MessDeckServiceDTO(Vendor vendor, ServiceType serviceType, Date date, List<Item> meal, double cost) {
 		super();
 		this.vendor = vendor;
 		this.serviceType = serviceType;
@@ -85,7 +76,6 @@ public class MessDeckService {
 
 	public void setMeal(List<Item> meal) {
 		this.meal = meal;
-
 	}
 
 	public double getCost() {

@@ -25,7 +25,7 @@ public class TestCustomerDAO {
 	@Autowired
 	CustomerDAO cdao;
 	@Autowired
-	VenderDAO vdao;
+	VenderDAOImpl vdao;
 
 	@Test
     @Ignore

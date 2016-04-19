@@ -20,7 +20,7 @@ import com.app.messdeck.model.Vendor;
 public class TestVendorDAO {
 
 	@Autowired
-	private VenderDAO dao;
+	private VenderDAOImpl dao;
 	private Vendor mess;
 	private Long generatedMessId;
 
