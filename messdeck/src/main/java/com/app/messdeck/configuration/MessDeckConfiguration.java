@@ -18,6 +18,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 		"com.app.messdeck.service" })
 @EnableTransactionManagement()
 @PropertySource("classpath:db.properties")
-public class MessDeckConfiguration {
+public class MessDeckConfiguration extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	private Environment env;
@@ -81,6 +82,12 @@ public class MessDeckConfiguration {
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
+
+	@Override
+	public void addResourceHandlers(
+			org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/");
+	};
 
 	private Properties hibernateProperties() {
 		Properties hibernateProperties = new Properties();
