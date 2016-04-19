@@ -18,7 +18,9 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
@@ -84,9 +86,11 @@ public class MessDeckConfiguration extends WebMvcConfigurerAdapter {
 	}
 
 	@Override
-	public void addResourceHandlers(
-			org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/");
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		// registry.addResourceHandler("/resources/**").addResourceLocations("/");
+
+		registry.addResourceHandler("/resources/**").addResourceLocations("/").setCachePeriod(3600).resourceChain(true)
+				.addResolver(new PathResourceResolver());
 	};
 
 	private Properties hibernateProperties() {
