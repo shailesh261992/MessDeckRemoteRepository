@@ -6,4 +6,6 @@ public interface MessDeckServiceDAO {
 
 	Long saveMessDeckService(MessDeckService messDeckService);
 
+	public void update();
+
 }
