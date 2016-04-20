@@ -26,10 +26,11 @@ import com.app.messdeck.entity.Vendor;
 public class TestMessDeckServiceDAO {
 
 	@Autowired
-	private VenderDAO vdao;
+	private VenderDAOImpl vdao;
 
-	@Autowired
-	private MessageDeckServiceDAO dao;
+	/*
+	 * @Autowired private MessageDeckServiceDAO dao;
+	 */
 
 	@Ignore
 	@Test
@@ -50,13 +51,13 @@ public class TestMessDeckServiceDAO {
 
 		Address address = new Address();
 		address.setCity("pune");
-		//v.setAddress(address);
+		// v.setAddress(address);
 		v.setOwner(o);
 
-		 vdao.create(v);
+		vdao.create(v);
 
 		MessDeckService messDeckService = new MessDeckService(v, ServiceType.TIFFIN, new Date(), meal, 100);
-		dao.create(messDeckService);
+		// dao.create(messDeckService);
 
 	}
 

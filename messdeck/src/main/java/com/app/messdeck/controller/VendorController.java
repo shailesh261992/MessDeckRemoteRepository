@@ -35,7 +35,6 @@ public class VendorController {
 		Long vendorID = service.createVendor(dto);
 		String resourceUrl = request.getRequestURL().toString() + "/" + vendorID;
 		ResponseEntity<?> responseEntity = new ResponseEntity<String>(resourceUrl, HttpStatus.CREATED);
-
 		return responseEntity;
 	}
 

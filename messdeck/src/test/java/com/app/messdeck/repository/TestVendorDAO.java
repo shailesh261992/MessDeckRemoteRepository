@@ -7,11 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.configuration.MessDeckConfiguration;
-import com.app.messdeck.configuration.MessDeckInitializer;
 import com.app.messdeck.entity.Address;
 import com.app.messdeck.entity.EmailID;
 import com.app.messdeck.entity.Gender;
@@ -25,8 +23,8 @@ import com.app.messdeck.entity.Vendor;
 public class TestVendorDAO {
 
 	@Autowired
-	private VenderDAO dao;
-	
+	private VendorDAO dao;
+
 	private Vendor mess;
 	private Long generatedMessId;
 

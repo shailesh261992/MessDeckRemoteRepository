@@ -9,7 +9,7 @@ import com.app.messdeck.entity.Vendor;
 
 @Repository
 @Transactional
-public class VenderDAO {
+public class VenderDAOImpl implements VendorDAO {
 
 	@Autowired
 	private HibernateTemplate template;
