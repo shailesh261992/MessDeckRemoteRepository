@@ -1,5 +1,7 @@
 package com.app.messdeck.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -27,8 +29,13 @@ public class VenderDAOImpl implements VendorDAO {
 		template.update(vendor);
 	}
 
-	public Vendor read(long id) {
+	public Vendor get(long id) {
 		return template.get(Vendor.class, id);
+	}
+
+	@Override
+	public List<Vendor> getAll() {
+		return template.loadAll(Vendor.class);
 	}
 
 }

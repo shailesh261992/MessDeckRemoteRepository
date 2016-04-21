@@ -1,5 +1,7 @@
 package com.app.messdeck.repository;
 
+import java.util.List;
+
 import com.app.messdeck.entity.Vendor;
 
 public interface VendorDAO {
@@ -10,6 +12,8 @@ public interface VendorDAO {
 
 	void update(Vendor vendor);
 
-	Vendor read(long id);
+	Vendor get(long id);
+
+	List<Vendor> getAll();
 
 }

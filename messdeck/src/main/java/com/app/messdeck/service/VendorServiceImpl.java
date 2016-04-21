@@ -16,7 +16,7 @@ public class VendorServiceImpl implements VendorService {
 	private VendorDAO dao;
 
 	public VendorDTO getVendor(Long id) {
-		return DTOConverter.EntityToDTOConverter(dao.read(id));
+		return DTOConverter.EntityToDTOConverter(dao.get(id));
 	}
 
 	public Long createVendor(VendorDTO vendorDTO) {
@@ -29,7 +29,7 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	public void deleteVendor(Long id) {
-		dao.delete(dao.read(id));
+		dao.delete(dao.get(id));
 	}
 
 }
