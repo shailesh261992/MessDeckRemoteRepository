@@ -2,6 +2,7 @@ package com.app.messdeck.repository;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,7 @@ public class TestVendorDAO {
 	}
 
 	@Test
+	@Ignore
 	public void testCRUDOperations() {
 		mess = createSaiVendor();
 		generatedMessId = dao.create(mess);
@@ -83,6 +85,23 @@ public class TestVendorDAO {
 
 		dao.delete(mess);
 		assertEquals(null, dao.read(generatedMessId));
+
+	}
+
+	@Test
+	@Ignore
+
+	public void testCreate() {
+		mess = createSaiVendor();
+		dao.create(mess);
+	}
+
+	@Test
+	public void testUpdate() {
+		mess = createSaiVendor();
+		mess.setId(3);
+		System.out.println("### = " + dao.read(3));
+		dao.update(mess);
 
 	}
 }
