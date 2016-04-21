@@ -1,37 +1,16 @@
-package com.app.messdeck.entity;
+package com.app.messdeck.model.dto;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import com.app.messdeck.entity.Address;
+import com.app.messdeck.entity.EmailID;
+import com.app.messdeck.entity.Gender;
+import com.app.messdeck.entity.Name;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Person {
+public class PersonDTO {
 
-	@Id
-	@Column(name = "PersonID")
-	@GeneratedValue(strategy = GenerationType.TABLE)
 	private long id;
-
-	@Embedded
 	private Name name;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(nullable = false)
 	private Address address;
-
-	@Column(nullable = false)
 	private String mobileNo;
-
-	@Embedded
 	private EmailID emailID;
 	private Gender gender;
 
@@ -91,7 +70,7 @@ public class Person {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Person other = (Person) obj;
+		PersonDTO other = (PersonDTO) obj;
 		if (emailID == null) {
 			if (other.emailID != null)
 				return false;
@@ -112,13 +91,6 @@ public class Person {
 	public String toString() {
 		return "Person [id=" + id + ", name=" + name + ", address=" + address + ", mobileNo=" + mobileNo + ", emailID="
 				+ emailID + ", gender=" + gender + "]";
-	}
-
-	public void copyFrom(Person person) {
-		this.address = person.address;
-		this.emailID = person.emailID;
-		this.mobileNo = person.mobileNo;
-
 	}
 
 }

@@ -1,35 +1,15 @@
 package com.app.messdeck.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.app.messdeck.entity.Customer;
 
-@Repository
-@Transactional
-public class CustomerDAO {
+public interface CustomerDAO {
 
-    @Autowired
-	private HibernateTemplate template;
+	Long create(Customer obj);
 
-	public void create(Customer obj) {
-		template.save(obj);
-	}
+	void delete(Customer obj);
 
-	public void delete(Customer obj) {
-		template.delete(obj);
+	void update(Customer obj);
 
-	}
-
-	public void update(Customer obj) {
-		template.update(obj);
-
-	}
-
-	public Customer read(long id) {
-		return template.get(Customer.class, id);
-	}
+	Customer read(long id);
 
 }
