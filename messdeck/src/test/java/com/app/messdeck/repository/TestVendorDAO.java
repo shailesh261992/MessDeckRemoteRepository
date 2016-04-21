@@ -32,6 +32,7 @@ public class TestVendorDAO {
 	}
 
 	@Test
+
 	@Rollback(true)
 	@Transactional
 	public void create2() {
