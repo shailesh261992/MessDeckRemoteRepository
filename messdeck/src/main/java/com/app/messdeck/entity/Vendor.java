@@ -7,23 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Vendor {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String name;
 
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "addressID",nullable=false)
-	private Address vendorddress;
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private VendorAddress vendorddress;
 
-	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "ownerID",nullable=false)
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private Owner owner;
 
 	@OneToMany(mappedBy = "vendor")
@@ -59,6 +60,7 @@ public class Vendor {
 		this.owner = owner;
 	}
 
+	@OneToMany(mappedBy = "vendor")
 	public List<MessDeckService> getServices() {
 		return services;
 	}
@@ -67,11 +69,11 @@ public class Vendor {
 		this.services = services;
 	}
 
-	public Address getVendorddress() {
+	public VendorAddress getVendorddress() {
 		return vendorddress;
 	}
 
-	public void setVendorddress(Address vendorddress) {
+	public void setVendorddress(VendorAddress vendorddress) {
 		this.vendorddress = vendorddress;
 	}
 

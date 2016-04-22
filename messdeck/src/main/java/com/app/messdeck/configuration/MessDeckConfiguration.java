@@ -60,7 +60,8 @@ public class MessDeckConfiguration extends WebMvcConfigurerAdapter {
 
 		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
 		localSessionFactoryBean.setDataSource(dataSource());
-		localSessionFactoryBean.setPackagesToScan(new String[] { "com.app.messdeck.entity" });
+		localSessionFactoryBean
+				.setPackagesToScan(new String[] { "com.app.messdeck.entity", "com.websystique.hibernate.model" });
 		localSessionFactoryBean.setHibernateProperties(hibernateProperties());
 		localSessionFactoryBean.afterPropertiesSet();
 		return localSessionFactoryBean.getObject();

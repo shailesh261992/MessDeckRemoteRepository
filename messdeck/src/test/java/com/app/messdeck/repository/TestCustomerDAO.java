@@ -29,7 +29,7 @@ public class TestCustomerDAO {
 	VenderDAOImpl vdao;
 
 	@Test
-    @Ignore
+	@Ignore
 	public void test() {
 
 		Vendor v = new Vendor();
@@ -41,7 +41,7 @@ public class TestCustomerDAO {
 
 		Address address = new Address();
 		address.setCity("pune");
-		//v.setAddress(address);
+		// v.setAddress(address);
 		v.setOwner(o);
 
 		vdao.create(v);
@@ -54,13 +54,12 @@ public class TestCustomerDAO {
 		customer.setVendor(v);
 		customer.setGender(Gender.FEMALE);
 		customer.setEmailID(new EmailID("shailesh261992@gmail.com"));
-	
 
 		Address a = new Address();
 		a.setCity("satara");
-		
-		customer.setAddress(a);
-		
+
+		// customer.setAddress(a);
+
 		cdao.create(customer);
 
 		// Item item1 = new Item();

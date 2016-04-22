@@ -1,33 +1,24 @@
 package com.app.messdeck.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity
-public class Owner extends Person {
+public class VendorAddress extends Address {
 	@Id
 	@GeneratedValue(generator = "foreigngen")
 	@GenericGenerator(strategy = "foreign", name = "foreigngen", parameters = @Parameter(name = "property", value = "vendor") )
 	@Column(name = "id")
 	private long id;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private OwnerAddress ownerAddress;
-
-	@OneToOne(mappedBy = "owner")
+	@OneToOne(mappedBy = "vendorddress")
 	private Vendor vendor;
-
-	public Owner() {
-	}
 
 	public long getId() {
 		return id;
@@ -35,14 +26,6 @@ public class Owner extends Person {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public OwnerAddress getOwnerAddress() {
-		return ownerAddress;
-	}
-
-	public void setOwnerAddress(OwnerAddress ownerAddress) {
-		this.ownerAddress = ownerAddress;
 	}
 
 	public Vendor getVendor() {
@@ -55,7 +38,7 @@ public class Owner extends Person {
 
 	@Override
 	public String toString() {
-		return "Owner [id=" + id + ", ownerAddress=" + ownerAddress + "]";
+		return "VendorAddress [id=" + id + "]";
 	}
 
 }

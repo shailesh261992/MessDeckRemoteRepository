@@ -15,7 +15,7 @@ public class DTOConverter {
 			vendor.setId(dto.getId());
 			vendor.setName(dto.getName());
 			vendor.setOwner(dto.getOwner());
-			vendor.setVendorddress(dto.getVendorddress());
+			// vendor.setVendorddress(dto.getVendorddress());
 		}
 
 		return vendor;
@@ -40,8 +40,8 @@ public class DTOConverter {
 
 	public static Customer DTOToEntityCoverter(CustomerDTO dto) {
 		Customer customer = new Customer();
-		customer.setId(dto.getId());
-		customer.setAddress(dto.getAddress());
+		// customer.setId(dto.getId());
+		// customer.setAddress(dto.getAddress());
 		customer.setEmailID(dto.getEmailID());
 		customer.setGender(dto.getGender());
 		customer.setMobileNo(dto.getMobileNo());
@@ -56,13 +56,13 @@ public class DTOConverter {
 
 	public static CustomerDTO EntityToDTOConverter(Customer customer) {
 		CustomerDTO dto = new CustomerDTO();
-		dto.setAddress(customer.getAddress());
+		// dto.setAddress(customer.getAddress());
 		dto.setEmailID(customer.getEmailID());
 		dto.setGender(customer.getGender());
 		dto.setMobileNo(customer.getMobileNo());
 		dto.setName(customer.getName());
 		dto.setVendorID(customer.getVendor().getId());
-		dto.setId(customer.getId());
+		// dto.setId(customer.getId());
 		return dto;
 
 	}

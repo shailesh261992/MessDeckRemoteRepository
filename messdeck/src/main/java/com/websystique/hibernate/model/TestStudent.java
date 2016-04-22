@@ -1,11 +1,13 @@
-package com.app.messdeck.repository;
+package com.websystique.hibernate.model;
 
-import static com.app.messdeck.repository.testData.SampleVendorData.getVendorOne;
-import static org.junit.Assert.assertEquals;
+import java.io.Serializable;
+
+import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -15,19 +17,21 @@ import com.app.messdeck.configuration.MessDeckConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { MessDeckConfiguration.class })
 @WebAppConfiguration
-public class TestVendorDAO {
+public class TestStudent {
 
 	@Autowired
-	private VendorDAO dao;
+	HibernateTemplate template;
 
 	@Test
-	// @Rollback(true)
-	// @Transactional
+	@Transactional
+	public void test() {
+		Student student = new Student("Sam", "Disilva", "Maths");
+		Address address = new Address("10 Silver street", "NYC", "USA");
+		Serializable id = template.save(student);
+		address.setId((long) id);
+		student.setAddress(address);
+		template.save(student);
 
-	public void create() {
-		System.out.println("TTTT " + getVendorOne());
-		dao.create(getVendorOne());
-		assertEquals(1, dao.getAll().size());
 	}
 
 }

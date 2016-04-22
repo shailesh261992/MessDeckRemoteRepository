@@ -1,32 +1,25 @@
 package com.app.messdeck.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public class Person {
 
-	@Id
-	@Column(name = "PersonID")
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private long id;
+	// @Id
+	// // @Column(name = "PersonID")
+	// // @GeneratedValue(strategy = GenerationType.TABLE)
+	// private long id;
 
 	@Embedded
 	private Name name;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(nullable = false)
-	private Address address;
+	// @OneToOne(cascade = CascadeType.ALL)
+	// @JoinColumn(nullable = false)
+	// @OneToOne(cascade = CascadeType.ALL)
+	// @PrimaryKeyJoinColumn
+	// private Address address;
 
 	@Column(nullable = false)
 	private String mobileNo;
@@ -35,13 +28,13 @@ public class Person {
 	private EmailID emailID;
 	private Gender gender;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	// public long getId() {
+	// return id;
+	// }
+	//
+	// public void setId(long id) {
+	// this.id = id;
+	// }
 
 	public Name getName() {
 		return name;
@@ -50,14 +43,14 @@ public class Person {
 	public void setName(Name name) {
 		this.name = name;
 	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	//
+	// public Address getAddress() {
+	// return address;
+	// }
+	//
+	// public void setAddress(Address address) {
+	// this.address = address;
+	// }
 
 	public String getMobileNo() {
 		return mobileNo;
@@ -110,15 +103,14 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", address=" + address + ", mobileNo=" + mobileNo + ", emailID="
-				+ emailID + ", gender=" + gender + "]";
+		return "Person [name=" + name + ", mobileNo=" + mobileNo + ", emailID=" + emailID + ", gender=" + gender + "]";
 	}
 
-	public void copyFrom(Person person) {
-		this.address = person.address;
-		this.emailID = person.emailID;
-		this.mobileNo = person.mobileNo;
-
-	}
+	// @Override
+	// public String toString() {
+	// return "Person [id=" + id + ", name=" + name + ", address=" + address +
+	// ", mobileNo=" + mobileNo + ", emailID="
+	// + emailID + ", gender=" + gender + "]";
+	// }
 
 }

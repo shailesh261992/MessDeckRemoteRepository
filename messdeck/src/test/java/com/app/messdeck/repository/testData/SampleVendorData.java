@@ -2,12 +2,13 @@ package com.app.messdeck.repository.testData;
 
 import java.util.ArrayList;
 
-import com.app.messdeck.entity.Address;
 import com.app.messdeck.entity.EmailID;
 import com.app.messdeck.entity.Gender;
 import com.app.messdeck.entity.Name;
 import com.app.messdeck.entity.Owner;
+import com.app.messdeck.entity.OwnerAddress;
 import com.app.messdeck.entity.Vendor;
+import com.app.messdeck.entity.VendorAddress;
 
 public class SampleVendorData {
 
@@ -15,31 +16,45 @@ public class SampleVendorData {
 
 		Vendor saiMess = new Vendor();
 		saiMess.setName("Sai Mess");
-		Address vendorAddress = new Address();
+		saiMess.setVendorddress(createVendorAddress(saiMess));
+		saiMess.setOwner(createOwnerOne(saiMess));
+
+		return saiMess;
+
+	}
+
+	private static VendorAddress createVendorAddress(Vendor saiMess) {
+		VendorAddress vendorAddress = new VendorAddress();
 		vendorAddress.setCity("pune");
 		vendorAddress.setCountry("India");
 		vendorAddress.setPinCode("410");
+		vendorAddress.setVendor(saiMess);
+		return vendorAddress;
+	}
 
+	private static Owner createOwnerOne(Vendor saiMess) {
 		Owner saiMessOwner = new Owner();
 		saiMessOwner.setName(new Name("Shailesh", "Kadam"));
 		saiMessOwner.setEmailID(new EmailID("shailesh261992@gmail.com"));
 		saiMessOwner.setMobileNo("7276248187");
-		Address ownerAddress = new Address();
-		ownerAddress.setCity("Talegaon");
-		saiMessOwner.setAddress(ownerAddress);
 		saiMessOwner.setGender(Gender.MALE);
+		saiMessOwner.setVendor(saiMess);
+		saiMessOwner.setOwnerAddress(createOwnerAddressOne(saiMessOwner));
+		return saiMessOwner;
+	}
 
-		saiMess.setVendorddress(vendorAddress);
-		saiMess.setOwner(saiMessOwner);
-		return saiMess;
-
+	private static OwnerAddress createOwnerAddressOne(Owner saiMessOwner) {
+		OwnerAddress ownerAddress = new OwnerAddress();
+		ownerAddress.setCity("Talegaon");
+		ownerAddress.setOwner(saiMessOwner);
+		return ownerAddress;
 	}
 
 	public static Vendor getVendorTwo() {
 
 		Vendor andhraMess = new Vendor();
 		andhraMess.setName("Andhra Mess");
-		Address vendorAddress = new Address();
+		VendorAddress vendorAddress = new VendorAddress();
 		vendorAddress.setCity("pune");
 		vendorAddress.setCountry("India");
 		vendorAddress.setPinCode("410");
@@ -48,9 +63,9 @@ public class SampleVendorData {
 		andhraMessOwner.setName(new Name("Nikunj", "Viramgama"));
 		andhraMessOwner.setEmailID(new EmailID("Nikunj@gmail.com"));
 		andhraMessOwner.setMobileNo("9876543210");
-		Address ownerAddress = new Address();
+		OwnerAddress ownerAddress = new OwnerAddress();
 		ownerAddress.setCity("Pimpari");
-		andhraMessOwner.setAddress(ownerAddress);
+		andhraMessOwner.setOwnerAddress(ownerAddress);
 		andhraMessOwner.setGender(Gender.MALE);
 
 		andhraMess.setVendorddress(vendorAddress);
@@ -63,7 +78,7 @@ public class SampleVendorData {
 
 		Vendor santoshMess = new Vendor();
 		santoshMess.setName("Santosh Mess");
-		Address vendorAddress = new Address();
+		VendorAddress vendorAddress = new VendorAddress();
 		vendorAddress.setCity("pune");
 		vendorAddress.setCountry("India");
 		vendorAddress.setPinCode("410");
@@ -72,9 +87,9 @@ public class SampleVendorData {
 		andhraMessOwner.setName(new Name("Tushar", "Bandal"));
 		andhraMessOwner.setEmailID(new EmailID("tushar@gmail.com"));
 		andhraMessOwner.setMobileNo("7876643210");
-		Address ownerAddress = new Address();
+		OwnerAddress ownerAddress = new OwnerAddress();
 		ownerAddress.setCity("Nal stop");
-		andhraMessOwner.setAddress(ownerAddress);
+		andhraMessOwner.setOwnerAddress(ownerAddress);
 		andhraMessOwner.setGender(Gender.MALE);
 
 		santoshMess.setVendorddress(vendorAddress);

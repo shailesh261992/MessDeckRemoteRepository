@@ -1,30 +1,25 @@
 package com.app.messdeck.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Basic;
+import javax.persistence.MappedSuperclass;
 
-@Entity
+//@Entity
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
+@MappedSuperclass
 public class Address {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@Basic
 	private String street;
+	@Basic
 	private String city;
+	@Basic
 	private String state;
+	@Basic
 	private String country;
+	@Basic
 	private String pinCode;
 
 	public Address() {
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getStreet() {
@@ -69,8 +64,8 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state + ", country="
-				+ country + ", pinCode=" + pinCode + "]";
+		return "Address [street=" + street + ", city=" + city + ", state=" + state + ", country=" + country
+				+ ", pinCode=" + pinCode + "]";
 	}
 
 }
