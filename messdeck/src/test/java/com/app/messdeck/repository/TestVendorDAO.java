@@ -33,7 +33,7 @@ public class TestVendorDAO {
 
 	@Test
 
-	@Rollback(true)
+	// @Rollback(true)
 	@Transactional
 	public void create2() {
 		dao.create(getVendorOne());
