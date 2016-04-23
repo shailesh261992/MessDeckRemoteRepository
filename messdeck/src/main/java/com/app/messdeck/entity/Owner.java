@@ -16,6 +16,7 @@ public class Owner extends Person {
 	private OwnerAddress ownerAddress;
 
 	public Owner() {
+		this.ownerAddress = new OwnerAddress();
 	}
 
 	public long getId() {

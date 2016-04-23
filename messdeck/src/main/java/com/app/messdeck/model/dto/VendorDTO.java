@@ -6,9 +6,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.MessDeckService;
-import com.app.messdeck.entity.Owner;
 import com.app.messdeck.entity.Vendor;
-import com.app.messdeck.entity.VendorAddress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -20,7 +18,7 @@ public class VendorDTO {
 
 	private VendorAddressDTO vendorAddress;
 
-	private Owner owner;
+	private OwnerDTO owner;
 
 	private List<Customer> customers;
 
@@ -45,11 +43,11 @@ public class VendorDTO {
 		this.name = name;
 	}
 
-	public Owner getOwner() {
+	public OwnerDTO getOwner() {
 		return owner;
 	}
 
-	public void setOwner(Owner owner) {
+	public void setOwner(OwnerDTO owner) {
 		this.owner = owner;
 	}
 
@@ -117,9 +115,9 @@ public class VendorDTO {
 	public Vendor toVendor() {
 		Vendor vendor = new Vendor();
 		BeanUtils.copyProperties(this, vendor);
-		VendorAddress vendorAddress = new VendorAddress();
-		vendor.setVendorAddress(vendorAddress);
-		BeanUtils.copyProperties(this.getVendorAddress(), vendorAddress);
+		BeanUtils.copyProperties(this.getVendorAddress(), vendor.getVendorAddress());
+		BeanUtils.copyProperties(this.getOwner(), vendor.getOwner());
+		BeanUtils.copyProperties(this.getOwner().getOwnerAddress(), vendor.getOwner().getOwnerAddress());
 
 		return vendor;
 

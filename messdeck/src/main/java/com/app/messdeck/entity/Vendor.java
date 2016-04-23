@@ -34,6 +34,8 @@ public class Vendor {
 	private List<MessDeckService> services;
 
 	public Vendor() {
+		this.owner = new Owner();
+		this.vendorAddress = new VendorAddress();
 	}
 
 	public long getId() {

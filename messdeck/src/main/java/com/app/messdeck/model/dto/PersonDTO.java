@@ -1,26 +1,17 @@
 package com.app.messdeck.model.dto;
 
-import com.app.messdeck.entity.Address;
 import com.app.messdeck.entity.EmailID;
 import com.app.messdeck.entity.Gender;
 import com.app.messdeck.entity.Name;
 
 public class PersonDTO {
 
-	private long id;
 	private Name name;
-	private Address address;
+
 	private String mobileNo;
+
 	private EmailID emailID;
 	private Gender gender;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public Name getName() {
 		return name;
@@ -28,14 +19,6 @@ public class PersonDTO {
 
 	public void setName(Name name) {
 		this.name = name;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
 	}
 
 	public String getMobileNo() {
@@ -54,7 +37,6 @@ public class PersonDTO {
 		this.emailID = emailID;
 	}
 
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -62,7 +44,6 @@ public class PersonDTO {
 		return result;
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -89,8 +70,6 @@ public class PersonDTO {
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", address=" + address + ", mobileNo=" + mobileNo + ", emailID="
-				+ emailID + ", gender=" + gender + "]";
+		return "Person [name=" + name + ", mobileNo=" + mobileNo + ", emailID=" + emailID + ", gender=" + gender + "]";
 	}
-
 }
