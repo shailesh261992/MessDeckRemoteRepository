@@ -16,7 +16,7 @@ public class SampleVendorData {
 
 		Vendor saiMess = new Vendor();
 		saiMess.setName("Sai Mess");
-		saiMess.setVendorddress(createVendorAddress(saiMess));
+		saiMess.setVendorAddress(createVendorAddress(saiMess));
 		saiMess.setOwner(createOwnerOne(saiMess));
 
 		return saiMess;
@@ -66,7 +66,7 @@ public class SampleVendorData {
 		andhraMessOwner.setOwnerAddress(ownerAddress);
 		andhraMessOwner.setGender(Gender.MALE);
 
-		andhraMess.setVendorddress(vendorAddress);
+		andhraMess.setVendorAddress(vendorAddress);
 		andhraMess.setOwner(andhraMessOwner);
 		return andhraMess;
 
@@ -90,7 +90,7 @@ public class SampleVendorData {
 		andhraMessOwner.setOwnerAddress(ownerAddress);
 		andhraMessOwner.setGender(Gender.MALE);
 
-		santoshMess.setVendorddress(vendorAddress);
+		santoshMess.setVendorAddress(vendorAddress);
 		santoshMess.setOwner(andhraMessOwner);
 		return santoshMess;
 

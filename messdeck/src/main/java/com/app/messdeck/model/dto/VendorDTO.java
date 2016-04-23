@@ -2,9 +2,12 @@ package com.app.messdeck.model.dto;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.MessDeckService;
 import com.app.messdeck.entity.Owner;
+import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.entity.VendorAddress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -15,7 +18,7 @@ public class VendorDTO {
 	private long id;
 	private String name;
 
-	private VendorAddress vendorddress;
+	private VendorAddressDTO vendorAddress;
 
 	private Owner owner;
 
@@ -58,12 +61,12 @@ public class VendorDTO {
 		this.services = services;
 	}
 
-	public VendorAddress getVendorddress() {
-		return vendorddress;
+	public VendorAddressDTO getVendorAddress() {
+		return vendorAddress;
 	}
 
-	public void setVendorddress(VendorAddress vendorddress) {
-		this.vendorddress = vendorddress;
+	public void setVendorAddress(VendorAddressDTO vendorAddress) {
+		this.vendorAddress = vendorAddress;
 	}
 
 	public List<Customer> getCustomers() {
@@ -76,7 +79,7 @@ public class VendorDTO {
 
 	@Override
 	public String toString() {
-		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorddress + ", owner=" + owner
+		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + ", owner=" + owner
 				+ ", customers=" + customers + ", services=" + services + "]";
 	}
 
@@ -109,5 +112,16 @@ public class VendorDTO {
 		} else if (!owner.equals(other.owner))
 			return false;
 		return true;
+	}
+
+	public Vendor toVendor() {
+		Vendor vendor = new Vendor();
+		BeanUtils.copyProperties(this, vendor);
+		VendorAddress vendorAddress = new VendorAddress();
+		vendor.setVendorAddress(vendorAddress);
+		BeanUtils.copyProperties(this.getVendorAddress(), vendorAddress);
+
+		return vendor;
+
 	}
 }

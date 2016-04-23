@@ -21,7 +21,7 @@ public class Vendor {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
-	private VendorAddress vendorddress;
+	private VendorAddress vendorAddress;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
@@ -69,12 +69,12 @@ public class Vendor {
 		this.services = services;
 	}
 
-	public VendorAddress getVendorddress() {
-		return vendorddress;
+	public VendorAddress getVendorAddress() {
+		return vendorAddress;
 	}
 
-	public void setVendorddress(VendorAddress vendorddress) {
-		this.vendorddress = vendorddress;
+	public void setVendorAddress(VendorAddress vendorAddress) {
+		this.vendorAddress = vendorAddress;
 	}
 
 	public List<Customer> getCustomers() {
@@ -87,7 +87,7 @@ public class Vendor {
 
 	@Override
 	public String toString() {
-		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorddress + ", owner=" + owner
+		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + ", owner=" + owner
 				+ ", customers=" + customers + ", services=" + services + "]";
 	}
 

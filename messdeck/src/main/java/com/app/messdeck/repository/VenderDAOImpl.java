@@ -21,7 +21,7 @@ public class VenderDAOImpl implements VendorDAO {
 	public Long create(Vendor vendor) {
 
 		Owner owner = vendor.getOwner();
-		VendorAddress vendorddress = vendor.getVendorddress();
+		VendorAddress vendorddress = vendor.getVendorAddress();
 
 		detachVendorFromAddressAndOwner(vendor);
 		template.save(vendor);
@@ -51,19 +51,19 @@ public class VenderDAOImpl implements VendorDAO {
 
 	private void detachVendorFromAddressAndOwner(Vendor vendor) {
 		vendor.setOwner(null);
-		vendor.setVendorddress(null);
+		vendor.setVendorAddress(null);
 	}
 
 	private void attchVendorWithAddressAndOwner(Vendor vendor, Owner owner, VendorAddress vendorddress) {
 		vendor.setOwner(owner);
-		vendor.setVendorddress(vendorddress);
+		vendor.setVendorAddress(vendorddress);
 	}
 
 	private Vendor attchVendorIDToOwnerOwneraddressVendoraddress(Vendor vendor) {
 		System.out.println("**** vendor = " + vendor);
 		vendor.getOwner().setId(vendor.getId());
 		vendor.getOwner().getOwnerAddress().setId(vendor.getId());
-		vendor.getVendorddress().setId(vendor.getId());
+		vendor.getVendorAddress().setId(vendor.getId());
 		return vendor;
 	}
 }

@@ -50,7 +50,7 @@ public class TestVendorDAO {
 		Long id = dao.create(getVendorOne());
 		Vendor vendor = dao.get(id);
 		assertEquals(getVendorOne().getOwner(), vendor.getOwner());
-		assertEquals(getVendorOne().getVendorddress(), vendor.getVendorddress());
+		assertEquals(getVendorOne().getVendorAddress(), vendor.getVendorAddress());
 		assertEquals(getVendorOne().getOwner().getOwnerAddress(), vendor.getOwner().getOwnerAddress());
 
 	}
