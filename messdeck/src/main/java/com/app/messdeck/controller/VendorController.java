@@ -1,8 +1,12 @@
 package com.app.messdeck.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +30,14 @@ public class VendorController {
 	}
 
 	@RequestMapping("/{id}")
-	public VendorDTO getVendor(@PathVariable Long id) {
-		return service.getVendor(id);
+	public Resource<VendorDTO> getVendorSummary(@PathVariable Long id) {
+
+		VendorDTO vendorSummaryDTO = service.getVendorSummary(id);
+		Resource<VendorDTO> resource = new Resource<>(vendorSummaryDTO);
+		resource.add(linkTo(methodOn(VendorController.class).getVendorSummary(id)).withSelfRel());
+
+		return resource;
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

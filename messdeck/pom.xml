@@ -27,7 +27,7 @@
 			<artifactId>spring-core</artifactId>
 			<!-- <version>4.1.0.RELEASE</version> -->
 			<version>${spring.version}</version>
-			
+
 		</dependency>
 
 		<dependency>
@@ -110,18 +110,11 @@
 			<version>5.1.10</version>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.4.1.1</version>
-		</dependency> -->
-		
-		
+		<!-- <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-core</artifactId> 
+			<version>2.4.1</version> </dependency> <dependency> <groupId>com.fasterxml.jackson.core</groupId> 
+			<artifactId>jackson-databind</artifactId> <version>2.4.1.1</version> </dependency> -->
+
+
 		<!-- Need this for json to/from object -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -141,7 +134,7 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -168,6 +161,16 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.1.7.RELEASE</version>
 		</dependency>
+
+
+       <!-- Sprin HATEOAS Support -->
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+			<version>0.19.0.RELEASE</version>
+		</dependency>
+
+
 
 
 	</dependencies>

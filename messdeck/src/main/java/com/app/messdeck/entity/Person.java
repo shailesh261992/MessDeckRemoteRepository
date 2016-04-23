@@ -7,19 +7,8 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Person {
 
-	// @Id
-	// // @Column(name = "PersonID")
-	// // @GeneratedValue(strategy = GenerationType.TABLE)
-	// private long id;
-
 	@Embedded
 	private Name name;
-
-	// @OneToOne(cascade = CascadeType.ALL)
-	// @JoinColumn(nullable = false)
-	// @OneToOne(cascade = CascadeType.ALL)
-	// @PrimaryKeyJoinColumn
-	// private Address address;
 
 	@Column(nullable = false)
 	private String mobileNo;
@@ -28,14 +17,6 @@ public class Person {
 	private EmailID emailID;
 	private Gender gender;
 
-	// public long getId() {
-	// return id;
-	// }
-	//
-	// public void setId(long id) {
-	// this.id = id;
-	// }
-
 	public Name getName() {
 		return name;
 	}
@@ -43,14 +24,6 @@ public class Person {
 	public void setName(Name name) {
 		this.name = name;
 	}
-	//
-	// public Address getAddress() {
-	// return address;
-	// }
-	//
-	// public void setAddress(Address address) {
-	// this.address = address;
-	// }
 
 	public String getMobileNo() {
 		return mobileNo;
@@ -105,12 +78,5 @@ public class Person {
 	public String toString() {
 		return "Person [name=" + name + ", mobileNo=" + mobileNo + ", emailID=" + emailID + ", gender=" + gender + "]";
 	}
-
-	// @Override
-	// public String toString() {
-	// return "Person [id=" + id + ", name=" + name + ", address=" + address +
-	// ", mobileNo=" + mobileNo + ", emailID="
-	// + emailID + ", gender=" + gender + "]";
-	// }
 
 }

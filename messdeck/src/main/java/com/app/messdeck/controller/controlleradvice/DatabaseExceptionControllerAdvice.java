@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.controller.exceptions.ErrorInfo;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -26,10 +27,18 @@ public class DatabaseExceptionControllerAdvice {
 							.getLocalizedMessage());
 
 		}
-  
-		
+
 		return new ErrorInfo(req.getRequestURL().toString(), exception.getMessage());
-     
+
+	}
+
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({ VendorNotExistException.class })
+	public @ResponseBody ErrorInfo handleVendorNotExistException(HttpServletRequest req,
+			VendorNotExistException exception) {
+
+		return new ErrorInfo(req.getRequestURL().toString(), exception.getMessage());
+
 	}
 
 }

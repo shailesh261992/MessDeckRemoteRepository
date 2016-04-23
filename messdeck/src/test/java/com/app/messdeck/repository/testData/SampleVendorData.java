@@ -28,7 +28,6 @@ public class SampleVendorData {
 		vendorAddress.setCity("pune");
 		vendorAddress.setCountry("India");
 		vendorAddress.setPinCode("410");
-		vendorAddress.setVendor(saiMess);
 		return vendorAddress;
 	}
 
@@ -38,7 +37,6 @@ public class SampleVendorData {
 		saiMessOwner.setEmailID(new EmailID("shailesh261992@gmail.com"));
 		saiMessOwner.setMobileNo("7276248187");
 		saiMessOwner.setGender(Gender.MALE);
-		saiMessOwner.setVendor(saiMess);
 		saiMessOwner.setOwnerAddress(createOwnerAddressOne(saiMessOwner));
 		return saiMessOwner;
 	}
@@ -46,7 +44,7 @@ public class SampleVendorData {
 	private static OwnerAddress createOwnerAddressOne(Owner saiMessOwner) {
 		OwnerAddress ownerAddress = new OwnerAddress();
 		ownerAddress.setCity("Talegaon");
-		ownerAddress.setOwner(saiMessOwner);
+
 		return ownerAddress;
 	}
 

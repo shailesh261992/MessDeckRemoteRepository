@@ -2,10 +2,10 @@ package com.app.messdeck.model.dto;
 
 import java.util.List;
 
-import com.app.messdeck.entity.Address;
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.MessDeckService;
 import com.app.messdeck.entity.Owner;
+import com.app.messdeck.entity.VendorAddress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -14,7 +14,8 @@ public class VendorDTO {
 
 	private long id;
 	private String name;
-	private Address vendorddress;
+
+	private VendorAddress vendorddress;
 
 	private Owner owner;
 
@@ -57,11 +58,11 @@ public class VendorDTO {
 		this.services = services;
 	}
 
-	public Address getVendorddress() {
+	public VendorAddress getVendorddress() {
 		return vendorddress;
 	}
 
-	public void setVendorddress(Address vendorddress) {
+	public void setVendorddress(VendorAddress vendorddress) {
 		this.vendorddress = vendorddress;
 	}
 
@@ -109,5 +110,4 @@ public class VendorDTO {
 			return false;
 		return true;
 	}
-
 }
