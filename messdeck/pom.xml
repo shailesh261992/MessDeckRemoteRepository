@@ -21,6 +21,12 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>hamcrest-core</artifactId>
+					<groupId>org.hamcrest</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -163,16 +169,41 @@
 		</dependency>
 
 
-       <!-- Sprin HATEOAS Support -->
+		<!-- Sprin HATEOAS Support -->
 		<dependency>
 			<groupId>org.springframework.hateoas</groupId>
 			<artifactId>spring-hateoas</artifactId>
 			<version>0.19.0.RELEASE</version>
 		</dependency>
+		<!-- Mockito Support for unit testing -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.0.50-beta</version>
+		</dependency>
 
+		<!-- JsonPath Support -->
 
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>0.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path-assert</artifactId>
+			<version>0.8.1</version>
+			<scope>test</scope>
+		</dependency>
 
-
+		<!-- Hamcrest Matcher support -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 
