@@ -1,9 +1,12 @@
 package com.app.messdeck.model.dto;
 
+import net.sf.oval.constraint.AssertValid;
+
 public class OwnerDTO extends PersonDTO {
 
 	private long id;
-
+    
+	@AssertValid
 	private OwnerAddressDTO ownerAddress;
 
 	public OwnerDTO() {

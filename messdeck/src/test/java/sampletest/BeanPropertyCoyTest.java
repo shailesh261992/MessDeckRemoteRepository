@@ -6,7 +6,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.VendorDTO;
-import com.app.messdeck.repository.testData.SampleVendorData;
+import com.app.messdeck.testData.SampleVendorData;
 
 public class BeanPropertyCoyTest {
 

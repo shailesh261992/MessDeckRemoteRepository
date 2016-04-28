@@ -11,6 +11,7 @@ import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.VendorAddressDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.repository.VendorDAO;
+import com.app.messdeck.testData.VendorDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
 
 @Service
@@ -44,22 +45,9 @@ public class VendorServiceImpl implements VendorService {
 		}
 	}
 
-	// =======
-	// @Override
-	// public VendorDTO getVendor(Long id) {
-	// return DTOConverter.entityToDTOConverter(dao.get(id));
-	// >>>>>>> refs/remotes/origin/master
-	// }
-
 	@Override
 	@ValidateWithOval
 	public Long createVendor(VendorDTO vendorDTO) {
-
-		// Vendor vendor = new Vendor();
-		// vendor.setVendorAddress(new VendorAddress());
-		// BeanUtils.copyProperties(vendorDTO, vendor);
-		// BeanUtils.copyProperties(vendorDTO.getVendorAddress(),
-		// vendor.getVendorAddress());
 		System.out.println("*** dto = " + vendorDTO);
 		System.out.println("*** vendor = " + vendorDTO.toVendor());
 		return dao.create(vendorDTO.toVendor());

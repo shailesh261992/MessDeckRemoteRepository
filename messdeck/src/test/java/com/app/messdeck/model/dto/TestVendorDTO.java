@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.configuration.UnitTestConfiguration;
-import com.app.messdeck.testData.NameDTODataSample;
+import com.app.messdeck.testData.VendorDTODataSample;
 
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -21,52 +21,52 @@ import net.sf.oval.Validator;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UnitTestConfiguration.class })
 @WebAppConfiguration
-public class TestNameDTO {
+public class TestVendorDTO {
 
 	@Autowired
 	private Validator validator;
 
-	private NameDTO dto;
+	private VendorDTO dto;
 
 	@Before
 	public void setUp() throws Exception {
-		dto = NameDTODataSample.getNameDTO();
+		dto = VendorDTODataSample.getVendorDTO();
 	}
 
 	@Test
-	public void testInvalidFirstName() {
-		dto.setFirstName("s23");
+	public void testInvalidVendorName() {
+		dto.setName("Sai 123");
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals(1,listOfVilolation.size());
+		assertEquals(1, listOfVilolation.size());
 		assertEquals("Only Alphabets are allowed", listOfVilolation.get(0).getMessage());
-
 	}
-	
+
 	@Test
-	public void testInvalidLastName() {
-		dto.setLastName("k23");
+	public void testInvalidVendorAddress() {
+		VendorAddressDTO vendorAddressDTO = new VendorAddressDTO();
+		vendorAddressDTO.setCity("Satara");
+		dto.setVendorAddress(vendorAddressDTO);
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals(1,listOfVilolation.size());
-		assertEquals("Only Alphabets are allowed", listOfVilolation.get(0).getMessage());
-
+		assertEquals(1, listOfVilolation.size());
+		assertEquals("Invalid Vendor Address", listOfVilolation.get(0).getMessage());
 	}
-	
+
 	@Test
-	public void testNullFirstName() {
-		dto.setFirstName(null);
+	public void testInvalidOwner() {
+		OwnerDTO ownerDTO = new OwnerDTO();
+		ownerDTO.setMobileNo("123");
+		dto.setOwner(ownerDTO);
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals(1,listOfVilolation.size());
-
+		assertEquals(1, listOfVilolation.size());
+		assertEquals("Invalid Owner", listOfVilolation.get(0).getMessage());
 	}
-	
+
 	@Test
-	public void testNullLastName() {
-		dto.setLastName(null);
+	public void testValidVendor() {
+
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals(0,listOfVilolation.size());
+		assertEquals(0, listOfVilolation.size());
 
 	}
-	
-	
 
 }

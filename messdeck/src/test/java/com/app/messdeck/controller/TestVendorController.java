@@ -26,8 +26,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.app.messdeck.configuration.UnitTestConfiguration;
 import com.app.messdeck.model.dto.VendorDTO;
-import com.app.messdeck.repository.testData.VendorDTODataSample;
 import com.app.messdeck.service.VendorService;
+import com.app.messdeck.testData.VendorDTODataSample;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UnitTestConfiguration.class })

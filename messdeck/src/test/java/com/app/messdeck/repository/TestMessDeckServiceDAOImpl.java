@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,6 +66,7 @@ public class TestMessDeckServiceDAOImpl {
 	}
 
 	@Test
+	@Transactional
 	public void testSaveMessDeckService() {
 		Long l = messDeckServiceDAO.saveMessDeckService(createMessDeckSerivce());
 		Assert.assertNotNull(l);

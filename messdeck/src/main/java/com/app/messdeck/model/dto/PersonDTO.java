@@ -1,26 +1,27 @@
 package com.app.messdeck.model.dto;
 
-import com.app.messdeck.entity.EmailID;
 import com.app.messdeck.entity.Gender;
-import com.app.messdeck.entity.Name;
 
+import net.sf.oval.constraint.AssertValid;
 import net.sf.oval.constraint.MatchPattern;
 
 public class PersonDTO {
 
-	private Name name;
+	@AssertValid
+	private NameDTO name;
 
-	@MatchPattern(pattern = "^[789]\\d{9}$",message="Invalid Mobile Number:Number should start with 7,8 or 9 & must be 10 digits")
+	@MatchPattern(pattern = "^[789]\\d{9}$", message = "Invalid Mobile Number:Number should start with 7,8 or 9 & must be 10 digits")
 	private String mobileNo;
 
-	private EmailID emailID;
+	@AssertValid
+	private EmailIDDTO emailID;
 	private Gender gender;
 
-	public Name getName() {
+	public NameDTO getName() {
 		return name;
 	}
 
-	public void setName(Name name) {
+	public void setName(NameDTO name) {
 		this.name = name;
 	}
 
@@ -32,11 +33,11 @@ public class PersonDTO {
 		this.mobileNo = mobileNo;
 	}
 
-	public EmailID getEmailID() {
+	public EmailIDDTO getEmailID() {
 		return emailID;
 	}
 
-	public void setEmailID(EmailID emailID) {
+	public void setEmailID(EmailIDDTO emailID) {
 		this.emailID = emailID;
 	}
 

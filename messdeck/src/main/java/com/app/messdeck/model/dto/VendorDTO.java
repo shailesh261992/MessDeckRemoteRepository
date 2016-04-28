@@ -10,16 +10,23 @@ import com.app.messdeck.entity.Vendor;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import net.sf.oval.constraint.AssertValid;
+import net.sf.oval.constraint.MatchPattern;
+import net.sf.oval.constraint.NotNull;
 
 @JsonInclude(Include.NON_EMPTY)
 public class VendorDTO {
 
 	private long id;
+	@MatchPattern(pattern = "^[a-zA-Z ]*$", message = "Only Alphabets are allowed")
+	@NotNull
 	private String name;
-	private VendorAddressDTO vendorAddress;
-	private OwnerDTO owner;
-	private AddressDTO vendorddress;
 
+	@AssertValid(message = "Invalid Vendor Address")
+	private VendorAddressDTO vendorAddress;
+
+	@AssertValid(message = "Invalid Owner")
+	private OwnerDTO owner;
 
 	private List<Customer> customers;
 
@@ -119,6 +126,7 @@ public class VendorDTO {
 		BeanUtils.copyProperties(this.getVendorAddress(), vendor.getVendorAddress());
 		BeanUtils.copyProperties(this.getOwner(), vendor.getOwner());
 		BeanUtils.copyProperties(this.getOwner().getOwnerAddress(), vendor.getOwner().getOwnerAddress());
+		BeanUtils.copyProperties(this.getOwner().getName(), vendor.getOwner().getName());
 
 		return vendor;
 

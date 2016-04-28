@@ -1,4 +1,4 @@
-package com.app.messdeck.repository.testData;
+package com.app.messdeck.testData;
 
 import java.util.ArrayList;
 
