@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -25,6 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.app.messdeck.configuration.UnitTestConfiguration;
 import com.app.messdeck.model.dto.VendorDTO;
+import com.app.messdeck.repository.testData.VendorDTODataSample;
 import com.app.messdeck.service.VendorService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,7 +40,6 @@ public class TestVendorController {
 	@Autowired
 	VendorService serviceMock;
 
-
 	private MockMvc mockMvc;
 
 	@Autowired
@@ -48,6 +49,7 @@ public class TestVendorController {
 	public void setUp() {
 		Mockito.reset(serviceMock);
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
 	}
 
 	@Test
@@ -63,4 +65,19 @@ public class TestVendorController {
 
 	}
 
+	@Test
+	public void testVendorCreateWithExistingEmailID() throws Exception {
+		VendorDTO vendor = VendorDTODataSample.getVendorDTO();
+		
+
+		when(serviceMock.getVendorSummary(1l)).thenReturn(vendor)
+				.thenThrow(new DataIntegrityViolationException("Vendor with email ID  " + vendor.getOwner().getEmailID() + "already exist"));
+
+		mockMvc.perform(get("/vendors/1")).andExpect(status().isOk()).andExpect(content().contentType(contentType))
+				.andExpect(jsonPath("$.id", is(1))).andExpect(jsonPath("$.name", is("Sai Dhaba")))
+				.andExpect(jsonPath("$.links[0].rel", is("self"))).andDo(print());
+
+		mockMvc.perform(get("/vendors/1")).andDo(print());
+
+	}
 }

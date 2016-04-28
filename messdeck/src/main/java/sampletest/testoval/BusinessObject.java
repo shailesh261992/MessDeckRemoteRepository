@@ -21,5 +21,7 @@ public class BusinessObject {
 		this.invoiceAddress = invoiceAddress;
 		this.mailingAddress = mailingAddress;
 	}
+	
+	
 
 }

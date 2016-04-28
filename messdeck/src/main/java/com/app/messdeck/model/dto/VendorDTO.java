@@ -2,7 +2,6 @@ package com.app.messdeck.model.dto;
 
 import java.util.List;
 
-
 import org.springframework.beans.BeanUtils;
 
 import com.app.messdeck.entity.Customer;
@@ -11,21 +10,20 @@ import com.app.messdeck.entity.Vendor;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import net.sf.oval.constraint.NotNull;
 import net.sf.oval.constraint.Size;
-
-
 
 @JsonInclude(Include.NON_EMPTY)
 
 public class VendorDTO {
 
 	private long id;
-	
-	@Size(max=2)
+
 	private String name;
 
+	@NotNull
 	private VendorAddressDTO vendorAddress;
-
+	@NotNull
 	private OwnerDTO owner;
 
 	private List<Customer> customers;

@@ -1,28 +1,26 @@
-package com.app.messdeck.entity;
+package com.app.messdeck.model.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import net.sf.oval.constraint.MatchPattern;
+import net.sf.oval.constraint.NotNull;
 
-@Embeddable
-public class Name {
-	
-	@Column(nullable=false)
+public class NameDTO {
+
+	@MatchPattern(pattern = "^[a-zA-Z ]*$", message = "Only Alphabets are allowed")
+	@NotNull
 	private String firstName;
+
+	@MatchPattern(pattern = "^[a-zA-Z ]*$", message = "Only Alphabets are allowed")
 	private String lastName;
 
-	public Name() {
+	public NameDTO() {
 		super();
 	}
-	
-	
 
-	public Name(String firstName, String lastName) {
+	public NameDTO(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-
-
 
 	public String getFirstName() {
 		return firstName;
@@ -62,7 +60,7 @@ public class Name {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Name other = (Name) obj;
+		NameDTO other = (NameDTO) obj;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;

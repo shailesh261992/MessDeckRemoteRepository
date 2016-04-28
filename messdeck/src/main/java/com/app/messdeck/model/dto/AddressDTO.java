@@ -1,18 +1,24 @@
 package com.app.messdeck.model.dto;
 
-import javax.persistence.Basic;
+import java.util.regex.Pattern;
+
+import net.sf.oval.constraint.MatchPattern;
 
 public class AddressDTO {
 
-	@Basic
+
 	private String street;
-	@Basic
+
+	@MatchPattern(pattern="Pune",flags={Pattern.CASE_INSENSITIVE},message="Only Supported in Pune. Valid values list [Pune]")
 	private String city;
-	@Basic
+
+	@MatchPattern(pattern="Maharashtra",flags={Pattern.CASE_INSENSITIVE},message="Only Supported in Maharashtra. Valid values list [Maharashtra]")
 	private String state;
-	@Basic
+
+	@MatchPattern(pattern="india",flags={Pattern.CASE_INSENSITIVE},message="Only Supported in India. Valid values list [India]")
 	private String country;
-	@Basic
+	
+	@MatchPattern(pattern="^[1-9][0-9]{5}$",message="Invalid Pincode")
 	private String pinCode;
 
 	public AddressDTO() {

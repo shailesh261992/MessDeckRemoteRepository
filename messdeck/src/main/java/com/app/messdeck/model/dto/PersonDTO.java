@@ -4,10 +4,13 @@ import com.app.messdeck.entity.EmailID;
 import com.app.messdeck.entity.Gender;
 import com.app.messdeck.entity.Name;
 
+import net.sf.oval.constraint.MatchPattern;
+
 public class PersonDTO {
 
 	private Name name;
 
+	@MatchPattern(pattern = "^[789]\\d{9}$",message="Invalid Mobile Number:Number should start with 7,8 or 9 & must be 10 digits")
 	private String mobileNo;
 
 	private EmailID emailID;

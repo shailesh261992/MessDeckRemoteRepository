@@ -4,6 +4,7 @@ import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -17,10 +18,15 @@ import com.app.messdeck.service.VendorService;
 
 @Configuration
 @EnableWebMvc
+@ComponentScan(basePackages = {
+		"com.app.messdeck.controller" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {
+				CustomerController.class }) )
+
 @EnableTransactionManagement()
-@Import({HibernateConfiguration.class,StaticResourceConfiguration.class})
-@ComponentScan(basePackages={"com.app.messdeck.controller"},excludeFilters=@ComponentScan.Filter(type=FilterType.ASSIGNABLE_TYPE,value={CustomerController.class}))
-public class UnitTestConfiguration extends WebMvcConfigurerAdapter{
+@Import({ HibernateConfiguration.class, StaticResourceConfiguration.class, OvalConfiguration.class,
+		AOPConfiguration.class })
+@EnableAspectJAutoProxy
+public class UnitTestConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public ViewResolver viewResolver() {
