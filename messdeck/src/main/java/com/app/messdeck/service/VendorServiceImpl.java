@@ -42,10 +42,19 @@ public class VendorServiceImpl implements VendorService {
 		} else {
 			throw new VendorNotExistException(id);
 		}
-
 	}
 
+	// =======
+	// @Override
+	// public VendorDTO getVendor(Long id) {
+	// return DTOConverter.entityToDTOConverter(dao.get(id));
+	// >>>>>>> refs/remotes/origin/master
+	// }
+
+	@Override
+	@ValidateWithOval
 	public Long createVendor(VendorDTO vendorDTO) {
+
 		// Vendor vendor = new Vendor();
 		// vendor.setVendorAddress(new VendorAddress());
 		// BeanUtils.copyProperties(vendorDTO, vendor);
@@ -54,13 +63,16 @@ public class VendorServiceImpl implements VendorService {
 		System.out.println("*** dto = " + vendorDTO);
 		System.out.println("*** vendor = " + vendorDTO.toVendor());
 		return dao.create(vendorDTO.toVendor());
+
 	}
 
+	@Override
 	public void updateVendor(VendorDTO dto) {
-		dao.update(DTOConverter.DTOToEntityCoverter(dto));
+		dao.update(DTOConverter.dTOToEntityCoverter(dto));
 
 	}
 
+	@Override
 	public void deleteVendor(Long id) {
 		dao.delete(dao.get(id));
 	}

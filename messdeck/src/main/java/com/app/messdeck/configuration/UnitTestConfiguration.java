@@ -14,13 +14,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.app.messdeck.controller.CustomerController;
+import com.app.messdeck.controller.MessDeckServiceController;
 import com.app.messdeck.service.VendorService;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
 		"com.app.messdeck.controller" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {
-				CustomerController.class }) )
+				CustomerController.class,MessDeckServiceController.class }) )
 
 @EnableTransactionManagement()
 @Import({ HibernateConfiguration.class, StaticResourceConfiguration.class, OvalConfiguration.class,

@@ -10,9 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class MessDeckService {
@@ -20,23 +21,35 @@ public class MessDeckService {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@ManyToOne
-	
-	@JoinColumn(nullable = false,name="vendorID")
+
+	@JoinColumn(nullable = false, name = "vendorID")
 	private Vendor vendor;
 
 	@Column(nullable = false)
 	private ServiceType serviceType;
-	
+
 	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Service_ItemList")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
 	private List<Item> meal;
 	private double cost;
 
-	@ManyToMany(mappedBy = "subscribedServices")
-	private List<Customer> subscribers;
+	// @ManyToMany(mappedBy = "subscribedServices")
+	// private List<Customer> subscribers;
+
+	private Integer capacityOfMembers;
+
+	@Temporal(TemporalType.TIME)
+	private Date startTime;
+
+	@Temporal(TemporalType.TIME)
+	private Date endTime;
+
+	public MessDeckService() {
+
+	}
 
 	public MessDeckService(Vendor vendor, ServiceType serviceType, Date date, List<Item> meal, double cost) {
 		super();
@@ -45,6 +58,38 @@ public class MessDeckService {
 		this.date = date;
 		this.meal = meal;
 		this.cost = cost;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public ServiceType getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(ServiceType serviceType) {
+		this.serviceType = serviceType;
+	}
+
+	public Integer getCapacityOfMembers() {
+		return capacityOfMembers;
+	}
+
+	public void setCapacityOfMembers(Integer capacityOfMembers) {
+		this.capacityOfMembers = capacityOfMembers;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
 	}
 
 	public long getId() {
@@ -95,12 +140,12 @@ public class MessDeckService {
 		this.cost = cost;
 	}
 
-	public List<Customer> getSubscribers() {
-		return subscribers;
-	}
-
-	public void setSubscribers(List<Customer> subscribers) {
-		this.subscribers = subscribers;
-	}
+	// public List<Customer> getSubscribers() {
+	// return subscribers;
+	// }
+	//
+	// public void setSubscribers(List<Customer> subscribers) {
+	// this.subscribers = subscribers;
+	// }
 
 }

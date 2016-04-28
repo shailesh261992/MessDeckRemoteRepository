@@ -6,4 +6,10 @@ public interface MessDeckService {
 
 	Long saveMessDeckService(MessDeckServiceDTO messDeckServiceDTO);
 
+	MessDeckServiceDTO getMessDeckService(Long id);
+
+	void updateMessDeckService(MessDeckServiceDTO messDeckServiceDTO);
+
+	void deleteMessDeckService(Long id);
+
 }

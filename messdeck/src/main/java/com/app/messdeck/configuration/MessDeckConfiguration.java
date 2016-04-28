@@ -29,11 +29,4 @@ public class MessDeckConfiguration extends WebMvcConfigurerAdapter {
 		return viewResolver;
 	}
 
-	
-
-//	public AnnotationAwareAspectJAutoProxyCreator annotationAwareAspectJAutoProxyCreator(){
-//		return new AnnotationAwareAspectJAutoProxyCreator();
-//	}
-
-	
 }

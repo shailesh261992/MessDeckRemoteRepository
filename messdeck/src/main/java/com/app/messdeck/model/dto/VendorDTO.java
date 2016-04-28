@@ -10,21 +10,16 @@ import com.app.messdeck.entity.Vendor;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.constraint.Size;
 
 @JsonInclude(Include.NON_EMPTY)
-
 public class VendorDTO {
 
 	private long id;
-
 	private String name;
-
-	@NotNull
 	private VendorAddressDTO vendorAddress;
-	@NotNull
 	private OwnerDTO owner;
+	private AddressDTO vendorddress;
+
 
 	private List<Customer> customers;
 

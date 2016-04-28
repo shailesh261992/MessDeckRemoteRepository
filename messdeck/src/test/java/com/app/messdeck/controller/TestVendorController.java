@@ -65,19 +65,19 @@ public class TestVendorController {
 
 	}
 
-	@Test
-	public void testVendorCreateWithExistingEmailID() throws Exception {
-		VendorDTO vendor = VendorDTODataSample.getVendorDTO();
-		
-
-		when(serviceMock.getVendorSummary(1l)).thenReturn(vendor)
-				.thenThrow(new DataIntegrityViolationException("Vendor with email ID  " + vendor.getOwner().getEmailID() + "already exist"));
-
-		mockMvc.perform(get("/vendors/1")).andExpect(status().isOk()).andExpect(content().contentType(contentType))
-				.andExpect(jsonPath("$.id", is(1))).andExpect(jsonPath("$.name", is("Sai Dhaba")))
-				.andExpect(jsonPath("$.links[0].rel", is("self"))).andDo(print());
-
-		mockMvc.perform(get("/vendors/1")).andDo(print());
-
-	}
+//	@Test
+//	public void testVendorCreateWithExistingEmailID() throws Exception {
+//		VendorDTO vendor = VendorDTODataSample.getVendorDTO();
+//		
+//
+//		when(serviceMock.getVendorSummary(1l)).thenReturn(vendor)
+//				.thenThrow(new DataIntegrityViolationException("Vendor with email ID  " + vendor.getOwner().getEmailID() + "already exist"));
+//
+//		mockMvc.perform(get("/vendors/1")).andExpect(status().isOk()).andExpect(content().contentType(contentType))
+//				.andExpect(jsonPath("$.id", is(1))).andExpect(jsonPath("$.name", is("Sai Dhaba")))
+//				.andExpect(jsonPath("$.links[0].rel", is("self"))).andDo(print());
+//
+//		mockMvc.perform(get("/vendors/1")).andDo(print());
+//
+//	}
 }
