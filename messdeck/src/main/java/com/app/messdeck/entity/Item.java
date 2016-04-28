@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Item {
@@ -15,6 +16,21 @@ public class Item {
 	private String name;
 	private String description;
 	private String Category;
+
+	public MessDeckService getService() {
+		return service;
+	}
+
+	public void setService(MessDeckService service) {
+		this.service = service;
+	}
+
+	@ManyToOne
+	private MessDeckService service;
+
+	public Item() {
+
+	}
 
 	public Item(String name) {
 		this.name = name;

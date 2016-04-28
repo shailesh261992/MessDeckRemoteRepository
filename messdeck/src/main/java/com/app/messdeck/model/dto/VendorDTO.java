@@ -9,12 +9,20 @@ import com.app.messdeck.entity.Owner;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import net.sf.oval.constraint.AssertValid;
+import net.sf.oval.constraint.NotEmpty;
+import net.sf.oval.constraint.NotNull;
+
 @JsonInclude(Include.NON_EMPTY)
 public class VendorDTO {
 
 	private long id;
+
+	@NotEmpty(message = "name should not be empty")
+	@NotNull(message = "Name should not be null")
 	private String name;
 
+	@AssertValid
 	private Address vendorddress;
 
 	private Owner owner;

@@ -3,33 +3,77 @@ package com.app.messdeck.model.dto;
 import java.util.Date;
 import java.util.List;
 
-import com.app.messdeck.entity.Customer;
-import com.app.messdeck.entity.Item;
 import com.app.messdeck.entity.ServiceType;
-import com.app.messdeck.entity.Vendor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class MessDeckServiceDTO {
 
 	private long id;
 
-	private Vendor vendor;
+	private long vendorId;
 
 	private ServiceType serviceType;
 
+	// startTime
+	// endTime
+	// capacityOfMembers
+
+	private Integer capacityOfMembers;
+
+	@JsonDeserialize(using = TimeDeserializer.class)
+	private Date startTime;
+
+	@JsonDeserialize(using = TimeDeserializer.class)
+	private Date endTime;
+
 	private Date date;
 
-	private List<Item> meal;
+	private List<ItemDTO> meal;
 	private double cost;
 
-	private List<Customer> subscribers;
+	public MessDeckServiceDTO() {
 
-	public MessDeckServiceDTO(Vendor vendor, ServiceType serviceType, Date date, List<Item> meal, double cost) {
+	}
+
+	public MessDeckServiceDTO(long vendorDTO, ServiceType serviceType, Date date, List<ItemDTO> meal, double cost) {
 		super();
-		this.vendor = vendor;
+		this.vendorId = vendorId;
 		this.serviceType = serviceType;
 		this.date = date;
 		this.meal = meal;
 		this.cost = cost;
+	}
+
+	public ServiceType getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(ServiceType serviceType) {
+		this.serviceType = serviceType;
+	}
+
+	public Integer getCapacityOfMembers() {
+		return capacityOfMembers;
+	}
+
+	public void setCapacityOfMembers(Integer capacityOfMembers) {
+		this.capacityOfMembers = capacityOfMembers;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public long getId() {
@@ -40,12 +84,13 @@ public class MessDeckServiceDTO {
 		this.id = id;
 	}
 
-	public Vendor getVendor() {
-		return vendor;
+	public long getVendorId() {
+		return vendorId;
 	}
 
-	public void setVendor(Vendor vendor) {
-		this.vendor = vendor;
+	public void setVendorId(long vendorId) {
+		this.vendorId = vendorId;
+
 	}
 
 	public ServiceType serviceType() {
@@ -64,11 +109,11 @@ public class MessDeckServiceDTO {
 		this.date = date;
 	}
 
-	public List<Item> getMeal() {
+	public List<ItemDTO> getMeal() {
 		return meal;
 	}
 
-	public void setMeal(List<Item> meal) {
+	public void setMeal(List<ItemDTO> meal) {
 		this.meal = meal;
 	}
 
@@ -78,14 +123,6 @@ public class MessDeckServiceDTO {
 
 	public void setCost(double cost) {
 		this.cost = cost;
-	}
-
-	public List<Customer> getSubscribers() {
-		return subscribers;
-	}
-
-	public void setSubscribers(List<Customer> subscribers) {
-		this.subscribers = subscribers;
 	}
 
 }
