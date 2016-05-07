@@ -1,11 +1,15 @@
 package com.app.messdeck.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.messdeck.aspects.ValidateWithOval;
 import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.VendorAddressDTO;
@@ -50,14 +54,36 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
+	@ValidateWithOval
 	public void updateVendor(VendorDTO dto) {
-		dao.update(DTOConverter.dTOToEntityCoverter(dto));
+
+		dao.update(DTOConverter.getVendor(dto));
 
 	}
 
 	@Override
 	public void deleteVendor(Long id) {
-		dao.delete(dao.get(id));
+		Vendor vendor = dao.get(id);
+		if (vendor != null) {
+			dao.delete(vendor);
+		} else {
+			throw new VendorNotExistException(id);
+		}
+
+	}
+
+	@Override
+	public List<VendorDTO> getAllVendorsSummary() {
+		List<Vendor> vendors = dao.getAll();
+		List<VendorDTO> dtoList = new ArrayList<>();
+		if (vendors != null) {
+			for (Vendor vendor : vendors) {
+				dtoList.add(EntityConverter.getVendorSummaryDTO(vendor));
+			}
+			return dtoList;
+		}
+
+		return null;
 	}
 
 }

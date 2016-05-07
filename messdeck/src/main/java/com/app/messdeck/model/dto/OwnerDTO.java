@@ -1,9 +1,12 @@
 package com.app.messdeck.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import net.sf.oval.constraint.AssertValid;
 
 public class OwnerDTO extends PersonDTO {
 
+	@JsonIgnore
 	private long id;
 
 	@AssertValid

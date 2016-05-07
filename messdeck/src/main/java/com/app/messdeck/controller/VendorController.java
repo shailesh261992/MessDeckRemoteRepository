@@ -3,8 +3,10 @@ package com.app.messdeck.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -42,6 +44,17 @@ public class VendorController {
 
 	}
 
+	@RequestMapping(value = "/{id}/details", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Resource<VendorDTO> getVendorDetails(@PathVariable Long id) {
+
+		VendorDTO dto = service.getVendorDetails(id);
+		Resource<VendorDTO> resource = new Resource<>(dto);
+		resource.add(linkTo(methodOn(VendorController.class).getVendorDetails(id)).withSelfRel());
+
+		return resource;
+
+	}
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createVendor(@RequestBody VendorDTO dto, HttpServletRequest request) {
 		System.out.println("Vendor Controller : Vendor DTO revied = " + dto);
@@ -52,7 +65,8 @@ public class VendorController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateVendor(@RequestBody VendorDTO dto) {
+	public ResponseEntity<?> updateVendor(@PathVariable long id, @RequestBody VendorDTO dto) {
+		dto.setId(id);
 		service.updateVendor(dto);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 
@@ -62,6 +76,23 @@ public class VendorController {
 	public ResponseEntity<?> deleteVendor(@PathVariable long id) {
 		service.deleteVendor(id);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+
+	}
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Resource<VendorDTO>> getAllVendorsSummary() {
+
+		List<VendorDTO> allVendorsSummary = service.getAllVendorsSummary();
+		List<Resource<VendorDTO>> resourceList = new ArrayList<>();
+
+		for (VendorDTO dto : allVendorsSummary) {
+			Resource<VendorDTO> resource = new Resource<>(dto);
+			resource.add(linkTo(methodOn(VendorController.class).getVendorSummary(dto.getId())).withSelfRel());
+			resource.add(linkTo(methodOn(VendorController.class).getVendorDetails(dto.getId())).withRel("details"));
+			resourceList.add(resource);
+		}
+
+		return resourceList;
 
 	}
 

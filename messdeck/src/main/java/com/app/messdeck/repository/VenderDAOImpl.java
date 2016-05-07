@@ -7,6 +7,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.entity.Owner;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.entity.VendorAddress;
@@ -37,8 +38,18 @@ public class VenderDAOImpl implements VendorDAO {
 	}
 
 	public void update(Vendor vendor) {
-		// template.update(attchVendorIDToOwnerOwneraddressVendoraddress(vendor));
-		template.merge(vendor);
+
+		Vendor v = this.get(vendor.getId());
+
+		if (v != null) {
+			vendor.getOwner().setId(v.getOwner().getId());
+			vendor.getOwner().getOwnerAddress().setId(v.getOwner().getOwnerAddress().getId());
+			vendor.getVendorAddress().setId(v.getVendorAddress().getId());
+			template.merge(vendor);
+		} else {
+			throw new VendorNotExistException(vendor.getId());
+		}
+
 	}
 
 	public Vendor get(long id) {

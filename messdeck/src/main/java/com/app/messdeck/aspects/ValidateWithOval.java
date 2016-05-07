@@ -1,4 +1,4 @@
-package com.app.messdeck.service;
+package com.app.messdeck.aspects;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -11,14 +11,6 @@ import net.sf.oval.guard.GuardInterceptor;
 @Configuration
 public class OvalConfiguration extends WebMvcConfigurerAdapter {
 
-//	@Bean
-//	@Override
-//	public Validator getValidator() {
-//
-//		return new SpringValidator(new net.sf.oval.Validator());
-//
-//	}
-
 	@Bean
 	public GuardInterceptor guardInterceptor() {
 		return new GuardInterceptor();
