@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.service.VendorService;
 
-//@Controller
 @RestController
 @RequestMapping("/vendors")
 public class VendorController {
@@ -31,10 +30,8 @@ public class VendorController {
 	public VendorController() {
 
 	}
-	
-	
 
-	@RequestMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE+";charset=UTF-8")
+	@RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Resource<VendorDTO> getVendorSummary(@PathVariable Long id) {
 
 		VendorDTO vendorSummaryDTO = service.getVendorSummary(id);
@@ -45,9 +42,9 @@ public class VendorController {
 
 	}
 
-	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createVendor(@Valid @RequestBody VendorDTO dto, HttpServletRequest request) {
+	public ResponseEntity<?> createVendor(@RequestBody VendorDTO dto, HttpServletRequest request) {
+		System.out.println("Vendor Controller : Vendor DTO revied = " + dto);
 		Long vendorID = service.createVendor(dto);
 		String resourceUrl = request.getRequestURL().toString() + "/" + vendorID;
 		ResponseEntity<?> responseEntity = new ResponseEntity<String>(resourceUrl, HttpStatus.CREATED);

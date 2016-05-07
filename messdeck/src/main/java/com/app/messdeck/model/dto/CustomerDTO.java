@@ -1,8 +1,5 @@
 package com.app.messdeck.model.dto;
 
-import javax.persistence.Entity;
-
-@Entity
 public class CustomerDTO extends PersonDTO {
 
 	private long vendorID;

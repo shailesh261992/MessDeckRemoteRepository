@@ -12,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.app.messdeck.configuration.UnitTestConfiguration;
+import com.app.messdeck.configuration.testenvconfig.UnitTestConfiguration;
 import com.app.messdeck.testData.VendorDTODataSample;
 
 import net.sf.oval.ConstraintViolation;

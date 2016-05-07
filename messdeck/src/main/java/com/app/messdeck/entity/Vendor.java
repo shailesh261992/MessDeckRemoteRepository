@@ -98,7 +98,7 @@ public class Vendor {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
+		result = prime * result + ((vendorAddress == null) ? 0 : vendorAddress.hashCode());
 		return result;
 	}
 
@@ -116,10 +116,10 @@ public class Vendor {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (owner == null) {
-			if (other.owner != null)
+		if (vendorAddress == null) {
+			if (other.vendorAddress != null)
 				return false;
-		} else if (!owner.equals(other.owner))
+		} else if (!vendorAddress.equals(other.vendorAddress))
 			return false;
 		return true;
 	}

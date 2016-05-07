@@ -17,6 +17,9 @@ public class Person {
 	private EmailID emailID;
 	private Gender gender;
 
+	public Person() {
+	}
+
 	public Name getName() {
 		return name;
 	}

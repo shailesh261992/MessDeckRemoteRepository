@@ -1,4 +1,4 @@
-package com.app.messdeck.configuration;
+package com.app.messdeck.configuration.testenvconfig;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -17,19 +17,19 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 
 @Configuration
 @PropertySource("classpath:db.properties")
-public class HibernateConfiguration {
+public class HibernateConfigurationTestEnvironment {
 	@Autowired
 	private Environment env;
 
 	@Bean
 	public BasicDataSource dataSource() {
 		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName(env.getProperty("db.driverClassName"));
-		basicDataSource.setUrl(env.getProperty("db.url"));
-		basicDataSource.setUsername(env.getProperty("db.userName"));
-		basicDataSource.setPassword(env.getProperty("db.password"));
+		basicDataSource.setDriverClassName(env.getProperty("test.db.driverClassName"));
+		basicDataSource.setUrl(env.getProperty("test.db.url"));
+		basicDataSource.setUsername(env.getProperty("test.db.userName"));
+		basicDataSource.setPassword(env.getProperty("test.db.password"));
 		basicDataSource.setInitialSize(2);
-		basicDataSource.setMaxActive(5);
+		basicDataSource.setMaxActive(15);
 		return basicDataSource;
 
 	}
@@ -66,10 +66,10 @@ public class HibernateConfiguration {
 
 	private Properties hibernateProperties() {
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-		hibernateProperties.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
+		hibernateProperties.setProperty("hibernate.dialect", env.getProperty("test.hibernate.dialect"));
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("test.hibernate.hbm2ddl.auto"));
+		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("test.hibernate.show_sql"));
+		hibernateProperties.setProperty("hibernate.format_sql", env.getProperty("test.hibernate.format_sql"));
 		return hibernateProperties;
 	}
 

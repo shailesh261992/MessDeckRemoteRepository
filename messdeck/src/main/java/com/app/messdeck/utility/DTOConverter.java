@@ -1,8 +1,10 @@
 package com.app.messdeck.utility;
 
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.Item;
@@ -14,6 +16,21 @@ import com.app.messdeck.model.dto.MessDeckServiceDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 
 public class DTOConverter {
+
+	public static Vendor getVendor(VendorDTO dto) {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.addMappings(new PropertyMap<VendorDTO, Vendor>() {
+
+			@Override
+			protected void configure() {
+				skip().setCustomers(null);
+				skip().setServices(null);
+
+			}
+		});
+
+		return modelMapper.map(dto, Vendor.class);
+	}
 
 	public static Vendor dTOToEntityCoverter(VendorDTO dto) {
 
@@ -46,7 +63,6 @@ public class DTOConverter {
 
 	}
 
-
 	public static Customer DTOToEntityCoverter(CustomerDTO dto) {
 		Customer customer = new Customer();
 		// customer.setId(dto.getId());
@@ -75,6 +91,7 @@ public class DTOConverter {
 		return dto;
 
 	}
+
 	public static MessDeckServiceDTO entityTODTOCoverterForMessDeckService(MessDeckService messDeckService) {
 		MessDeckServiceDTO messDeckServiceDTO = null;
 		if (messDeckService != null) {

@@ -70,17 +70,20 @@ public class TestVendorDAO {
 	@Test
 	@Transactional
 	public void update() {
+		
+		System.out.println("*********** Update Test start********************");
 		Long id = dao.create(getVendorOne());
 		Vendor v = dao.get(id);
 
 		Owner owner = new Owner();
 		OwnerAddress ownerAddress = new OwnerAddress();
-		ownerAddress.setCity("Satara");
+		ownerAddress.setCity("Nepal");
 		owner.setOwnerAddress(ownerAddress);
 		v.getOwner().setOwnerAddress(ownerAddress);
 
 		dao.update(v);
-		assertEquals("Satara", dao.get(id).getOwner().getOwnerAddress().getCity());
+		assertEquals("Nepal", dao.get(id).getOwner().getOwnerAddress().getCity());
+		System.out.println("*********** Update Test end********************");
 
 	}
 

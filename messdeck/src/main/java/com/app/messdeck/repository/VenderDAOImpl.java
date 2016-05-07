@@ -37,7 +37,8 @@ public class VenderDAOImpl implements VendorDAO {
 	}
 
 	public void update(Vendor vendor) {
-		template.update(attchVendorIDToOwnerOwneraddressVendoraddress(vendor));
+		// template.update(attchVendorIDToOwnerOwneraddressVendoraddress(vendor));
+		template.merge(vendor);
 	}
 
 	public Vendor get(long id) {

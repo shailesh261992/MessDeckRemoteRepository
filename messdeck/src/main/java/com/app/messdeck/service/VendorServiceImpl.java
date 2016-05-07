@@ -13,6 +13,7 @@ import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.repository.VendorDAO;
 import com.app.messdeck.testData.VendorDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
+import com.app.messdeck.utility.EntityConverter;
 
 @Service
 @Transactional
@@ -23,11 +24,7 @@ public class VendorServiceImpl implements VendorService {
 	public VendorDTO getVendorSummary(Long id) throws VendorNotExistException {
 		Vendor vendor = dao.get(id);
 		if (vendor != null) {
-			VendorDTO dto = new VendorDTO();
-			dto.setVendorAddress(new VendorAddressDTO());
-			BeanUtils.copyProperties(vendor, dto, "customers", "services", "owner");
-			BeanUtils.copyProperties(vendor.getVendorAddress(), dto.getVendorAddress());
-			return dto;
+			return EntityConverter.getVendorSummaryDTO(vendor);
 		} else {
 			throw new VendorNotExistException(id);
 		}
@@ -37,9 +34,7 @@ public class VendorServiceImpl implements VendorService {
 	public VendorDTO getVendorDetails(Long id) throws VendorNotExistException {
 		Vendor vendor = dao.get(id);
 		if (vendor != null) {
-			VendorDTO dto = new VendorDTO();
-			BeanUtils.copyProperties(vendor, dto, "customers", "services");
-			return dto;
+			return EntityConverter.getVendorDetailsDTO(vendor);
 		} else {
 			throw new VendorNotExistException(id);
 		}
@@ -49,8 +44,8 @@ public class VendorServiceImpl implements VendorService {
 	@ValidateWithOval
 	public Long createVendor(VendorDTO vendorDTO) {
 		System.out.println("*** dto = " + vendorDTO);
-		System.out.println("*** vendor = " + vendorDTO.toVendor());
-		return dao.create(vendorDTO.toVendor());
+		System.out.println("*** vendor = " + DTOConverter.getVendor(vendorDTO));
+		return dao.create(DTOConverter.getVendor(vendorDTO));
 
 	}
 

@@ -5,7 +5,7 @@ import net.sf.oval.constraint.AssertValid;
 public class OwnerDTO extends PersonDTO {
 
 	private long id;
-    
+
 	@AssertValid
 	private OwnerAddressDTO ownerAddress;
 
@@ -30,6 +30,7 @@ public class OwnerDTO extends PersonDTO {
 
 	@Override
 	public String toString() {
-		return "Owner [id=" + id + ", ownerAddress=" + ownerAddress + "]";
+		return "OwnerDTO [id=" + id + ", ownerAddress=" + ownerAddress + ", paerson = " + super.toString() + "]";
 	}
+
 }

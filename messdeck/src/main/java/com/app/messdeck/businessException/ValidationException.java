@@ -1,4 +1,4 @@
-package com.app.messdeck.service;
+package com.app.messdeck.businessException;
 
 import java.util.List;
 

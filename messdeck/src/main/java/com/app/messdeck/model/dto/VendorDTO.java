@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-import com.app.messdeck.entity.Customer;
-import com.app.messdeck.entity.MessDeckService;
+import com.app.messdeck.entity.EmailID;
+import com.app.messdeck.entity.Name;
+import com.app.messdeck.entity.Owner;
+import com.app.messdeck.entity.OwnerAddress;
 import com.app.messdeck.entity.Vendor;
+import com.app.messdeck.entity.VendorAddress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -28,9 +31,9 @@ public class VendorDTO {
 	@AssertValid(message = "Invalid Owner")
 	private OwnerDTO owner;
 
-	private List<Customer> customers;
+	private List<CustomerDTO> customers;
 
-	private List<MessDeckService> services;
+	private List<MessDeckServiceDTO> services;
 
 	public VendorDTO() {
 	}
@@ -59,11 +62,11 @@ public class VendorDTO {
 		this.owner = owner;
 	}
 
-	public List<MessDeckService> getServices() {
+	public List<MessDeckServiceDTO> getServices() {
 		return services;
 	}
 
-	public void setServices(List<MessDeckService> services) {
+	public void setServices(List<MessDeckServiceDTO> services) {
 		this.services = services;
 	}
 
@@ -75,11 +78,11 @@ public class VendorDTO {
 		this.vendorAddress = vendorAddress;
 	}
 
-	public List<Customer> getCustomers() {
+	public List<CustomerDTO> getCustomers() {
 		return customers;
 	}
 
-	public void setCustomers(List<Customer> customers) {
+	public void setCustomers(List<CustomerDTO> customers) {
 		this.customers = customers;
 	}
 
@@ -121,7 +124,8 @@ public class VendorDTO {
 	}
 
 	public Vendor toVendor() {
-		Vendor vendor = new Vendor();
+		Vendor vendor = getDummyVendor();
+
 		BeanUtils.copyProperties(this, vendor);
 		BeanUtils.copyProperties(this.getVendorAddress(), vendor.getVendorAddress());
 		BeanUtils.copyProperties(this.getOwner(), vendor.getOwner());
@@ -130,5 +134,18 @@ public class VendorDTO {
 
 		return vendor;
 
+	}
+
+	private Vendor getDummyVendor() {
+		Vendor vendor = new Vendor();
+
+		Owner owner = new Owner();
+		owner.setEmailID(new EmailID());
+		owner.setName(new Name());
+		owner.setOwnerAddress(new OwnerAddress());
+
+		vendor.setOwner(owner);
+		vendor.setVendorAddress(new VendorAddress());
+		return vendor;
 	}
 }
