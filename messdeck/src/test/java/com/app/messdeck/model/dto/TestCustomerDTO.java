@@ -13,7 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
-import com.app.messdeck.testData.NameDTODataSample;
+import com.app.messdeck.testData.CustomerAddressDTODataSample;
+import com.app.messdeck.testData.CustomerDTODataSample;
 
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -21,50 +22,33 @@ import net.sf.oval.Validator;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UnitTestConfigurationForControllers.class })
 @WebAppConfiguration
-public class TestNameDTO {
+public class TestCustomerDTO {
 
 	@Autowired
 	private Validator validator;
 
-	private NameDTO dto;
+	private CustomerDTO dto;
 
 	@Before
 	public void setUp() throws Exception {
-		dto = NameDTODataSample.getNameDTO_Owner();
+		dto = CustomerDTODataSample.getCustomerDTO();
 	}
 
 	@Test
-	public void testInvalidFirstName() {
-		dto.setFirstName("s23");
+	public void testInvalidCustomerName() {
+		dto.setName(new NameDTO("shaggy19", "Kadam"));
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals(1,listOfVilolation.size());
-		assertEquals("Only Alphabets are allowed", listOfVilolation.get(0).getMessage());
-
+		assertEquals(1, listOfVilolation.size());
+		assertEquals("com.app.messdeck.model.dto.PersonDTO.name is invalid", listOfVilolation.get(0).getMessage());
 	}
-	
-	@Test
-	public void testInvalidLastName() {
-		dto.setLastName("k23");
-		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals(1,listOfVilolation.size());
-		assertEquals("Only Alphabets are allowed", listOfVilolation.get(0).getMessage());
 
-	}
-	
 	@Test
-	public void testNullFirstName() {
-		dto.setFirstName(null);
+	public void testInvalidCustomerAddress() {
+		CustomerAddressDTO customerAddress = dto.getCustomerAddress();
+		customerAddress.setCity("satara");
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals(1,listOfVilolation.size());
-
-	}
-	
-	@Test
-	public void testNullLastName() {
-		dto.setLastName(null);
-		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals(0,listOfVilolation.size());
-
+		assertEquals(1, listOfVilolation.size());
+		assertEquals("Invalid Customer Address", listOfVilolation.get(0).getMessage());
 	}
 	
 	

@@ -23,7 +23,7 @@ public class CustomerController {
 
 	@RequestMapping("/{id}")
 	public CustomerDTO getCustomer(@PathVariable long id) {
-		return service.getCustomer(id);
+		return service.getCustomerSummary(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

@@ -2,14 +2,26 @@ package com.app.messdeck.model.dto;
 
 import java.util.List;
 
-import com.app.messdeck.entity.MessDeckService;
-import com.app.messdeck.entity.Vendor;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import net.sf.oval.constraint.AssertValid;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CustomerDTO extends PersonDTO {
-
+	@JsonIgnore
 	private long id;
-	private Vendor vendor;
-	private List<MessDeckService> subscribedServices;
+
+	@AssertValid(message = "Invalid Customer Address")
+	private CustomerAddressDTO customerAddress;
+
+	@NotNull
+	private VendorDTO vendor;
+
+	@JsonIgnore
+	private List<MessDeckServiceDTO> subscribedServices;
 
 	public CustomerDTO() {
 	}
@@ -22,25 +34,34 @@ public class CustomerDTO extends PersonDTO {
 		this.id = id;
 	}
 
-	public Vendor getVendor() {
+	public VendorDTO getVendor() {
 		return vendor;
 	}
 
-	public void setVendor(Vendor vendor) {
+	public void setVendor(VendorDTO vendor) {
 		this.vendor = vendor;
 	}
 
-	public List<MessDeckService> getSubscribedServices() {
+	public List<MessDeckServiceDTO> getSubscribedServices() {
 		return subscribedServices;
 	}
 
-	public void setSubscribedServices(List<MessDeckService> subscribedServices) {
+	public void setSubscribedServices(List<MessDeckServiceDTO> subscribedServices) {
 		this.subscribedServices = subscribedServices;
+	}
+
+	public CustomerAddressDTO getCustomerAddress() {
+		return customerAddress;
+	}
+
+	public void setCustomerAddress(CustomerAddressDTO customerAddress) {
+		this.customerAddress = customerAddress;
 	}
 
 	@Override
 	public String toString() {
-		return "CustomerDTO [id=" + id + ", vendor=" + vendor + ", person=" + super.toString() + "]";
+		return "CustomerDTO [id=" + id + ", customerAddress=" + customerAddress + ", vendor=" + vendor + ", person"
+				+ super.toString() + "]";
 	}
 
 }

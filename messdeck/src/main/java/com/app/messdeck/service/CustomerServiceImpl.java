@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.messdeck.aspects.ValidateWithOval;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.repository.CustomerDAO;
 import com.app.messdeck.utility.DTOConverter;
@@ -17,19 +18,18 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDAO dao;
 
 	@Override
-	public CustomerDTO getCustomer(Long id) {
+	public CustomerDTO getCustomerSummary(Long id) {
 
 		// Long id2 = this.createCustomer(createCustomerDTO());
-		return DTOConverter.EntityToDTOConverter(dao.read(id));
+		return DTOConverter.EntityToDTOConverter(dao.get(id));
 
 	}
 
 	@Override
+	@ValidateWithOval
 	public Long createCustomer(CustomerDTO dto) {
-		System.out.println("*** creating dto " + dto);
-		Long id = dao.create(DTOConverter.DTOToEntityCoverter(dto));
-		System.out.println("Created object with id " + id);
-		return id;
+		
+		return null;
 
 	}
 
@@ -40,25 +40,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void deleteCustomer(Long id) {
-		dao.delete(dao.read(id));
+		dao.delete(dao.get(id));
 
 	}
-
-	// private CustomerDTO createCustomerDTO() {
-	// CustomerDTO dto = new CustomerDTO();
-	//
-	// Address address = new Address();
-	// address.setCity("Pune");
-	// dto.setAddress(address);
-	//
-	// dto.setEmailID(new EmailID("Shailesh444@gmail.com"));
-	// dto.setGender(Gender.MALE);
-	// dto.setMobileNo("8765234");
-	// dto.setName(new Name("Teja", "Thakur"));
-	// dto.setVendorID(1);
-	//
-	// return dto;
-	//
-	// }
 
 }

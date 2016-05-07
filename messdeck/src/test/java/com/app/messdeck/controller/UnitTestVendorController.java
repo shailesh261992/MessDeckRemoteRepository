@@ -36,7 +36,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.app.messdeck.businessException.ValidationException;
 import com.app.messdeck.businessException.VendorNotExistException;
-import com.app.messdeck.configuration.testenvconfig.UnitTestConfiguration;
+import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
 import com.app.messdeck.model.dto.ValidationErrrorInfo;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.service.VendorService;
@@ -44,7 +44,7 @@ import com.app.messdeck.testData.VendorDTODataSample;
 import com.app.messdeck.testutils.TestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { UnitTestConfiguration.class })
+@ContextConfiguration(classes = { UnitTestConfigurationForControllers.class })
 @WebAppConfiguration
 
 public class UnitTestVendorController {

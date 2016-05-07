@@ -1,5 +1,7 @@
 package com.app.messdeck.repository;
 
+import java.util.List;
+
 import com.app.messdeck.entity.Customer;
 
 public interface CustomerDAO {
@@ -10,6 +12,8 @@ public interface CustomerDAO {
 
 	void update(Customer obj);
 
-	Customer read(long id);
+	Customer get(long id);
+	
+	List<Customer> getAll();
 
 }

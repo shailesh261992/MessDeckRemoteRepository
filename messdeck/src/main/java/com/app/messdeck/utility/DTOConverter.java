@@ -32,34 +32,20 @@ public class DTOConverter {
 		return modelMapper.map(dto, Vendor.class);
 	}
 
-	public static Vendor dTOToEntityCoverter(VendorDTO dto) {
+	public static Customer getCustomer(CustomerDTO dto) {
 
-		Vendor vendor = null;
-		// if (dto != null) {
-		// vendor = new Vendor();
-		// vendor.setId(dto.getId());
-		// vendor.setName(dto.getName());
-		// vendor.setOwner(dto.getOwner());
-		// // vendor.setVendorddress(dto.getVendorddress());
-		// }
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.addMappings(new PropertyMap<CustomerDTO, Customer>() {
 
-		return vendor;
+			@Override
+			protected void configure() {
+				skip().setSubscribedServices(null);
 
-	}
+			}
+		});
 
-	public static VendorDTO entityToDTOConverter(Vendor vendor) {
-		VendorDTO vendorDTO = null;
-		// if (vendor != null) {
-		// vendorDTO = new VendorDTO();
-		//
-		// vendorDTO.setId(vendor.getId());
-		// vendorDTO.setName(vendor.getName());
-		// // vendorDTO.setVendorddress(vendor.getVendorddress());
-		// vendorDTO.setOwner(vendor.getOwner());
-		//
-		// }
-
-		return vendorDTO;
+		Customer customer = modelMapper.map(dto, Customer.class);
+		return customer;
 
 	}
 

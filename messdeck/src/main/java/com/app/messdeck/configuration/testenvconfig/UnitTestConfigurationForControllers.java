@@ -31,7 +31,7 @@ import com.app.messdeck.service.VendorService;
 @Import({ HibernateConfiguration.class, StaticResourceConfiguration.class, OvalConfiguration.class,
 		AOPConfiguration.class })
 @EnableAspectJAutoProxy
-public class UnitTestConfiguration extends WebMvcConfigurerAdapter {
+public class UnitTestConfigurationForControllers extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public ViewResolver viewResolver() {

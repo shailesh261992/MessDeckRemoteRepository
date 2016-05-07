@@ -1,13 +1,11 @@
-package com.app.messdeck.entity;
+package com.app.messdeck.model.dto;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
-public class CustomerAddress extends Address {
-	@Id
+public class CustomerAddressDTO extends AddressDTO {
 	private long id;
 
+	@Id
 	public long getId() {
 		return id;
 	}
@@ -20,5 +18,4 @@ public class CustomerAddress extends Address {
 	public String toString() {
 		return "CustomerAddress [id=" + id + ", address=" + super.toString() + "]";
 	}
-
 }

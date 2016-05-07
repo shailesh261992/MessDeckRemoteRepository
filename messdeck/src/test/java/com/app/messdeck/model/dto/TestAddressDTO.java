@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.app.messdeck.configuration.testenvconfig.UnitTestConfiguration;
+import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
 import com.app.messdeck.testData.AddressDTODataSample;
 
 import net.sf.oval.ConstraintViolation;
@@ -18,7 +18,7 @@ import net.sf.oval.Validator;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { UnitTestConfiguration.class })
+@ContextConfiguration(classes = { UnitTestConfigurationForControllers.class })
 @WebAppConfiguration
 public class TestAddressDTO {
 

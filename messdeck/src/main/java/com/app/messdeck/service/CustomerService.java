@@ -4,7 +4,7 @@ import com.app.messdeck.model.dto.CustomerDTO;
 
 public interface CustomerService {
 
-	CustomerDTO getCustomer(Long id);
+	CustomerDTO getCustomerSummary(Long id);
 
 	Long createCustomer(CustomerDTO dto);
 
