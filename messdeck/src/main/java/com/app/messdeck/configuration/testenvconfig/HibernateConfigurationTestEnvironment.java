@@ -29,7 +29,7 @@ public class HibernateConfigurationTestEnvironment {
 		basicDataSource.setUsername(env.getProperty("test.db.userName"));
 		basicDataSource.setPassword(env.getProperty("test.db.password"));
 		basicDataSource.setInitialSize(2);
-		basicDataSource.setMaxActive(15);
+		basicDataSource.setMaxActive(25);
 		return basicDataSource;
 
 	}

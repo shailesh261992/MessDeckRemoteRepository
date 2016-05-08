@@ -16,6 +16,8 @@ public class IntegrationTestData {
 	private static String INSERT_VENDOR_ADDRESS_QUERY = "INSERT INTO vendoraddress VALUES(?,?,?,?,?,?)";
 	private static String INSERT_OWNER_QUERY = "INSERT INTO owner VALUES(?,?,?,?,?,?)";
 	private static String INSERT_OWNER_ADDRESS_QUERY = "INSERT INTO owneraddress VALUES(?,?,?,?,?,?)";
+	private static String INSERT_CUSTOMER_QUERY = "INSERT INTO customer VALUES(?,?,?,?,?,?,?)";
+	private static String INSERT_CUSTOMER_ADDRESS_QUERY = "INSERT INTO customeraddress VALUES(?,?,?,?,?,?)";
 
 	public IntegrationTestData() {
 
@@ -31,6 +33,8 @@ public class IntegrationTestData {
 		addVendorAddress();
 		addOwners();
 		addOwnerAddress();
+		addCustomers();
+		addCustomerAddress();
 	}
 
 	private void clearData() {
@@ -49,27 +53,16 @@ public class IntegrationTestData {
 
 		query = session.createSQLQuery("DELETE FROM owneraddress");
 		query.executeUpdate();
-		transaction.commit();
 
-	}
-
-	private void createDB() {
-		SessionFactory sessionFactory = template.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("CREATE DATABASE messdecktestdb");
+		query = session.createSQLQuery("DELETE FROM customer");
 		query.executeUpdate();
-		transaction.commit();
 
-	}
-
-	private void dropDB() {
-		SessionFactory sessionFactory = template.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("DROP DATABASE messdecktestdb");
+		query = session.createSQLQuery("DELETE FROM customeraddress");
 		query.executeUpdate();
+
 		transaction.commit();
+		session.close();
+
 	}
 
 	private void addVendors() {
@@ -92,6 +85,7 @@ public class IntegrationTestData {
 		query.executeUpdate();
 
 		transaction.commit();
+		session.close();
 
 	}
 
@@ -125,6 +119,7 @@ public class IntegrationTestData {
 		query.executeUpdate();
 
 		transaction.commit();
+		session.close();
 	}
 
 	public void addOwners() {
@@ -158,6 +153,7 @@ public class IntegrationTestData {
 		query.executeUpdate();
 
 		transaction.commit();
+		session.close();
 	}
 
 	public void addOwnerAddress() {
@@ -190,5 +186,83 @@ public class IntegrationTestData {
 		query.executeUpdate();
 
 		transaction.commit();
+		session.close();
 	}
+
+	public void addCustomers() {
+
+		SessionFactory sessionFactory = template.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(INSERT_CUSTOMER_QUERY);
+		query.setLong(0, 1);
+		query.setString(1, "ganesh@gmail.com");
+		query.setInteger(2, 1);
+		query.setString(3, "7770092161");
+		query.setString(4, "Ganesh");
+		query.setString(5, "Kadam");
+		query.setInteger(6, 1);
+		query.executeUpdate();
+		session.flush();
+		session.clear();
+
+		query.setLong(0, 2);
+		query.setString(1, "harshad@gmail.com");
+		query.setInteger(2, 1);
+		query.setString(3, "7779999999");
+		query.setString(4, "Harshad");
+		query.setString(5, "Thorat");
+		query.setInteger(6, 1);
+		query.executeUpdate();
+		session.flush();
+		session.clear();
+
+		query.setLong(0, 3);
+		query.setString(1, "Rohit@gmail.com");
+		query.setInteger(2, 1);
+		query.setString(3, "7878787878");
+		query.setString(4, "Rohit");
+		query.setString(5, "Navadkar");
+		query.setInteger(6, 1);
+		query.executeUpdate();
+
+		transaction.commit();
+		session.close();
+
+	}
+
+	public void addCustomerAddress() {
+		SessionFactory sessionFactory = template.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(INSERT_CUSTOMER_ADDRESS_QUERY);
+		query.setLong(0, 1);
+		query.setString(1, "pune");
+		query.setString(2, "India");
+		query.setString(3, "410507");
+		query.setString(4, "Maharashtra");
+		query.setString(5, "Talegaon street 1");
+		query.executeUpdate();
+
+		query.setLong(0, 2);
+		query.setString(1, "pune");
+		query.setString(2, "India");
+		query.setString(3, "410507");
+		query.setString(4, "Maharashtra");
+		query.setString(5, "Talegaon street 2");
+		query.executeUpdate();
+
+		query.setLong(0, 3);
+		query.setString(1, "pune");
+		query.setString(2, "India");
+		query.setString(3, "410507");
+		query.setString(4, "Maharashtra");
+		query.setString(5, "Talegaon street 3");
+		query.executeUpdate();
+
+		transaction.commit();
+		session.close();
+
+	}
+
 }

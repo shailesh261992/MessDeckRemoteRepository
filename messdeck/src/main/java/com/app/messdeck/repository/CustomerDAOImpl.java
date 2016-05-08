@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.messdeck.businessException.CustomerNotExistsException;
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.CustomerAddress;
+import com.app.messdeck.entity.Vendor;
 
 @Repository
 @Transactional
@@ -19,8 +20,14 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Autowired
 	private HibernateTemplate template;
 
+	@Autowired
+	private VendorDAO vendorDao;
+
 	@Override
 	public Long create(Customer customer) {
+		Vendor vendor = vendorDao.get(customer.getVendor().getId());
+		customer.setVendor(vendor);
+
 		CustomerAddress customerAddress = customer.getCustomerAddress();
 		customer.setCustomerAddress(null);
 		Long id = (Long) template.save(customer);

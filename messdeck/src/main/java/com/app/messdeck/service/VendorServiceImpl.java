@@ -37,11 +37,9 @@ public class VendorServiceImpl implements VendorService {
 	@Override
 	public VendorDTO getVendorDetails(Long id) throws VendorNotExistException {
 		Vendor vendor = dao.get(id);
-		if (vendor != null) {
-			return EntityConverter.getVendorDetailsDTO(vendor);
-		} else {
-			throw new VendorNotExistException(id);
-		}
+
+		return EntityConverter.getVendorDetailsDTO(vendor);
+
 	}
 
 	@Override

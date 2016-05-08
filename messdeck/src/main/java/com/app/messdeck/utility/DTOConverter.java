@@ -49,35 +49,6 @@ public class DTOConverter {
 
 	}
 
-	public static Customer DTOToEntityCoverter(CustomerDTO dto) {
-		Customer customer = new Customer();
-		// customer.setId(dto.getId());
-		// customer.setAddress(dto.getAddress());
-		// customer.setEmailID(dto.getEmailID());
-		// customer.setGender(dto.getGender());
-		// customer.setMobileNo(dto.getMobileNo());
-		// customer.setName(dto.getName());
-		// Vendor vendor = new Vendor();
-		// vendor.setId(dto.getVendorID());
-		// customer.setVendor(vendor);
-
-		return customer;
-
-	}
-
-	public static CustomerDTO EntityToDTOConverter(Customer customer) {
-		CustomerDTO dto = new CustomerDTO();
-		// dto.setAddress(customer.getAddress());
-		// dto.setEmailID(customer.getEmailID());
-		// dto.setGender(customer.getGender());
-		// dto.setMobileNo(customer.getMobileNo());
-		// dto.setName(customer.getName());
-		// dto.setVendorID(customer.getVendor().getId());
-		// // dto.setId(customer.getId());
-		return dto;
-
-	}
-
 	public static MessDeckServiceDTO entityTODTOCoverterForMessDeckService(MessDeckService messDeckService) {
 		MessDeckServiceDTO messDeckServiceDTO = null;
 		if (messDeckService != null) {

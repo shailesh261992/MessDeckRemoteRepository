@@ -53,7 +53,13 @@ public class VenderDAOImpl implements VendorDAO {
 	}
 
 	public Vendor get(long id) {
-		return template.get(Vendor.class, id);
+		Vendor vendor = template.get(Vendor.class, id);
+		if (vendor != null) {
+			return vendor;
+		} else {
+			throw new VendorNotExistException(id);
+		}
+
 	}
 
 	@Override

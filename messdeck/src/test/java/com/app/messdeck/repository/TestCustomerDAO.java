@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.businessException.CustomerNotExistsException;
+import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.MessDeckConfiguration;
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.CustomerAddress;
@@ -61,6 +62,18 @@ public class TestCustomerDAO {
 		dao.create(customer);
 		assertEquals(dao.getAll().size(), 1);
 		assertEquals(1, template.loadAll(CustomerAddress.class).size());
+	}
+
+	@Test(expected = VendorNotExistException.class)
+	@Transactional
+	public void tesCreateWithNonExistingVendor() {
+		Vendor vendor = DTOConverter.getVendor(VendorDTODataSample.getVendorDTO());
+		CustomerDTO dto = CustomerDTODataSample.getCustomerDTO();
+		dto.setVendor(EntityConverter.getVendorSummaryDTO(vendor));
+		Customer customer = DTOConverter.getCustomer(dto);
+		dao.create(customer);
+		// assertEquals(dao.getAll().size(), 1);
+		// assertEquals(1, template.loadAll(CustomerAddress.class).size());
 	}
 
 	@Test(expected = DataIntegrityViolationException.class)

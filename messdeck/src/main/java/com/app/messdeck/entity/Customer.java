@@ -26,7 +26,7 @@ public class Customer extends Person {
 	private CustomerAddress customerAddress;
 
 	@ManyToOne
-	@JoinColumn(name = "vendorID", nullable = false)
+	@JoinColumn(name = "vendorID")
 	private Vendor vendor;
 
 	@ManyToMany
@@ -72,6 +72,28 @@ public class Customer extends Person {
 	public String toString() {
 		return "Customer [id=" + id + ", customerAddress=" + customerAddress + ", vendor=" + vendor + ", person="
 				+ super.toString() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 
 }
