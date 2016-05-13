@@ -33,7 +33,7 @@ public class IntegrationTestConfiguration {
 
 	public IntegrationTestData getIntegrationTestData() throws IOException {
 		IntegrationTestData testData = new IntegrationTestData(hbconfig.template());
-		testData.initializeTestData();
+		// testData.initializeTestData();
 		return testData;
 
 	}

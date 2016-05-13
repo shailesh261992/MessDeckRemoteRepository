@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.app.messdeck.aspects.ValidateWithOval;
 import com.app.messdeck.businessException.VendorNotExistException;
+import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.Vendor;
+import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.VendorAddressDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.repository.VendorDAO;
@@ -82,6 +84,17 @@ public class VendorServiceImpl implements VendorService {
 		}
 
 		return null;
+	}
+
+	@Override
+	public List<CustomerDTO> getCustomrs(Long id) {
+		Vendor vendor = dao.get(id);
+		List<Customer> customers = vendor.getCustomers();
+		List<CustomerDTO> customrsDto = new ArrayList<>();
+		for (Customer c : customers) {
+			customrsDto.add(EntityConverter.getCustomorSummaryDTO(c));
+		}
+		return customrsDto;
 	}
 
 }

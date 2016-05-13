@@ -88,8 +88,7 @@ public class VendorDTO {
 
 	@Override
 	public String toString() {
-		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + ", owner=" + owner
-				+ ", customers=" + customers + ", services=" + services + "]";
+		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + "]";
 	}
 
 	@Override
@@ -123,29 +122,4 @@ public class VendorDTO {
 		return true;
 	}
 
-	public Vendor toVendor() {
-		Vendor vendor = getDummyVendor();
-
-		BeanUtils.copyProperties(this, vendor);
-		BeanUtils.copyProperties(this.getVendorAddress(), vendor.getVendorAddress());
-		BeanUtils.copyProperties(this.getOwner(), vendor.getOwner());
-		BeanUtils.copyProperties(this.getOwner().getOwnerAddress(), vendor.getOwner().getOwnerAddress());
-		BeanUtils.copyProperties(this.getOwner().getName(), vendor.getOwner().getName());
-
-		return vendor;
-
-	}
-
-	private Vendor getDummyVendor() {
-		Vendor vendor = new Vendor();
-
-		Owner owner = new Owner();
-		owner.setEmailID(new EmailID());
-		owner.setName(new Name());
-		owner.setOwnerAddress(new OwnerAddress());
-
-		vendor.setOwner(owner);
-		vendor.setVendorAddress(new VendorAddress());
-		return vendor;
-	}
 }

@@ -42,6 +42,13 @@ public class IntegrationTestData {
 		SessionFactory sessionFactory = template.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
+
+		query = session.createSQLQuery("DELETE FROM customeraddress");
+		query.executeUpdate();
+		
+		query = session.createSQLQuery("DELETE FROM customer");
+		query.executeUpdate();
+
 		query = session.createSQLQuery("DELETE FROM vendor");
 		query.executeUpdate();
 
@@ -52,12 +59,6 @@ public class IntegrationTestData {
 		query.executeUpdate();
 
 		query = session.createSQLQuery("DELETE FROM owneraddress");
-		query.executeUpdate();
-
-		query = session.createSQLQuery("DELETE FROM customer");
-		query.executeUpdate();
-
-		query = session.createSQLQuery("DELETE FROM customeraddress");
 		query.executeUpdate();
 
 		transaction.commit();

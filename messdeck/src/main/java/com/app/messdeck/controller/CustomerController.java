@@ -3,7 +3,9 @@ package com.app.messdeck.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.messdeck.model.dto.CustomerDTO;
+import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.service.CustomerService;
+import com.app.messdeck.testData.CustomerAddressDTODataSample;
+import com.app.messdeck.testData.CustomerDTODataSample;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/customers")
@@ -21,23 +28,36 @@ public class CustomerController {
 	@Autowired
 	private CustomerService service;
 
-	@RequestMapping("/{id}")
-	public CustomerDTO getCustomer(@PathVariable long id) {
-		return service.getCustomerSummary(id);
+	@RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Resource<CustomerDTO> getCustomerSummary(@PathVariable long id) {
+
+		CustomerDTO customerSummary = service.getCustomerSummary(id);
+		Resource<CustomerDTO> resource = new Resource<CustomerDTO>(customerSummary);
+		resource.add(linkTo(methodOn(CustomerController.class).getCustomerSummary(id)).withSelfRel());
+		return resource;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createCustomer(@RequestBody CustomerDTO dto, HttpServletRequest request) {
+	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Resource<CustomerDTO>> createCustomer(@RequestBody CustomerDTO dto,
+			HttpServletRequest request) {
 		Long customerID = service.createCustomer(dto);
-		String resourceUrl = request.getRequestURL().toString() + "/" + customerID;
-		ResponseEntity<?> responseEntity = new ResponseEntity<String>(resourceUrl, HttpStatus.CREATED);
+		CustomerDTO customerSummary = service.getCustomerSummary(customerID);
+		Resource<CustomerDTO> resource = new Resource<CustomerDTO>(customerSummary);
+		resource.add(linkTo(methodOn(CustomerController.class).getCustomerSummary(customerID)).withSelfRel());
+		ResponseEntity<Resource<CustomerDTO>> responseEntity = new ResponseEntity<Resource<CustomerDTO>>(resource,
+				HttpStatus.CREATED);
 		return responseEntity;
+
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateCustomer(@RequestBody CustomerDTO dto) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateCustomer(@PathVariable long id, @RequestBody CustomerDTO dto) {
+		dto.setId(id);
 		service.updateCustomer(dto);
-		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+		CustomerDTO customerSummary = service.getCustomerSummary(id);
+		Resource<CustomerDTO> resource = new Resource<CustomerDTO>(customerSummary);
+		resource.add(linkTo(methodOn(CustomerController.class).getCustomerSummary(id)).withSelfRel());
+		return new ResponseEntity<Object>(resource, HttpStatus.OK);
 
 	}
 

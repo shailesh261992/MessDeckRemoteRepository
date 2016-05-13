@@ -5,13 +5,16 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import net.sf.oval.constraint.AssertValid;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(Include.NON_EMPTY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerDTO extends PersonDTO {
-	@JsonIgnore
+
 	private long id;
 
 	@AssertValid(message = "Invalid Customer Address")

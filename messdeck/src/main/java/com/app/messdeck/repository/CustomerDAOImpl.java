@@ -45,6 +45,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public void update(Customer customer) {
+		Vendor vendor = vendorDao.get(customer.getVendor().getId());
+		customer.setVendor(vendor);
+
 		Customer c = this.get(customer.getId());
 		customer.getCustomerAddress().setId(c.getId());
 		template.merge(customer);

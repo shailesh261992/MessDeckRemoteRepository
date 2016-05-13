@@ -89,8 +89,7 @@ public class Vendor {
 
 	@Override
 	public String toString() {
-		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + ", owner=" + owner
-				+ ", customers=" + customers + ", services=" + services + "]";
+		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + "]";
 	}
 
 	@Override

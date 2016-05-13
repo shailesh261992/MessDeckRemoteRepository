@@ -3,6 +3,9 @@ package com.app.messdeck.service;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -11,10 +14,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.app.messdeck.businessException.VendorNotExistException;
+import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.Vendor;
+import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.repository.VendorDAO;
+import com.app.messdeck.testData.CustomerDTODataSample;
 import com.app.messdeck.testData.VendorDTODataSample;
+import com.app.messdeck.utility.DTOConverter;
 
 public class TestVendorServiceImpl {
 
@@ -83,6 +91,27 @@ public class TestVendorServiceImpl {
 
 		verify(dao).delete(vendor);
 		verify(dao).get(1l);
+
+	}
+
+	@Test
+	public void testGetCustomers() {
+		Vendor vendor = VendorDTODataSample.getEquivalentVendor();
+		vendor.setId(1);
+		List<Customer> customers = new ArrayList<>();
+		customers.add(DTOConverter.getCustomer(CustomerDTODataSample.getCustomerDTO()));
+		vendor.setCustomers(customers);
+		when(dao.get(1)).thenReturn(vendor);
+
+		List<CustomerDTO> list = service.getCustomrs(1l);
+		assertEquals(1, list.size());
+	}
+
+	@Test(expected = VendorNotExistException.class)
+	public void testGetCustomersForNonExistingVendor() {
+
+		when(dao.get(1)).thenThrow(new VendorNotExistException(1));
+		service.getCustomrs(1l);
 
 	}
 

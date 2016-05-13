@@ -54,6 +54,9 @@ public class EntityConverter {
 			@Override
 			protected void configure() {
 				skip().setSubscribedServices(null);
+				skip().getVendor().setCustomers(null);
+				skip().getVendor().setOwner(null);
+				skip().getVendor().setServices(null);
 
 			}
 		});

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.service.VendorService;
 
@@ -93,6 +94,13 @@ public class VendorController {
 		}
 
 		return resourceList;
+
+	}
+
+	@RequestMapping(value = "/{id}/customers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<CustomerDTO> getCustomers(@PathVariable long id) {
+
+		return service.getCustomrs(id);
 
 	}
 

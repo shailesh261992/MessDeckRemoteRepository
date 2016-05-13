@@ -42,6 +42,16 @@ public class ValidationAspect {
 				if (context instanceof FieldContext) {
 					Field field = ((FieldContext) context).getField();
 					info.setFieldName(field.getName());
+					// ConstraintViolation[] causes =
+					// constraintViolation.getCauses();
+					//
+					// if (causes != null) {
+					// for (ConstraintViolation c : causes) {
+					// System.out.println("*** Extra cause" + ((FieldContext)
+					// context).getField() + " = "
+					// + field.getName());
+					// }
+					// }
 
 				}
 				validationErrros.add(info);

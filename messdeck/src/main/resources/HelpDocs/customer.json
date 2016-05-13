@@ -1,21 +1,40 @@
 {
-  "id": 0,
-  "name": {
-    "firstName": "Teja",
-    "lastName": "Thakur"
-  },
-  "address": {
-    "id": 3,
-    "street": null,
-    "city": "Pune",
-    "state": null,
-    "country": null,
-    "pinCode": null
-  },
-  "mobileNo": "8765234",
-  "emailID": {
-    "emailId": "Shailesh444@gmail.com"
-  },
-  "gender": "MALE",
-  "vendorID": 1
+	"name": 
+	{
+		"firstName": "Ganesh",
+		"lastName": "Kadam"
+	},
+
+	"mobileNo": "7770092161",
+	"emailID": 
+	{
+		"emailId": "ganesh@gmail.com"
+	},
+
+	"gender": "FEMALE",
+	"id": 1,
+	"customerAddress": 
+	{
+		"street": "Talegaon street 1",
+		"city": "pune",
+		"state": "Maharashtra",
+		"country": "India",
+		"pinCode": "410507",
+		"id": 1
+	},
+
+	"vendor": 
+	{
+		"id": 1,
+		"name": "Sai Mess",
+		"vendorAddress": 
+		{
+			"street": "Talegaon",
+			"city": "pune",
+			"state": "Maharashtra",
+			"country": "India",
+			"pinCode": "410507",
+			"id": 1
+		}
+	}
 }

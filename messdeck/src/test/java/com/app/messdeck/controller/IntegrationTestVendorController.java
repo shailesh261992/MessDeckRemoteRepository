@@ -1,6 +1,7 @@
 package com.app.messdeck.controller;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -11,7 +12,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +28,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.testenvconfig.IntegrationTestConfiguration;
 import com.app.messdeck.model.dto.EmailIDDTO;
 import com.app.messdeck.model.dto.VendorDTO;
+import com.app.messdeck.testData.IntegrationTestData;
 import com.app.messdeck.testData.VendorDTODataSample;
 import com.app.messdeck.testutils.TestUtils;
 
@@ -43,9 +49,17 @@ public class IntegrationTestVendorController {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
+	@Autowired
+	private IntegrationTestData testData;
+	
+	@PostConstruct
+	public void init(){
+		testData.initializeTestData();
+	}
+
 	@Before
 	public void setUp() {
-
+		
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 	}
@@ -179,7 +193,22 @@ public class IntegrationTestVendorController {
 	@Test
 	public void getAllVendorsSummary() throws Exception {
 		mockMvc.perform(get("/vendors/all")).andDo(print()).andExpect(status().isOk());
-		System.out.println("*** testGetVendorSummary end ****");
+
+	}
+
+	@Test
+	public void testGetCustomers() throws Exception {
+		mockMvc.perform(get("/vendors/1/customers").accept(contentType)).andDo(print()).andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].mobileNo", is("7770092161")));
+
+	}
+
+	@Test
+	public void testGetCustomersForNonExistingVendor() throws Exception {
+
+		mockMvc.perform(get("/vendors/" + Integer.MAX_VALUE + "/customers").accept(contentType)).andDo(print())
+				.andExpect(status().isBadRequest());
+
 	}
 
 }
