@@ -1,14 +1,18 @@
 package com.app.messdeck.utility;
 
+import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
 import com.app.messdeck.entity.Customer;
+import com.app.messdeck.entity.MessDeckService;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.CustomerDTO;
+import com.app.messdeck.model.dto.MessDeckServiceDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 
 public class EntityConverter {
+	private static Logger logger = Logger.getLogger(DTOConverter.class);
 
 	public static VendorDTO getVendorSummaryDTO(Vendor vendor) {
 		ModelMapper modelMapper = new ModelMapper();
@@ -65,6 +69,26 @@ public class EntityConverter {
 		System.out.println("CustomerDTO Summary = " + customer);
 		return customerDTO;
 
+	}
+
+	public static MessDeckServiceDTO getMessDeckServiceDTO(MessDeckService messDeckService) {
+
+		ModelMapper modelMapper = new ModelMapper();
+
+		modelMapper.addMappings(new PropertyMap<MessDeckService, MessDeckServiceDTO>() {
+
+			@Override
+			protected void configure() {
+				skip().getVendor().setCustomers(null);
+				skip().getVendor().setServices(null);
+				skip().getVendor().setOwner(null);
+				skip().setMeal(null);
+
+			}
+		});
+
+		MessDeckServiceDTO dto = modelMapper.map(messDeckService, MessDeckServiceDTO.class);
+		return dto;
 	}
 
 }

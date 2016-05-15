@@ -6,18 +6,19 @@ import java.util.List;
 import com.app.messdeck.entity.ServiceType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import net.sf.oval.constraint.Assert;
+import net.sf.oval.constraint.NotNull;
+
 public class MessDeckServiceDTO {
 
 	private long id;
 
-	private long vendorId;
+	@NotNull(message = "Vendor can not be null,Only vendors are allowed to publish service")
+	private VendorDTO vendor;
 
 	private ServiceType serviceType;
 
-	// startTime
-	// endTime
-	// capacityOfMembers
-
+	@Assert(expr = "_this.capacityOfMembers > 0", lang = "js", message = "Member Capacity must be greater than 0(Zero)")
 	private Integer capacityOfMembers;
 
 	@JsonDeserialize(using = TimeDeserializer.class)
@@ -29,15 +30,19 @@ public class MessDeckServiceDTO {
 	private Date date;
 
 	private List<ItemDTO> meal;
+
+	@Assert(expr = "_this.cost > 0", lang = "js", message = "Cost must be greater than 0(Zero)")
 	private double cost;
+
+	private List<CustomerDTO> subscribers;
 
 	public MessDeckServiceDTO() {
 
 	}
 
-	public MessDeckServiceDTO(long vendorDTO, ServiceType serviceType, Date date, List<ItemDTO> meal, double cost) {
+	public MessDeckServiceDTO(VendorDTO vendor, ServiceType serviceType, Date date, List<ItemDTO> meal, double cost) {
 		super();
-		this.vendorId = vendorId;
+		this.vendor = vendor;
 		this.serviceType = serviceType;
 		this.date = date;
 		this.meal = meal;
@@ -84,21 +89,12 @@ public class MessDeckServiceDTO {
 		this.id = id;
 	}
 
-	public long getVendorId() {
-		return vendorId;
+	public VendorDTO getVendor() {
+		return vendor;
 	}
 
-	public void setVendorId(long vendorId) {
-		this.vendorId = vendorId;
-
-	}
-
-	public ServiceType serviceType() {
-		return serviceType;
-	}
-
-	public void setService(ServiceType serviceType) {
-		this.serviceType = serviceType;
+	public void setVendor(VendorDTO vendor) {
+		this.vendor = vendor;
 	}
 
 	public Date getDate() {
@@ -123,6 +119,21 @@ public class MessDeckServiceDTO {
 
 	public void setCost(double cost) {
 		this.cost = cost;
+	}
+
+	public List<CustomerDTO> getSubscribers() {
+		return subscribers;
+	}
+
+	public void setSubscribers(List<CustomerDTO> subscribers) {
+		this.subscribers = subscribers;
+	}
+
+	@Override
+	public String toString() {
+		return "MessDeckServiceDTO [id=" + id + ", vendor=" + vendor + ", serviceType=" + serviceType
+				+ ", capacityOfMembers=" + capacityOfMembers + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", date=" + date + ", meal=" + meal + ", cost=" + cost + "]";
 	}
 
 }

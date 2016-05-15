@@ -68,7 +68,7 @@ public class TestMessDeckServiceDAOImpl {
 	@Test
 	@Transactional
 	public void testSaveMessDeckService() {
-		Long l = messDeckServiceDAO.saveMessDeckService(createMessDeckSerivce());
+		Long l = messDeckServiceDAO.create(createMessDeckSerivce());
 		Assert.assertNotNull(l);
 	}
 

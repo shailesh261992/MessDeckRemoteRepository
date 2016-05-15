@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.messdeck.annotations.Loggable;
 import com.app.messdeck.aspects.ValidateWithOval;
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.model.dto.CustomerDTO;
@@ -24,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	@ValidateWithOval
+   @Loggable
 	public CustomerDTO getCustomerSummary(Long id) {
 
 		return EntityConverter.getCustomorSummaryDTO(dao.get(id));

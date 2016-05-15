@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.app.messdeck.annotations.Loggable;
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
 import com.app.messdeck.testData.AddressDTODataSample;
 

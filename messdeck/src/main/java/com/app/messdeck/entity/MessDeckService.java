@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -20,8 +21,8 @@ public class MessDeckService {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	@ManyToOne
-
 	@JoinColumn(nullable = false, name = "vendorID")
 	private Vendor vendor;
 
@@ -36,8 +37,8 @@ public class MessDeckService {
 	private List<Item> meal;
 	private double cost;
 
-	// @ManyToMany(mappedBy = "subscribedServices")
-	// private List<Customer> subscribers;
+	@ManyToMany(mappedBy = "subscribedServices")
+	private List<Customer> subscribers;
 
 	private Integer capacityOfMembers;
 
@@ -140,12 +141,12 @@ public class MessDeckService {
 		this.cost = cost;
 	}
 
-	// public List<Customer> getSubscribers() {
-	// return subscribers;
-	// }
-	//
-	// public void setSubscribers(List<Customer> subscribers) {
-	// this.subscribers = subscribers;
-	// }
+	public List<Customer> getSubscribers() {
+		return subscribers;
+	}
+
+	public void setSubscribers(List<Customer> subscribers) {
+		this.subscribers = subscribers;
+	}
 
 }

@@ -33,6 +33,7 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import com.app.messdeck.annotations.Loggable;
 import com.app.messdeck.businessException.CustomerNotExistsException;
 import com.app.messdeck.businessException.ValidationException;
 import com.app.messdeck.businessException.VendorNotExistException;

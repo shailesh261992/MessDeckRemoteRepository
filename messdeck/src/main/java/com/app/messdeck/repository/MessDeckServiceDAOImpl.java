@@ -14,7 +14,7 @@ public class MessDeckServiceDAOImpl implements MessDeckServiceDAO {
 	private HibernateTemplate template;
 
 	@Override
-	public Long saveMessDeckService(MessDeckService messDeckService) {
+	public Long create(MessDeckService messDeckService) {
 		// TODO Auto-generated method stub
 		// template.getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
 		long l = (Long) template.save(messDeckService);
@@ -31,7 +31,7 @@ public class MessDeckServiceDAOImpl implements MessDeckServiceDAO {
 	}
 
 	@Override
-	public MessDeckService getMessDeckService(Long id) {
+	public MessDeckService get(Long id) {
 		return template.get(MessDeckService.class, id);
 	}
 

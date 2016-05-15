@@ -10,6 +10,7 @@ import com.app.messdeck.model.dto.MessDeckServiceDTO;
 import com.app.messdeck.repository.MessDeckServiceDAO;
 import com.app.messdeck.repository.VendorDAO;
 import com.app.messdeck.utility.DTOConverter;
+import com.app.messdeck.utility.EntityConverter;
 
 @Service
 @Transactional
@@ -26,26 +27,24 @@ public class MessDeckServiceImpl implements MessDeckService {
 		// TODO Auto-generated method stub
 
 		System.out.println("***DTO=" + messDeckServiceDTO);
-		return messDeckServiceDAO
-				.saveMessDeckService(DTOConverter.dtoTOEntityCoverterForMessDeckService(messDeckServiceDTO));
+		return messDeckServiceDAO.create(DTOConverter.getMessDeckService(messDeckServiceDTO));
 
 	}
 
 	@Override
 	public MessDeckServiceDTO getMessDeckService(Long id) {
-		return DTOConverter.entityTODTOCoverterForMessDeckService(messDeckServiceDAO.getMessDeckService(id));
+		return EntityConverter.getMessDeckServiceDTO(messDeckServiceDAO.get(id));
 	}
 
 	@Override
 	public void updateMessDeckService(MessDeckServiceDTO messDeckServiceDTO) {
 
-		com.app.messdeck.entity.MessDeckService messDeckService = DTOConverter
-				.dtoTOEntityCoverterForMessDeckService(messDeckServiceDTO);
+		com.app.messdeck.entity.MessDeckService messDeckService = DTOConverter.getMessDeckService(messDeckServiceDTO);
 
-		Vendor v = vendorDAO.get(messDeckServiceDTO.getVendorId());
-		Vendor vendor = new Vendor();
-		vendor.setId(messDeckServiceDTO.getVendorId());
-		messDeckService.setVendor(vendor);
+		Vendor v = vendorDAO.get(messDeckServiceDTO.getVendor().getId());
+		// Vendor vendor = new Vendor();
+		// vendor.setId(messDeckServiceDTO.getVendorId());
+		// messDeckService.setVendor(messDeckServiceDTO.getVendor());
 
 		messDeckServiceDAO.update(messDeckService);
 
@@ -55,7 +54,7 @@ public class MessDeckServiceImpl implements MessDeckService {
 	public void deleteMessDeckService(Long id) {
 		// messDeckServiceDAO.delete(messDeckServiceDAO.getMessDeckService(id));
 
-		messDeckServiceDAO.delete(messDeckServiceDAO.getMessDeckService(id));
+		messDeckServiceDAO.delete(messDeckServiceDAO.get(id));
 
 	}
 

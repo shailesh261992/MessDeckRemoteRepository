@@ -4,11 +4,11 @@ import com.app.messdeck.entity.MessDeckService;
 
 public interface MessDeckServiceDAO {
 
-	Long saveMessDeckService(MessDeckService messDeckService);
+	Long create(MessDeckService messDeckService);
 
 	void update(MessDeckService messDeckService);
 
-	MessDeckService getMessDeckService(Long id);
+	MessDeckService get(Long id);
 
 	void delete(MessDeckService messDeckService);
 
