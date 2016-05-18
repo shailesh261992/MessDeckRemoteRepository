@@ -1,5 +1,7 @@
 package sampletest;
 
+import java.util.Calendar;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +29,13 @@ public class BeanPropertyCoyTest {
 		Address address = new Address("10 Silver street", "NYC", "USA");
 		BeanUtils.copyProperties(address, addressDTO);
 		System.out.println("Address DTO = " + address);
+	}
+
+	@Test
+	public void test3() {
+		Calendar instance = Calendar.getInstance();
+		instance.set(Calendar.HOUR_OF_DAY, 13);
+		System.out.println("****" + instance.getTime());
 	}
 
 }

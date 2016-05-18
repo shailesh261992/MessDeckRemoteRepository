@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -17,16 +18,9 @@ public class Item {
 	private String description;
 	private String Category;
 
-	public MessDeckService getService() {
-		return service;
-	}
-
-	public void setService(MessDeckService service) {
-		this.service = service;
-	}
-
-	@ManyToOne
-	private MessDeckService service;
+//	@ManyToOne
+//	@JoinColumn(nullable = false)
+//	private MessDeckService service;
 
 	public Item() {
 
@@ -67,5 +61,13 @@ public class Item {
 	public void setCategory(String category) {
 		Category = category;
 	}
+
+//	public MessDeckService getService() {
+//		return service;
+//	}
+//
+//	public void setService(MessDeckService service) {
+//		this.service = service;
+//	}
 
 }

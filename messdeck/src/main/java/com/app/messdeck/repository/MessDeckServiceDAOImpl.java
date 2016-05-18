@@ -5,6 +5,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.app.messdeck.entity.MessDeckService;
+import com.app.messdeck.entity.Vendor;
 
 @Repository
 
@@ -13,13 +14,16 @@ public class MessDeckServiceDAOImpl implements MessDeckServiceDAO {
 	@Autowired
 	private HibernateTemplate template;
 
+	@Autowired
+	private VendorDAO vendorDao;
+
 	@Override
 	public Long create(MessDeckService messDeckService) {
-		// TODO Auto-generated method stub
-		// template.getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
-		long l = (Long) template.save(messDeckService);
-		template.clear();
-		return l;
+		Vendor vendor = vendorDao.get(messDeckService.getVendor().getId());
+		messDeckService.setVendor(vendor);
+		long id = (Long) template.save(messDeckService);
+
+		return id;
 	}
 
 	@Override

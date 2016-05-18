@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,7 +22,7 @@ public class MessDeckService {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@ManyToOne
 	@JoinColumn(nullable = false, name = "vendorID")
 	private Vendor vendor;
@@ -33,8 +34,10 @@ public class MessDeckService {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Service_Meal", joinColumns = @JoinColumn(name = "serviceId") , inverseJoinColumns = @JoinColumn(name = "itemId") )
 	private List<Item> meal;
+
 	private double cost;
 
 	@ManyToMany(mappedBy = "subscribedServices")

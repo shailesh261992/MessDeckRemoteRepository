@@ -24,8 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDAO dao;
 
 	@Override
-	@ValidateWithOval
-   @Loggable
+	@Loggable
 	public CustomerDTO getCustomerSummary(Long id) {
 
 		return EntityConverter.getCustomorSummaryDTO(dao.get(id));

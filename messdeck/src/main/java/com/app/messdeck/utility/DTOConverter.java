@@ -55,10 +55,19 @@ public class DTOConverter {
 
 	}
 
-
 	public static MessDeckService getMessDeckService(MessDeckServiceDTO dto) {
 		logger.debug("MessDeckServiceDTO : " + dto);
 		ModelMapper modelMapper = new ModelMapper();
+
+		modelMapper.addMappings(new PropertyMap<ItemDTO, Item>() {
+
+			@Override
+			protected void configure() {
+				skip().setId(0);
+
+			}
+		});
+
 		MessDeckService messDeckService = modelMapper.map(dto, MessDeckService.class);
 		logger.debug("Converted MessDeckService : " + messDeckService);
 		return messDeckService;

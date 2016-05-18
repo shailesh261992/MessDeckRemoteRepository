@@ -3,10 +3,12 @@ package com.app.messdeck.model.dto;
 import java.util.Date;
 import java.util.List;
 
+import com.app.messdeck.customvalidations.IsValidMessDeckServiceDate;
 import com.app.messdeck.entity.ServiceType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import net.sf.oval.constraint.Assert;
+import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.NotNull;
 
 public class MessDeckServiceDTO {
@@ -16,17 +18,20 @@ public class MessDeckServiceDTO {
 	@NotNull(message = "Vendor can not be null,Only vendors are allowed to publish service")
 	private VendorDTO vendor;
 
+	@NotNull(message = "Service Type can not be null")
 	private ServiceType serviceType;
 
 	@Assert(expr = "_this.capacityOfMembers > 0", lang = "js", message = "Member Capacity must be greater than 0(Zero)")
 	private Integer capacityOfMembers;
 
 	@JsonDeserialize(using = TimeDeserializer.class)
+	@Assert(expr = "_this.startTime < _this.endTime", lang = "js", message = "Service start time must be less than end time")
 	private Date startTime;
 
 	@JsonDeserialize(using = TimeDeserializer.class)
 	private Date endTime;
 
+	@CheckWith(value = IsValidMessDeckServiceDate.class, message = "Date must be greate than eq to current date & must be less than laste date in next month")
 	private Date date;
 
 	private List<ItemDTO> meal;
