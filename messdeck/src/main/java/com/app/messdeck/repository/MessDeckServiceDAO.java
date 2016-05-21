@@ -10,6 +10,6 @@ public interface MessDeckServiceDAO {
 
 	MessDeckService get(Long id);
 
-	void delete(MessDeckService messDeckService);
+	void delete(Long id);
 
 }

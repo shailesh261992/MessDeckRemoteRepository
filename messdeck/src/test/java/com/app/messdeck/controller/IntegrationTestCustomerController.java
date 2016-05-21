@@ -1,7 +1,20 @@
 package com.app.messdeck.controller;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.IOException;
+
+import javax.annotation.PostConstruct;
+
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,39 +28,11 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.io.IOException;
-
-import javax.annotation.PostConstruct;
-
-import com.app.messdeck.annotations.Loggable;
-import com.app.messdeck.businessException.CustomerNotExistsException;
-import com.app.messdeck.businessException.ValidationException;
-import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.testenvconfig.IntegrationTestConfiguration;
-import com.app.messdeck.entity.Customer;
 import com.app.messdeck.model.dto.CustomerDTO;
-import com.app.messdeck.model.dto.EmailIDDTO;
-import com.app.messdeck.model.dto.NameDTO;
-import com.app.messdeck.model.dto.VendorDTO;
-import com.app.messdeck.testData.CustomerAddressDTODataSample;
 import com.app.messdeck.testData.CustomerDTODataSample;
 import com.app.messdeck.testData.IntegrationTestData;
 import com.app.messdeck.testutils.TestUtils;
-import com.app.messdeck.utility.DTOConverter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { IntegrationTestConfiguration.class })

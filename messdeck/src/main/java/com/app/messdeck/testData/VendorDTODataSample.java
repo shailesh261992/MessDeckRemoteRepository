@@ -2,15 +2,7 @@ package com.app.messdeck.testData;
 
 import java.util.ArrayList;
 
-import com.app.messdeck.entity.Customer;
-import com.app.messdeck.entity.EmailID;
 import com.app.messdeck.entity.Gender;
-import com.app.messdeck.entity.MessDeckService;
-import com.app.messdeck.entity.Name;
-import com.app.messdeck.entity.Owner;
-import com.app.messdeck.entity.OwnerAddress;
-import com.app.messdeck.entity.Vendor;
-import com.app.messdeck.entity.VendorAddress;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.EmailIDDTO;
 import com.app.messdeck.model.dto.MessDeckServiceDTO;
@@ -49,39 +41,40 @@ public class VendorDTODataSample {
 
 		andhraMess.setCustomers(new ArrayList<CustomerDTO>());
 		andhraMess.setServices(new ArrayList<MessDeckServiceDTO>());
+		andhraMess.setEmailID(new EmailIDDTO("andhra@gmail.com"));
 
 		return andhraMess;
 	}
 
-	public static Vendor getEquivalentVendor() {
-		Vendor andhraMess = new Vendor();
-		andhraMess.setName("Andhra Mess");
-
-		VendorAddress vendorAddress = new VendorAddress();
-		vendorAddress.setCity("pune");
-		vendorAddress.setState("Maharashtra");
-		vendorAddress.setCountry("India");
-		vendorAddress.setPinCode("410507");
-
-		Owner andhraMessOwner = new Owner();
-		andhraMessOwner.setName(new Name("Nikunj", "Viramgama"));
-		andhraMessOwner.setEmailID(new EmailID("Nikunj@gmail.com"));
-		andhraMessOwner.setMobileNo("9876543210");
-		OwnerAddress ownerAddress = new OwnerAddress();
-		ownerAddress.setCity("pune");
-		ownerAddress.setState("Maharashtra");
-		ownerAddress.setCountry("India");
-		ownerAddress.setPinCode("410507");
-		andhraMessOwner.setOwnerAddress(ownerAddress);
-		andhraMessOwner.setGender(Gender.MALE);
-
-		andhraMess.setVendorAddress(vendorAddress);
-		andhraMess.setOwner(andhraMessOwner);
-
-		andhraMess.setCustomers(new ArrayList<Customer>());
-		andhraMess.setServices(new ArrayList<MessDeckService>());
-		return andhraMess;
-
-	}
+	// public static Vendor getEquivalentVendor() {
+	// Vendor andhraMess = new Vendor();
+	// andhraMess.setName("Andhra Mess");
+	//
+	// VendorAddress vendorAddress = new VendorAddress();
+	// vendorAddress.setCity("pune");
+	// vendorAddress.setState("Maharashtra");
+	// vendorAddress.setCountry("India");
+	// vendorAddress.setPinCode("410507");
+	//
+	// Owner andhraMessOwner = new Owner();
+	// andhraMessOwner.setName(new Name("Nikunj", "Viramgama"));
+	// andhraMessOwner.setEmailID(new EmailID("Nikunj@gmail.com"));
+	// andhraMessOwner.setMobileNo("9876543210");
+	// OwnerAddress ownerAddress = new OwnerAddress();
+	// ownerAddress.setCity("pune");
+	// ownerAddress.setState("Maharashtra");
+	// ownerAddress.setCountry("India");
+	// ownerAddress.setPinCode("410507");
+	// andhraMessOwner.setOwnerAddress(ownerAddress);
+	// andhraMessOwner.setGender(Gender.MALE);
+	//
+	// andhraMess.setVendorAddress(vendorAddress);
+	// andhraMess.setOwner(andhraMessOwner);
+	//
+	// andhraMess.setCustomers(new ArrayList<Customer>());
+	// andhraMess.setServices(new ArrayList<MessDeckService>());
+	// return andhraMess;
+	//
+	// }
 
 }

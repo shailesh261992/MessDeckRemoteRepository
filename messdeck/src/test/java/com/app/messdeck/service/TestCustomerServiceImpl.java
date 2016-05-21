@@ -1,8 +1,11 @@
 package com.app.messdeck.service;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,10 +24,8 @@ import com.app.messdeck.entity.Customer;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.repository.CustomerDAO;
-import com.app.messdeck.testData.CustomerAddressDTODataSample;
 import com.app.messdeck.testData.CustomerDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
-import com.app.messdeck.utility.EntityConverter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UnitTestConfigurationForServices.class })
@@ -55,7 +56,7 @@ public class TestCustomerServiceImpl {
 		when(daoMock.create(any(Customer.class))).thenReturn(1l);
 		CustomerDTO customerDTO = CustomerDTODataSample.getCustomerDTO();
 		customerDTO.setMobileNo("123");
-		Long customerID = service.createCustomer(customerDTO);
+		service.createCustomer(customerDTO);
 
 	}
 
@@ -64,7 +65,7 @@ public class TestCustomerServiceImpl {
 		when(daoMock.create(any(Customer.class))).thenThrow(new Exception());
 		CustomerDTO customerDTO = CustomerDTODataSample.getCustomerDTO();
 		customerDTO.setVendor(new VendorDTO());
-		Long customerID = service.createCustomer(customerDTO);
+		service.createCustomer(customerDTO);
 
 	}
 

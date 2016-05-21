@@ -1,15 +1,8 @@
 package com.app.messdeck.model.dto;
 
+import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
-
-import com.app.messdeck.entity.EmailID;
-import com.app.messdeck.entity.Name;
-import com.app.messdeck.entity.Owner;
-import com.app.messdeck.entity.OwnerAddress;
-import com.app.messdeck.entity.Vendor;
-import com.app.messdeck.entity.VendorAddress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -30,6 +23,11 @@ public class VendorDTO {
 
 	@AssertValid(message = "Invalid Owner")
 	private OwnerDTO owner;
+
+	@AssertValid
+	private EmailIDDTO emailID;
+
+	private Date registrationDate;
 
 	private List<CustomerDTO> customers;
 
@@ -86,6 +84,22 @@ public class VendorDTO {
 		this.customers = customers;
 	}
 
+	public EmailIDDTO getEmailID() {
+		return emailID;
+	}
+
+	public void setEmailID(EmailIDDTO emailID) {
+		this.emailID = emailID;
+	}
+
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + "]";
@@ -95,8 +109,7 @@ public class VendorDTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
+		result = prime * result + ((emailID == null) ? 0 : emailID.hashCode());
 		return result;
 	}
 
@@ -109,15 +122,10 @@ public class VendorDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		VendorDTO other = (VendorDTO) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (emailID == null) {
+			if (other.emailID != null)
 				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (owner == null) {
-			if (other.owner != null)
-				return false;
-		} else if (!owner.equals(other.owner))
+		} else if (!emailID.equals(other.emailID))
 			return false;
 		return true;
 	}

@@ -39,13 +39,13 @@ public class TestVendorServiceImpl {
 
 	@Test
 	public void testVendorCreate() {
-
+		VendorDTO vendorDTO = VendorDTODataSample.getVendorDTO();
 		when(dao.create(any(Vendor.class))).thenReturn(1l);
-		Long vendorID = service.createVendor(VendorDTODataSample.getVendorDTO());
+		Long vendorID = service.createVendor(vendorDTO);
 		assertEquals(1l, (long) vendorID);
 		ArgumentCaptor<Vendor> captor = ArgumentCaptor.forClass(Vendor.class);
 		verify(dao).create(captor.capture());
-		assertEquals(VendorDTODataSample.getEquivalentVendor(), captor.getValue());
+		assertEquals(DTOConverter.getVendor(vendorDTO), captor.getValue());
 
 	}
 
@@ -59,7 +59,7 @@ public class TestVendorServiceImpl {
 
 	@Test
 	public void testGetVendorSummary() {
-		Vendor vendor = VendorDTODataSample.getEquivalentVendor();
+		Vendor vendor = DTOConverter.getVendor(VendorDTODataSample.getVendorDTO());
 		vendor.setId(1);
 		when(dao.get(1)).thenReturn(vendor);
 		VendorDTO dto = service.getVendorSummary(1l);
@@ -71,7 +71,7 @@ public class TestVendorServiceImpl {
 
 	@Test
 	public void testGetVendorDetails() {
-		Vendor vendor = VendorDTODataSample.getEquivalentVendor();
+		Vendor vendor = DTOConverter.getVendor(VendorDTODataSample.getVendorDTO());
 		vendor.setId(1);
 		when(dao.get(1)).thenReturn(vendor);
 		VendorDTO dto = service.getVendorDetails(1l);
@@ -83,7 +83,7 @@ public class TestVendorServiceImpl {
 
 	@Test
 	public void testVendorDelete() {
-		Vendor vendor = VendorDTODataSample.getEquivalentVendor();
+		Vendor vendor = DTOConverter.getVendor(VendorDTODataSample.getVendorDTO());
 		vendor.setId(1);
 		when(dao.get(1)).thenReturn(vendor);
 		doNothing().when(dao).delete(vendor);
@@ -96,7 +96,7 @@ public class TestVendorServiceImpl {
 
 	@Test
 	public void testGetCustomers() {
-		Vendor vendor = VendorDTODataSample.getEquivalentVendor();
+		Vendor vendor = DTOConverter.getVendor(VendorDTODataSample.getVendorDTO());
 		vendor.setId(1);
 		List<Customer> customers = new ArrayList<>();
 		customers.add(DTOConverter.getCustomer(CustomerDTODataSample.getCustomerDTO()));

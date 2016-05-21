@@ -1,5 +1,7 @@
 package com.app.messdeck.model.dto;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import org.junit.Before;
@@ -10,13 +12,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.app.messdeck.annotations.Loggable;
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
 import com.app.messdeck.testData.AddressDTODataSample;
 
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UnitTestConfigurationForControllers.class })

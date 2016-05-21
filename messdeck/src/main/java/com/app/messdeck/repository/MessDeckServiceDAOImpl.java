@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.app.messdeck.businessException.MessDeckServiceNotExistException;
 import com.app.messdeck.entity.MessDeckService;
 import com.app.messdeck.entity.Vendor;
 
@@ -28,19 +29,29 @@ public class MessDeckServiceDAOImpl implements MessDeckServiceDAO {
 
 	@Override
 	public void update(MessDeckService messDeckService) {
-		// TODO Auto-generated method stub
-
-		template.update(messDeckService);
+		get(messDeckService.getId());
+		template.merge(messDeckService);
 
 	}
 
 	@Override
 	public MessDeckService get(Long id) {
-		return template.get(MessDeckService.class, id);
+		MessDeckService messDeckService = template.get(MessDeckService.class, id);
+		if (messDeckService != null) {
+			return messDeckService;
+		} else {
+			throw new MessDeckServiceNotExistException(id);
+		}
+	}
+
+	public void delete(MessDeckService messDeckService) {
+		template.delete(messDeckService);
+
 	}
 
 	@Override
-	public void delete(MessDeckService messDeckService) {
+	public void delete(Long id) {
+		MessDeckService messDeckService = get(id);
 		template.delete(messDeckService);
 
 	}

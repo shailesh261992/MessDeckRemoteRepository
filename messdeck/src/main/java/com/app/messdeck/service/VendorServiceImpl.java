@@ -1,11 +1,11 @@
 package com.app.messdeck.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,8 @@ import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.CustomerDTO;
-import com.app.messdeck.model.dto.VendorAddressDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.repository.VendorDAO;
-import com.app.messdeck.testData.VendorDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
 import com.app.messdeck.utility.EntityConverter;
 
@@ -48,8 +46,10 @@ public class VendorServiceImpl implements VendorService {
 	@ValidateWithOval
 	public Long createVendor(VendorDTO vendorDTO) {
 		System.out.println("*** dto = " + vendorDTO);
-		System.out.println("*** vendor = " + DTOConverter.getVendor(vendorDTO));
-		return dao.create(DTOConverter.getVendor(vendorDTO));
+		Vendor vendor = DTOConverter.getVendor(vendorDTO);
+		vendor.setRegistrationDate(new Date());
+		System.out.println("*** vendor = " + vendor);
+		return dao.create(vendor);
 
 	}
 

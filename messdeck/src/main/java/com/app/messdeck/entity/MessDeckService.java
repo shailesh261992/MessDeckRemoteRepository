@@ -152,4 +152,74 @@ public class MessDeckService {
 		this.subscribers = subscribers;
 	}
 
+	@Override
+	public String toString() {
+		return "MessDeckService [id=" + id + ", vendor=" + vendor + ", serviceType=" + serviceType + ", date=" + date
+				+ ", meal=" + meal + ", cost=" + cost + ", capacityOfMembers=" + capacityOfMembers + ", startTime="
+				+ startTime + ", endTime=" + endTime + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((capacityOfMembers == null) ? 0 : capacityOfMembers.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(cost);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
+		result = prime * result + ((meal == null) ? 0 : meal.hashCode());
+		result = prime * result + ((serviceType == null) ? 0 : serviceType.hashCode());
+		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
+		result = prime * result + ((vendor == null) ? 0 : vendor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MessDeckService other = (MessDeckService) obj;
+		if (capacityOfMembers == null) {
+			if (other.capacityOfMembers != null)
+				return false;
+		} else if (!capacityOfMembers.equals(other.capacityOfMembers))
+			return false;
+		if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (endTime == null) {
+			if (other.endTime != null)
+				return false;
+		} else if (!endTime.equals(other.endTime))
+			return false;
+		if (meal == null) {
+			if (other.meal != null)
+				return false;
+		} else if (!meal.equals(other.meal))
+			return false;
+		if (serviceType != other.serviceType)
+			return false;
+		if (startTime == null) {
+			if (other.startTime != null)
+				return false;
+		} else if (!startTime.equals(other.startTime))
+			return false;
+		if (vendor == null) {
+			if (other.vendor != null)
+				return false;
+		} else if (!vendor.equals(other.vendor))
+			return false;
+		return true;
+	}
+
 }

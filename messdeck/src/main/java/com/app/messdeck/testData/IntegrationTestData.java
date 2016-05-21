@@ -1,5 +1,7 @@
 package com.app.messdeck.testData;
 
+import java.util.Date;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +14,7 @@ public class IntegrationTestData {
 	@Autowired
 	HibernateTemplate template;
 
-	private static String INSERT_VENDOR_QUERY = "INSERT INTO vendor VALUES(?,?)";
+	private static String INSERT_VENDOR_QUERY = "INSERT INTO vendor(id,name,emailId,registrationDate) VALUES(?,?,?,?)";
 	private static String INSERT_VENDOR_ADDRESS_QUERY = "INSERT INTO vendoraddress VALUES(?,?,?,?,?,?)";
 	private static String INSERT_OWNER_QUERY = "INSERT INTO owner VALUES(?,?,?,?,?,?)";
 	private static String INSERT_OWNER_ADDRESS_QUERY = "INSERT INTO owneraddress VALUES(?,?,?,?,?,?)";
@@ -45,7 +47,7 @@ public class IntegrationTestData {
 
 		query = session.createSQLQuery("DELETE FROM customeraddress");
 		query.executeUpdate();
-		
+
 		query = session.createSQLQuery("DELETE FROM customer");
 		query.executeUpdate();
 
@@ -75,14 +77,20 @@ public class IntegrationTestData {
 
 		query.setLong(0, 1);
 		query.setString(1, "Sai Mess");
+		query.setString(2, "sai@gmail.com");
+		query.setDate(3, new Date());
 		query.executeUpdate();
 
 		query.setLong(0, 2);
-		query.setString(1, "Andhra Mess");
+		query.setString(1, "Sonu Mess");
+		query.setString(2, "Sonu@gmail.com");
+		query.setDate(3, new Date());
 		query.executeUpdate();
 
 		query.setLong(0, 3);
 		query.setString(1, "Nilu Mess");
+		query.setString(2, "Nilu@gmail.com");
+		query.setDate(3, new Date());
 		query.executeUpdate();
 
 		transaction.commit();

@@ -4,7 +4,7 @@ import com.app.messdeck.model.dto.MessDeckServiceDTO;
 
 public interface MessDeckService {
 
-	Long saveMessDeckService(MessDeckServiceDTO messDeckServiceDTO);
+	Long createMessDeckService(MessDeckServiceDTO messDeckServiceDTO);
 
 	MessDeckServiceDTO getMessDeckService(Long id);
 

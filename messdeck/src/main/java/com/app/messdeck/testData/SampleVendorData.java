@@ -18,6 +18,7 @@ public class SampleVendorData {
 		saiMess.setName("Sai Mess");
 		saiMess.setVendorAddress(createVendorAddress(saiMess));
 		saiMess.setOwner(createOwnerOne(saiMess));
+		saiMess.setEmailID(new EmailID("Sai@gmail.com"));
 
 		return saiMess;
 

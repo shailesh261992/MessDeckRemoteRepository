@@ -1,7 +1,6 @@
 package com.app.messdeck.repository;
 
-import static com.app.messdeck.testData.SampleVendorData.getVendorOne;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import javax.transaction.Transactional;
 
@@ -11,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -21,16 +19,12 @@ import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.MessDeckConfiguration;
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.CustomerAddress;
-import com.app.messdeck.entity.Owner;
-import com.app.messdeck.entity.OwnerAddress;
 import com.app.messdeck.entity.Vendor;
-import com.app.messdeck.entity.VendorAddress;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.testData.CustomerDTODataSample;
 import com.app.messdeck.testData.VendorDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
 import com.app.messdeck.utility.EntityConverter;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { MessDeckConfiguration.class })

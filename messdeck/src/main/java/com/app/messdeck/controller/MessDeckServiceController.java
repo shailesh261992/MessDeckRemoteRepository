@@ -30,7 +30,7 @@ public class MessDeckServiceController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createMessDeckService(@RequestBody MessDeckServiceDTO messDeckServiceDTO,
 			HttpServletRequest request) {
-		Long id = messDeckService.saveMessDeckService(messDeckServiceDTO);
+		Long id = messDeckService.createMessDeckService(messDeckServiceDTO);
 		String resourceUrl = request.getRequestURL().toString() + "/" + id;
 		ResponseEntity<?> responseEntity = new ResponseEntity<String>(resourceUrl, HttpStatus.CREATED);
 		return responseEntity;

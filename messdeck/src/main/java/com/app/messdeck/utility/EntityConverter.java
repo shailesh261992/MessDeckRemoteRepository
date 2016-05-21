@@ -1,6 +1,5 @@
 package com.app.messdeck.utility;
 
-import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
@@ -12,7 +11,6 @@ import com.app.messdeck.model.dto.MessDeckServiceDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 
 public class EntityConverter {
-	private static Logger logger = Logger.getLogger(DTOConverter.class);
 
 	public static VendorDTO getVendorSummaryDTO(Vendor vendor) {
 		ModelMapper modelMapper = new ModelMapper();
@@ -82,7 +80,7 @@ public class EntityConverter {
 				skip().getVendor().setCustomers(null);
 				skip().getVendor().setServices(null);
 				skip().getVendor().setOwner(null);
-				skip().setMeal(null);
+				// skip().setMeal(null);
 
 			}
 		});

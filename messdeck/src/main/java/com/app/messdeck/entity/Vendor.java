@@ -1,8 +1,10 @@
 package com.app.messdeck.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Vendor {
@@ -33,9 +37,14 @@ public class Vendor {
 	@OneToMany(mappedBy = "vendor")
 	private List<MessDeckService> services;
 
+	@Embedded
+	private EmailID emailID;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date registrationDate;
+
 	public Vendor() {
-		this.owner = new Owner();
-		this.vendorAddress = new VendorAddress();
+		this.registrationDate = new Date();
 	}
 
 	public long getId() {
@@ -87,6 +96,22 @@ public class Vendor {
 		this.customers = customers;
 	}
 
+	public EmailID getEmailID() {
+		return emailID;
+	}
+
+	public void setEmailID(EmailID emailID) {
+		this.emailID = emailID;
+	}
+
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + "]";
@@ -96,8 +121,7 @@ public class Vendor {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((vendorAddress == null) ? 0 : vendorAddress.hashCode());
+		result = prime * result + ((emailID == null) ? 0 : emailID.hashCode());
 		return result;
 	}
 
@@ -110,15 +134,10 @@ public class Vendor {
 		if (getClass() != obj.getClass())
 			return false;
 		Vendor other = (Vendor) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (emailID == null) {
+			if (other.emailID != null)
 				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (vendorAddress == null) {
-			if (other.vendorAddress != null)
-				return false;
-		} else if (!vendorAddress.equals(other.vendorAddress))
+		} else if (!emailID.equals(other.emailID))
 			return false;
 		return true;
 	}

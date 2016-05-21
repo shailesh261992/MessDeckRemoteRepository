@@ -1,5 +1,8 @@
 package com.app.messdeck.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.messdeck.model.dto.CustomerDTO;
-import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.service.CustomerService;
-import com.app.messdeck.testData.CustomerAddressDTODataSample;
-import com.app.messdeck.testData.CustomerDTODataSample;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/customers")

@@ -1,7 +1,6 @@
 package com.app.messdeck.controller;
 
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.testenvconfig.IntegrationTestConfiguration;
 import com.app.messdeck.model.dto.EmailIDDTO;
 import com.app.messdeck.model.dto.VendorDTO;

@@ -42,6 +42,15 @@ public class TestVendorDTO {
 	}
 
 	@Test
+	public void testInvalidVendorEmailID() {
+		dto.setEmailID(new EmailIDDTO("shaggy@"));
+		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
+		assertEquals(1, listOfVilolation.size());
+		assertEquals("com.app.messdeck.model.dto.VendorDTO.emailID is invalid", listOfVilolation.get(0).getMessage());
+
+	}
+
+	@Test
 	public void testInvalidVendorAddress() {
 		VendorAddressDTO vendorAddressDTO = new VendorAddressDTO();
 		vendorAddressDTO.setCity("Satara");

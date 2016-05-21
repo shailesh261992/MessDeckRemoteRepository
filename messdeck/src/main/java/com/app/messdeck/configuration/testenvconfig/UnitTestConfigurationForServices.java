@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
@@ -14,15 +13,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.app.messdeck.configuration.AOPConfiguration;
-import com.app.messdeck.configuration.HibernateConfiguration;
 import com.app.messdeck.configuration.OvalConfiguration;
 import com.app.messdeck.configuration.StaticResourceConfiguration;
-import com.app.messdeck.controller.CustomerController;
-import com.app.messdeck.controller.MessDeckServiceController;
 import com.app.messdeck.repository.CustomerDAO;
 import com.app.messdeck.repository.MessDeckServiceDAO;
 import com.app.messdeck.repository.VendorDAO;
-import com.app.messdeck.service.VendorService;
 
 @Configuration
 @EnableWebMvc
