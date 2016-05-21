@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
-import com.app.messdeck.testData.EmailIDDTODataSample;
+import com.app.messdeck.test.data.EmailIDDTODataSample;
 
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;

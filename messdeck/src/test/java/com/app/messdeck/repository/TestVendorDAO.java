@@ -1,6 +1,6 @@
 package com.app.messdeck.repository;
 
-import static com.app.messdeck.testData.SampleVendorData.getVendorOne;
+import static com.app.messdeck.test.data.SampleVendorData.getVendorOne;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

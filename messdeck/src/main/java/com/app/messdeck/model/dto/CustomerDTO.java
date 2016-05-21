@@ -24,7 +24,7 @@ public class CustomerDTO extends PersonDTO {
 	private VendorDTO vendor;
 
 	@JsonIgnore
-	private List<MessDeckServiceDTO> subscribedServices;
+	private List<MessDeckServiceInfoDTO> subscribedServices;
 
 	public CustomerDTO() {
 	}
@@ -45,11 +45,11 @@ public class CustomerDTO extends PersonDTO {
 		this.vendor = vendor;
 	}
 
-	public List<MessDeckServiceDTO> getSubscribedServices() {
+	public List<MessDeckServiceInfoDTO> getSubscribedServices() {
 		return subscribedServices;
 	}
 
-	public void setSubscribedServices(List<MessDeckServiceDTO> subscribedServices) {
+	public void setSubscribedServices(List<MessDeckServiceInfoDTO> subscribedServices) {
 		this.subscribedServices = subscribedServices;
 	}
 

@@ -1,4 +1,4 @@
-package com.app.messdeck.testData;
+package com.app.messdeck.test.data;
 
 import com.app.messdeck.model.dto.AddressDTO;
 

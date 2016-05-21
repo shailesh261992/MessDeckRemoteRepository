@@ -24,7 +24,7 @@ import com.app.messdeck.entity.Customer;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.repository.CustomerDAO;
-import com.app.messdeck.testData.CustomerDTODataSample;
+import com.app.messdeck.test.data.CustomerDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
 
 @RunWith(SpringJUnit4ClassRunner.class)

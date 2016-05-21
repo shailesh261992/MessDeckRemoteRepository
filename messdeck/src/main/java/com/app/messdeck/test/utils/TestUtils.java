@@ -1,4 +1,4 @@
-package com.app.messdeck.testutils;
+package com.app.messdeck.test.utils;
 
 import java.io.IOException;
 import java.util.Calendar;

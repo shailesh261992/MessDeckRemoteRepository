@@ -20,8 +20,8 @@ import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.repository.VendorDAO;
-import com.app.messdeck.testData.CustomerDTODataSample;
-import com.app.messdeck.testData.VendorDTODataSample;
+import com.app.messdeck.test.data.CustomerDTODataSample;
+import com.app.messdeck.test.data.VendorDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
 
 public class TestVendorServiceImpl {

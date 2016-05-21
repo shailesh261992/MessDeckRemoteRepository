@@ -16,7 +16,7 @@ import com.app.messdeck.configuration.AOPConfiguration;
 import com.app.messdeck.configuration.OvalConfiguration;
 import com.app.messdeck.configuration.StaticResourceConfiguration;
 import com.app.messdeck.repository.CustomerDAO;
-import com.app.messdeck.repository.MessDeckServiceDAO;
+import com.app.messdeck.repository.MessDeckServiceInfoDAO;
 import com.app.messdeck.repository.VendorDAO;
 
 @Configuration
@@ -44,8 +44,8 @@ public class UnitTestConfigurationForServices extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	public MessDeckServiceDAO messDeckServiceDAOMock() {
-		return Mockito.mock(MessDeckServiceDAO.class);
+	public MessDeckServiceInfoDAO messDeckServiceDAOMock() {
+		return Mockito.mock(MessDeckServiceInfoDAO.class);
 	}
 
 	@Bean

@@ -1,4 +1,4 @@
-package com.app.messdeck.testData;
+package com.app.messdeck.test.data;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,12 +6,12 @@ import java.util.Date;
 import com.app.messdeck.entity.ServiceType;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.ItemDTO;
-import com.app.messdeck.model.dto.MessDeckServiceDTO;
-import com.app.messdeck.testutils.TestUtils;
+import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
+import com.app.messdeck.test.utils.TestUtils;
 
-public class MessDeckServiceDTODataSample {
-	public static MessDeckServiceDTO getMessDeckServiceDTO() {
-		MessDeckServiceDTO dto = new MessDeckServiceDTO();
+public class MessDeckServiceInfoDTODataSample {
+	public static MessDeckServiceInfoDTO getMessDeckServiceInfoDTO() {
+		MessDeckServiceInfoDTO dto = new MessDeckServiceInfoDTO();
 		dto.setCapacityOfMembers(50);
 		dto.setCost(100);
 		dto.setDate(new Date());

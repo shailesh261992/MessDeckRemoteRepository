@@ -31,7 +31,7 @@ public class VendorDTO {
 
 	private List<CustomerDTO> customers;
 
-	private List<MessDeckServiceDTO> services;
+	private List<MessDeckServiceInfoDTO> services;
 
 	public VendorDTO() {
 	}
@@ -60,11 +60,11 @@ public class VendorDTO {
 		this.owner = owner;
 	}
 
-	public List<MessDeckServiceDTO> getServices() {
+	public List<MessDeckServiceInfoDTO> getServices() {
 		return services;
 	}
 
-	public void setServices(List<MessDeckServiceDTO> services) {
+	public void setServices(List<MessDeckServiceInfoDTO> services) {
 		this.services = services;
 	}
 

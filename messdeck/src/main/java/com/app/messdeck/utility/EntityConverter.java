@@ -4,10 +4,10 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
 import com.app.messdeck.entity.Customer;
-import com.app.messdeck.entity.MessDeckService;
+import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.CustomerDTO;
-import com.app.messdeck.model.dto.MessDeckServiceDTO;
+import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 
 public class EntityConverter {
@@ -69,11 +69,11 @@ public class EntityConverter {
 
 	}
 
-	public static MessDeckServiceDTO getMessDeckServiceDTO(MessDeckService messDeckService) {
+	public static MessDeckServiceInfoDTO getMessDeckServiceInfoDTO(MessDeckServiceInfo messDeckService) {
 
 		ModelMapper modelMapper = new ModelMapper();
 
-		modelMapper.addMappings(new PropertyMap<MessDeckService, MessDeckServiceDTO>() {
+		modelMapper.addMappings(new PropertyMap<MessDeckServiceInfo, MessDeckServiceInfoDTO>() {
 
 			@Override
 			protected void configure() {
@@ -85,7 +85,7 @@ public class EntityConverter {
 			}
 		});
 
-		MessDeckServiceDTO dto = modelMapper.map(messDeckService, MessDeckServiceDTO.class);
+		MessDeckServiceInfoDTO dto = modelMapper.map(messDeckService, MessDeckServiceInfoDTO.class);
 		return dto;
 	}
 

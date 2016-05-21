@@ -31,7 +31,7 @@ public class Customer extends Person {
 
 	@ManyToMany
 	@JoinTable(name = "CustomerService")
-	private List<MessDeckService> subscribedServices;
+	private List<MessDeckServiceInfo> subscribedServices;
 
 	public Customer() {
 	}
@@ -52,11 +52,11 @@ public class Customer extends Person {
 		this.vendor = vendor;
 	}
 
-	public List<MessDeckService> getSubscribedServices() {
+	public List<MessDeckServiceInfo> getSubscribedServices() {
 		return subscribedServices;
 	}
 
-	public void setSubscribedServices(List<MessDeckService> subscribedServices) {
+	public void setSubscribedServices(List<MessDeckServiceInfo> subscribedServices) {
 		this.subscribedServices = subscribedServices;
 	}
 

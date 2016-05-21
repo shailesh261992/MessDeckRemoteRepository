@@ -21,8 +21,8 @@ import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.CustomerAddress;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.CustomerDTO;
-import com.app.messdeck.testData.CustomerDTODataSample;
-import com.app.messdeck.testData.VendorDTODataSample;
+import com.app.messdeck.test.data.CustomerDTODataSample;
+import com.app.messdeck.test.data.VendorDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
 import com.app.messdeck.utility.EntityConverter;
 

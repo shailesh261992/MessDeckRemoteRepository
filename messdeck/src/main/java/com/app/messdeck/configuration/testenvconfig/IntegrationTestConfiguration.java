@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.app.messdeck.configuration.AOPConfiguration;
 import com.app.messdeck.configuration.OvalConfiguration;
 import com.app.messdeck.configuration.StaticResourceConfiguration;
-import com.app.messdeck.testData.IntegrationTestData;
+import com.app.messdeck.test.data.IntegrationTestData;
 
 @Configuration
 @EnableWebMvc

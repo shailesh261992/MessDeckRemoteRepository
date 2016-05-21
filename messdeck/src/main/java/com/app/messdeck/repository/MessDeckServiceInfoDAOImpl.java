@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.app.messdeck.businessException.MessDeckServiceNotExistException;
-import com.app.messdeck.entity.MessDeckService;
+import com.app.messdeck.businessException.MessDeckServiceInfoNotExistException;
+import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.entity.Vendor;
 
 @Repository
 
-public class MessDeckServiceDAOImpl implements MessDeckServiceDAO {
+public class MessDeckServiceInfoDAOImpl implements MessDeckServiceInfoDAO {
 
 	@Autowired
 	private HibernateTemplate template;
@@ -19,7 +19,7 @@ public class MessDeckServiceDAOImpl implements MessDeckServiceDAO {
 	private VendorDAO vendorDao;
 
 	@Override
-	public Long create(MessDeckService messDeckService) {
+	public Long create(MessDeckServiceInfo messDeckService) {
 		Vendor vendor = vendorDao.get(messDeckService.getVendor().getId());
 		messDeckService.setVendor(vendor);
 		long id = (Long) template.save(messDeckService);
@@ -28,30 +28,32 @@ public class MessDeckServiceDAOImpl implements MessDeckServiceDAO {
 	}
 
 	@Override
-	public void update(MessDeckService messDeckService) {
+	public void update(MessDeckServiceInfo messDeckService) {
+		Vendor vendor = vendorDao.get(messDeckService.getVendor().getId());
+		messDeckService.setVendor(vendor);
 		get(messDeckService.getId());
 		template.merge(messDeckService);
 
 	}
 
 	@Override
-	public MessDeckService get(Long id) {
-		MessDeckService messDeckService = template.get(MessDeckService.class, id);
+	public MessDeckServiceInfo get(Long id) {
+		MessDeckServiceInfo messDeckService = template.get(MessDeckServiceInfo.class, id);
 		if (messDeckService != null) {
 			return messDeckService;
 		} else {
-			throw new MessDeckServiceNotExistException(id);
+			throw new MessDeckServiceInfoNotExistException(id);
 		}
 	}
 
-	public void delete(MessDeckService messDeckService) {
+	public void delete(MessDeckServiceInfo messDeckService) {
 		template.delete(messDeckService);
 
 	}
 
 	@Override
 	public void delete(Long id) {
-		MessDeckService messDeckService = get(id);
+		MessDeckServiceInfo messDeckService = get(id);
 		template.delete(messDeckService);
 
 	}

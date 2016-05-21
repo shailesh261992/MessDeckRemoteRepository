@@ -15,8 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
-import com.app.messdeck.testData.MessDeckServiceDTODataSample;
-import com.app.messdeck.testutils.TestUtils;
+import com.app.messdeck.test.data.MessDeckServiceInfoDTODataSample;
+import com.app.messdeck.test.utils.TestUtils;
 
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -29,11 +29,11 @@ public class TestMessDeckServiceDTO {
 	@Autowired
 	private Validator validator;
 
-	private MessDeckServiceDTO dto;
+	private MessDeckServiceInfoDTO dto;
 
 	@Before
 	public void setUp() throws Exception {
-		dto = MessDeckServiceDTODataSample.getMessDeckServiceDTO();
+		dto = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
 	}
 
 	@Test

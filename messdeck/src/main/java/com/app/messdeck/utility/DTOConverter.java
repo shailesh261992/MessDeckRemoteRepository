@@ -6,11 +6,11 @@ import org.modelmapper.PropertyMap;
 
 import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.Item;
-import com.app.messdeck.entity.MessDeckService;
+import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.ItemDTO;
-import com.app.messdeck.model.dto.MessDeckServiceDTO;
+import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 
 public class DTOConverter {
@@ -52,7 +52,7 @@ public class DTOConverter {
 
 	}
 
-	public static MessDeckService getMessDeckService(MessDeckServiceDTO dto) {
+	public static MessDeckServiceInfo getMessDeckServiceInfo(MessDeckServiceInfoDTO dto) {
 		logger.debug("MessDeckServiceDTO : " + dto);
 		ModelMapper modelMapper = new ModelMapper();
 
@@ -65,7 +65,7 @@ public class DTOConverter {
 			}
 		});
 
-		MessDeckService messDeckService = modelMapper.map(dto, MessDeckService.class);
+		MessDeckServiceInfo messDeckService = modelMapper.map(dto, MessDeckServiceInfo.class);
 		logger.debug("Converted MessDeckService : " + messDeckService);
 		return messDeckService;
 

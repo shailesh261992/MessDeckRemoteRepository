@@ -18,7 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class MessDeckService {
+public class MessDeckServiceInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -51,11 +51,11 @@ public class MessDeckService {
 	@Temporal(TemporalType.TIME)
 	private Date endTime;
 
-	public MessDeckService() {
+	public MessDeckServiceInfo() {
 
 	}
 
-	public MessDeckService(Vendor vendor, ServiceType serviceType, Date date, List<Item> meal, double cost) {
+	public MessDeckServiceInfo(Vendor vendor, ServiceType serviceType, Date date, List<Item> meal, double cost) {
 		super();
 		this.vendor = vendor;
 		this.serviceType = serviceType;
@@ -184,7 +184,7 @@ public class MessDeckService {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MessDeckService other = (MessDeckService) obj;
+		MessDeckServiceInfo other = (MessDeckServiceInfo) obj;
 		if (capacityOfMembers == null) {
 			if (other.capacityOfMembers != null)
 				return false;

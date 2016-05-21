@@ -5,8 +5,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.app.messdeck.model.dto.MessDeckServiceDTO;
-import com.app.messdeck.repository.MessDeckServiceDAO;
+import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
+import com.app.messdeck.repository.MessDeckServiceInfoDAO;
 import com.app.messdeck.repository.VendorDAO;
 import com.app.messdeck.utility.DTOConverter;
 import com.app.messdeck.utility.EntityConverter;
@@ -16,40 +16,30 @@ import com.app.messdeck.utility.EntityConverter;
 public class MessDeckServiceImpl implements MessDeckService {
 
 	@Autowired
-	MessDeckServiceDAO messDeckServiceDAO;
+	MessDeckServiceInfoDAO messDeckServiceDAO;
 
 	@Autowired
 	VendorDAO vendorDAO;
 
 	@Override
-	public Long createMessDeckService(MessDeckServiceDTO messDeckServiceDTO) {
-		return messDeckServiceDAO.create(DTOConverter.getMessDeckService(messDeckServiceDTO));
+	public Long createMessDeckService(MessDeckServiceInfoDTO messDeckServiceDTO) {
+		return messDeckServiceDAO.create(DTOConverter.getMessDeckServiceInfo(messDeckServiceDTO));
 
 	}
 
 	@Override
-	public MessDeckServiceDTO getMessDeckService(Long id) {
-		return EntityConverter.getMessDeckServiceDTO(messDeckServiceDAO.get(id));
+	public MessDeckServiceInfoDTO getMessDeckService(Long id) {
+		return EntityConverter.getMessDeckServiceInfoDTO(messDeckServiceDAO.get(id));
 	}
 
 	@Override
-	public void updateMessDeckService(MessDeckServiceDTO messDeckServiceDTO) {
+	public void updateMessDeckService(MessDeckServiceInfoDTO messDeckServiceDTO) {
 
-		//com.app.messdeck.entity.MessDeckService messDeckService = DTOConverter.getMessDeckService(messDeckServiceDTO);
-
-//		Vendor v = vendorDAO.get(messDeckServiceDTO.getVendor().getId());
-//		// Vendor vendor = new Vendor();
-//		// vendor.setId(messDeckServiceDTO.getVendorId());
-//		// messDeckService.setVendor(messDeckServiceDTO.getVendor());
-//
-//		messDeckServiceDAO.update(messDeckService);
-
+		messDeckServiceDAO.update(DTOConverter.getMessDeckServiceInfo(messDeckServiceDTO));
 	}
 
 	@Override
 	public void deleteMessDeckService(Long id) {
-		// messDeckServiceDAO.delete(messDeckServiceDAO.getMessDeckService(id));
-
 		messDeckServiceDAO.delete(id);
 
 	}

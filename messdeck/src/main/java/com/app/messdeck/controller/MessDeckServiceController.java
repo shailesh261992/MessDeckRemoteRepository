@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.messdeck.model.dto.MessDeckServiceDTO;
+import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.service.MessDeckService;
 
 /**
@@ -28,7 +28,7 @@ public class MessDeckServiceController {
 
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createMessDeckService(@RequestBody MessDeckServiceDTO messDeckServiceDTO,
+	public ResponseEntity<?> createMessDeckService(@RequestBody MessDeckServiceInfoDTO messDeckServiceDTO,
 			HttpServletRequest request) {
 		Long id = messDeckService.createMessDeckService(messDeckServiceDTO);
 		String resourceUrl = request.getRequestURL().toString() + "/" + id;
@@ -38,12 +38,12 @@ public class MessDeckServiceController {
 	}
 
 	@RequestMapping("/{id}")
-	public MessDeckServiceDTO getMessDeckService(@PathVariable Long id) {
+	public MessDeckServiceInfoDTO getMessDeckService(@PathVariable Long id) {
 		return messDeckService.getMessDeckService(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateMessDeckService(@RequestBody MessDeckServiceDTO messDeckServiceDTO) {
+	public ResponseEntity<?> updateMessDeckService(@RequestBody MessDeckServiceInfoDTO messDeckServiceDTO) {
 		messDeckService.updateMessDeckService(messDeckServiceDTO);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 

@@ -11,7 +11,7 @@ import net.sf.oval.constraint.Assert;
 import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.NotNull;
 
-public class MessDeckServiceDTO {
+public class MessDeckServiceInfoDTO {
 
 	private long id;
 
@@ -41,11 +41,11 @@ public class MessDeckServiceDTO {
 
 	private List<CustomerDTO> subscribers;
 
-	public MessDeckServiceDTO() {
+	public MessDeckServiceInfoDTO() {
 
 	}
 
-	public MessDeckServiceDTO(VendorDTO vendor, ServiceType serviceType, Date date, List<ItemDTO> meal, double cost) {
+	public MessDeckServiceInfoDTO(VendorDTO vendor, ServiceType serviceType, Date date, List<ItemDTO> meal, double cost) {
 		super();
 		this.vendor = vendor;
 		this.serviceType = serviceType;
@@ -166,7 +166,7 @@ public class MessDeckServiceDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MessDeckServiceDTO other = (MessDeckServiceDTO) obj;
+		MessDeckServiceInfoDTO other = (MessDeckServiceInfoDTO) obj;
 		if (capacityOfMembers == null) {
 			if (other.capacityOfMembers != null)
 				return false;

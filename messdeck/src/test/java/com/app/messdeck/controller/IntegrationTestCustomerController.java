@@ -30,9 +30,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.app.messdeck.configuration.testenvconfig.IntegrationTestConfiguration;
 import com.app.messdeck.model.dto.CustomerDTO;
-import com.app.messdeck.testData.CustomerDTODataSample;
-import com.app.messdeck.testData.IntegrationTestData;
-import com.app.messdeck.testutils.TestUtils;
+import com.app.messdeck.test.data.CustomerDTODataSample;
+import com.app.messdeck.test.data.IntegrationTestData;
+import com.app.messdeck.test.utils.TestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { IntegrationTestConfiguration.class })

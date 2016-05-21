@@ -1,11 +1,11 @@
-package com.app.messdeck.testData;
+package com.app.messdeck.test.data;
 
 import java.util.ArrayList;
 
 import com.app.messdeck.entity.Gender;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.EmailIDDTO;
-import com.app.messdeck.model.dto.MessDeckServiceDTO;
+import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.model.dto.NameDTO;
 import com.app.messdeck.model.dto.OwnerAddressDTO;
 import com.app.messdeck.model.dto.OwnerDTO;
@@ -40,7 +40,7 @@ public class VendorDTODataSample {
 		andhraMess.setOwner(andhraMessOwner);
 
 		andhraMess.setCustomers(new ArrayList<CustomerDTO>());
-		andhraMess.setServices(new ArrayList<MessDeckServiceDTO>());
+		andhraMess.setServices(new ArrayList<MessDeckServiceInfoDTO>());
 		andhraMess.setEmailID(new EmailIDDTO("andhra@gmail.com"));
 
 		return andhraMess;

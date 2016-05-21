@@ -40,8 +40,8 @@ import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForCont
 import com.app.messdeck.model.dto.ValidationErrrorInfo;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.service.VendorService;
-import com.app.messdeck.testData.VendorDTODataSample;
-import com.app.messdeck.testutils.TestUtils;
+import com.app.messdeck.test.data.VendorDTODataSample;
+import com.app.messdeck.test.utils.TestUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UnitTestConfigurationForControllers.class })

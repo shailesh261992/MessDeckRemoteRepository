@@ -14,14 +14,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.app.messdeck.businessException.MessDeckServiceNotExistException;
+import com.app.messdeck.businessException.MessDeckServiceInfoNotExistException;
 import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.MessDeckConfiguration;
 import com.app.messdeck.entity.Item;
-import com.app.messdeck.entity.MessDeckService;
+import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.entity.Vendor;
-import com.app.messdeck.testData.MessDeckServiceDTODataSample;
-import com.app.messdeck.testData.VendorDTODataSample;
+import com.app.messdeck.test.data.MessDeckServiceInfoDTODataSample;
+import com.app.messdeck.test.data.VendorDTODataSample;
 import com.app.messdeck.utility.DTOConverter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,16 +32,16 @@ public class TestMessDeckServiceDAO {
 	VendorDAO vendorDao;
 
 	@Autowired
-	MessDeckServiceDAO dao;
+	MessDeckServiceInfoDAO dao;
 
 	@Autowired
 	private HibernateTemplate template;
 
-	MessDeckService messDeckService;
+	MessDeckServiceInfo messDeckService;
 
 	@Before
 	public void setUp() throws Exception {
-		messDeckService = DTOConverter.getMessDeckService(MessDeckServiceDTODataSample.getMessDeckServiceDTO());
+		messDeckService = DTOConverter.getMessDeckServiceInfo(MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO());
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public class TestMessDeckServiceDAO {
 		vendor.setId(vendorId);
 		messDeckService.setVendor(vendor);
 		dao.create(messDeckService);
-		assertEquals(1, template.loadAll(MessDeckService.class).size());
+		assertEquals(1, template.loadAll(MessDeckServiceInfo.class).size());
 		assertTrue(template.loadAll(Item.class).size() >= 1);
 
 	}
@@ -75,18 +75,18 @@ public class TestMessDeckServiceDAO {
 		messDeckService.setVendor(vendor);
 		Long id = dao.create(messDeckService);
 
-		MessDeckService fetchedService = dao.get(id);
+		MessDeckServiceInfo fetchedService = dao.get(id);
 		assertEquals(messDeckService, fetchedService);
 
 	}
 
-	@Test(expected = MessDeckServiceNotExistException.class)
+	@Test(expected = MessDeckServiceInfoNotExistException.class)
 	@Transactional
 	public void testGetForNonExistingMessDeckService() {
 		dao.get(Long.MAX_VALUE);
 	}
 
-	@Test(expected = MessDeckServiceNotExistException.class)
+	@Test(expected = MessDeckServiceInfoNotExistException.class)
 	@Transactional
 	public void testDelete() {
 		Vendor vendor = DTOConverter.getVendor(VendorDTODataSample.getVendorDTO());
@@ -98,7 +98,7 @@ public class TestMessDeckServiceDAO {
 		dao.get(id);
 	}
 
-	@Test(expected = MessDeckServiceNotExistException.class)
+	@Test(expected = MessDeckServiceInfoNotExistException.class)
 	@Transactional
 	public void testDeleteForNonExistingService() {
 		dao.delete(Long.MAX_VALUE);
@@ -113,14 +113,14 @@ public class TestMessDeckServiceDAO {
 		messDeckService.setVendor(vendor);
 		Long id = dao.create(messDeckService);
 
-		MessDeckService updatedMessDeckService = dao.get(id);
+		MessDeckServiceInfo updatedMessDeckService = dao.get(id);
 		updatedMessDeckService.setCost(499);
 		dao.update(updatedMessDeckService);
 
 		assertEquals(updatedMessDeckService, dao.get(id));
 	}
 
-	@Test(expected = MessDeckServiceNotExistException.class)
+	@Test(expected = MessDeckServiceInfoNotExistException.class)
 	@Transactional
 	public void testUpdateNonExistingMessDeckService() {
 		messDeckService.setId(Long.MAX_VALUE);

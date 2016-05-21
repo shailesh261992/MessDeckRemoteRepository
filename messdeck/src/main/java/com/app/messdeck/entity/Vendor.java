@@ -35,7 +35,7 @@ public class Vendor {
 	private List<Customer> customers;
 
 	@OneToMany(mappedBy = "vendor")
-	private List<MessDeckService> services;
+	private List<MessDeckServiceInfo> services;
 
 	@Embedded
 	private EmailID emailID;
@@ -72,11 +72,11 @@ public class Vendor {
 	}
 
 	@OneToMany(mappedBy = "vendor")
-	public List<MessDeckService> getServices() {
+	public List<MessDeckServiceInfo> getServices() {
 		return services;
 	}
 
-	public void setServices(List<MessDeckService> services) {
+	public void setServices(List<MessDeckServiceInfo> services) {
 		this.services = services;
 	}
 
