@@ -1,7 +1,8 @@
 package com.app.messdeck.customvalidations;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 
 import org.apache.log4j.Logger;
 
@@ -16,19 +17,15 @@ public class IsValidMessDeckServiceDate implements CheckWithCheck.SimpleCheck {
 
 	@Override
 	public boolean isSatisfied(Object validatedObject, Object value) {
-		Date date = (Date) value;
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		Date currentDate = calendar.getTime();
+		LocalDate date = (LocalDate) value;
 
-		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-		calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));
-		calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
-		calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
+		LocalDate currentDate = LocalDate.now();
 
-		Date thresholdDate = calendar.getTime();
+		YearMonth nextMonth = YearMonth.from(currentDate).plus(1, ChronoUnit.MONTHS);
+		int lastDayOfMonth = nextMonth.lengthOfMonth();
+		LocalDate lastDateOfNextMonth = nextMonth.atDay(lastDayOfMonth);
+		LocalDate thresholdDate = lastDateOfNextMonth;
+
 		logger.debug("Valid Date Range - ");
 		logger.debug("Start Date : " + currentDate);
 		logger.debug("End date : " + thresholdDate);

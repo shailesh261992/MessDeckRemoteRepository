@@ -1,5 +1,6 @@
 package com.app.messdeck.test.data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.hibernate.SQLQuery;
@@ -78,19 +79,19 @@ public class IntegrationTestData {
 		query.setLong(0, 1);
 		query.setString(1, "Sai Mess");
 		query.setString(2, "sai@gmail.com");
-		query.setDate(3, new Date());
+		query.setTimestamp(3, new Date());
 		query.executeUpdate();
 
 		query.setLong(0, 2);
 		query.setString(1, "Sonu Mess");
 		query.setString(2, "Sonu@gmail.com");
-		query.setDate(3, new Date());
+		query.setTimestamp(3, new Date());
 		query.executeUpdate();
 
 		query.setLong(0, 3);
 		query.setString(1, "Nilu Mess");
 		query.setString(2, "Nilu@gmail.com");
-		query.setDate(3, new Date());
+		query.setTimestamp(3, new Date());
 		query.executeUpdate();
 
 		transaction.commit();

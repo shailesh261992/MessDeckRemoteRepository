@@ -1,17 +1,17 @@
 package com.app.messdeck.model.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import com.app.messdeck.customvalidations.IsValidMessDeckServiceDate;
-import com.app.messdeck.deserializer.TimeDeserializer;
 import com.app.messdeck.entity.ServiceType;
-import com.app.messdeck.serializer.DateSerializer;
-import com.app.messdeck.serializer.TimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
-import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 
 import net.sf.oval.constraint.Assert;
 import net.sf.oval.constraint.CheckWith;
@@ -30,19 +30,19 @@ public class MessDeckServiceInfoDTO {
 	@Assert(expr = "_this.capacityOfMembers > 0", lang = "js", message = "Member Capacity must be greater than 0(Zero)")
 	private Integer capacityOfMembers;
 
-	@JsonDeserialize(using = TimeDeserializer.class)
-	@JsonSerialize(using = TimeSerializer.class)
+	@JsonDeserialize(using = LocalTimeDeserializer.class)
+	@JsonSerialize(using = LocalTimeSerializer.class)
 	@Assert(expr = "_this.startTime < _this.endTime", lang = "js", message = "Service start time must be less than end time")
-	private Date startTime;
+	private LocalTime startTime;
 
-	@JsonDeserialize(using = TimeDeserializer.class)
-	@JsonSerialize(using = TimeSerializer.class)
-	private Date endTime;
+	@JsonDeserialize(using = LocalTimeDeserializer.class)
+	@JsonSerialize(using = LocalTimeSerializer.class)
+	private LocalTime endTime;
 
 	@CheckWith(value = IsValidMessDeckServiceDate.class, message = "Date must be greate than eq to current date & must be less than laste date in next month")
-	@JsonSerialize(using = DateSerializer.class)
-	@JsonDeserialize(using = DateDeserializer.class)
-	private Date date;
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	private LocalDate date;
 
 	private List<ItemDTO> meal;
 
@@ -55,7 +55,7 @@ public class MessDeckServiceInfoDTO {
 
 	}
 
-	public MessDeckServiceInfoDTO(VendorDTO vendor, ServiceType serviceType, Date date, List<ItemDTO> meal,
+	public MessDeckServiceInfoDTO(VendorDTO vendor, ServiceType serviceType, LocalDate date, List<ItemDTO> meal,
 			double cost) {
 		super();
 		this.vendor = vendor;
@@ -81,19 +81,19 @@ public class MessDeckServiceInfoDTO {
 		this.capacityOfMembers = capacityOfMembers;
 	}
 
-	public Date getStartTime() {
+	public LocalTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public LocalTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
 
@@ -113,11 +113,11 @@ public class MessDeckServiceInfoDTO {
 		this.vendor = vendor;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

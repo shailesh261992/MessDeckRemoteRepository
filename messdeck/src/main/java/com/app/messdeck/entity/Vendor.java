@@ -1,9 +1,11 @@
 package com.app.messdeck.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.app.messdeck.serializer.LocalDateTimeAttributeConverter;
 
 @Entity
 public class Vendor {
@@ -40,11 +44,12 @@ public class Vendor {
 	@Embedded
 	private EmailID emailID;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date registrationDate;
+	// @Temporal(TemporalType.TIMESTAMP)
+	@Convert(converter = LocalDateTimeAttributeConverter.class)
+	private LocalDateTime registrationDate;
 
 	public Vendor() {
-		this.registrationDate = new Date();
+		this.registrationDate = LocalDateTime.now();
 	}
 
 	public long getId() {
@@ -104,17 +109,18 @@ public class Vendor {
 		this.emailID = emailID;
 	}
 
-	public Date getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
 	@Override
 	public String toString() {
-		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + "]";
+		return "Vendor [id=" + id + ", name=" + name + ", vendorAddress=" + vendorAddress + ", emailID=" + emailID
+				+ ", registrationDate=" + registrationDate + "]";
 	}
 
 	@Override

@@ -28,5 +28,7 @@ public class MessDeckConfiguration extends WebMvcConfigurerAdapter {
 
 		return viewResolver;
 	}
+	
+	
 
 }

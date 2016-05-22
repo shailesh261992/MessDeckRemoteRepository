@@ -14,25 +14,20 @@ public class ModelMapperConfiguration {
 	@Bean
 	public ModelMapper getModelMapper() {
 		ModelMapper modelMapper = new ModelMapper();
-		
-		PropertyMap<Vendor,VendorDTO> vendorSummary = new PropertyMap<Vendor, VendorDTO>() {
+
+		PropertyMap<Vendor, VendorDTO> vendorSummary = new PropertyMap<Vendor, VendorDTO>() {
 
 			@Override
 			protected void configure() {
 				skip().setOwner(null);
-				
+
 			}
 		};
-		
+
 		modelMapper.addMappings(vendorSummary);
-		
-		
-		
-		
-		
-		
 
 		return modelMapper;
 	}
 
+	
 }

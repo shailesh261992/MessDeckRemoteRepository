@@ -1,5 +1,6 @@
 package com.app.messdeck.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +48,7 @@ public class VendorServiceImpl implements VendorService {
 	public Long createVendor(VendorDTO vendorDTO) {
 		System.out.println("*** dto = " + vendorDTO);
 		Vendor vendor = DTOConverter.getVendor(vendorDTO);
-		vendor.setRegistrationDate(new Date());
+		vendor.setRegistrationDate(LocalDateTime.now());
 		System.out.println("*** vendor = " + vendor);
 		return dao.create(vendor);
 

@@ -1,10 +1,16 @@
 package com.app.messdeck.model.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import net.sf.oval.constraint.AssertValid;
 import net.sf.oval.constraint.MatchPattern;
@@ -27,7 +33,9 @@ public class VendorDTO {
 	@AssertValid
 	private EmailIDDTO emailID;
 
-	private Date registrationDate;
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	private LocalDateTime registrationDate;
 
 	private List<CustomerDTO> customers;
 
@@ -92,17 +100,18 @@ public class VendorDTO {
 		this.emailID = emailID;
 	}
 
-	public Date getRegistrationDate() {
+	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
 	@Override
 	public String toString() {
-		return "Vendor [id=" + id + ", name=" + name + ", vendorddress=" + vendorAddress + "]";
+		return "Vendor [id=" + id + ", name=" + name + ", vendorAddress=" + vendorAddress + ", emailID=" + emailID
+				+ ", registrationDate=" + registrationDate + "]";
 	}
 
 	@Override

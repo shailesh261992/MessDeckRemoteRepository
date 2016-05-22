@@ -33,6 +33,7 @@ import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.test.data.CustomerDTODataSample;
 import com.app.messdeck.test.data.IntegrationTestData;
 import com.app.messdeck.test.utils.TestUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { IntegrationTestConfiguration.class })
@@ -161,6 +162,8 @@ public class IntegrationTestCustomerController {
 		mockMvc.perform(
 				put("/customers/3").contentType(contentType).content(TestUtils.convertObjectToJsonString(customerDTO)))
 				.andDo(print());
+		
+		
 
 	}
 

@@ -1,10 +1,12 @@
 package com.app.messdeck.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +16,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.app.messdeck.serializer.LocalDateAttributeConverter;
+import com.app.messdeck.serializer.LocalTimeAttributeConverter;
 
 @Entity
 public class MessDeckServiceInfo {
@@ -30,9 +33,8 @@ public class MessDeckServiceInfo {
 	@Column(nullable = false)
 	private ServiceType serviceType;
 
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date date;
+	@Convert(converter = LocalDateAttributeConverter.class)
+	private LocalDate date;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Service_Meal", joinColumns = @JoinColumn(name = "serviceId") , inverseJoinColumns = @JoinColumn(name = "itemId") )
@@ -45,17 +47,17 @@ public class MessDeckServiceInfo {
 
 	private Integer capacityOfMembers;
 
-	@Temporal(TemporalType.TIME)
-	private Date startTime;
+	@Convert(converter = LocalTimeAttributeConverter.class)
+	private LocalTime startTime;
 
-	@Temporal(TemporalType.TIME)
-	private Date endTime;
+	@Convert(converter = LocalTimeAttributeConverter.class)
+	private LocalTime endTime;
 
 	public MessDeckServiceInfo() {
 
 	}
 
-	public MessDeckServiceInfo(Vendor vendor, ServiceType serviceType, Date date, List<Item> meal, double cost) {
+	public MessDeckServiceInfo(Vendor vendor, ServiceType serviceType, LocalDate date, List<Item> meal, double cost) {
 		super();
 		this.vendor = vendor;
 		this.serviceType = serviceType;
@@ -64,7 +66,7 @@ public class MessDeckServiceInfo {
 		this.cost = cost;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
 
@@ -84,15 +86,15 @@ public class MessDeckServiceInfo {
 		this.capacityOfMembers = capacityOfMembers;
 	}
 
-	public Date getStartTime() {
+	public LocalTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public LocalTime getEndTime() {
 		return endTime;
 	}
 
@@ -120,11 +122,11 @@ public class MessDeckServiceInfo {
 		this.serviceType = serviceType;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

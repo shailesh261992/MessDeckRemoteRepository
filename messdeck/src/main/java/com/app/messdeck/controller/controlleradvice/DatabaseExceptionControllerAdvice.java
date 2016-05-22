@@ -29,7 +29,7 @@ public class DatabaseExceptionControllerAdvice {
 	@ExceptionHandler({ DataIntegrityViolationException.class, })
 	public @ResponseBody ErrorInfo handleDatabseExceptions(HttpServletRequest req,
 			DataIntegrityViolationException exception) {
-		System.out.println("*** below is handled Exception");
+		logger.debug(exception.getMessage(), exception);
 		// exception.printStackTrace();
 		if (exception.getMostSpecificCause() instanceof MySQLIntegrityConstraintViolationException) {
 			return new ErrorInfo(req.getRequestURL().toString(),
@@ -47,6 +47,7 @@ public class DatabaseExceptionControllerAdvice {
 	public @ResponseBody ErrorInfo handleVendorNotExistException(HttpServletRequest req,
 			VendorNotExistException exception) {
 
+		logger.debug(exception.getMessage(), exception);
 		return new ErrorInfo(req.getRequestURL().toString(), exception.getMessage());
 
 	}
@@ -55,7 +56,7 @@ public class DatabaseExceptionControllerAdvice {
 	@ExceptionHandler({ CustomerNotExistsException.class })
 	public @ResponseBody ErrorInfo handleCustomerNotExistsException(HttpServletRequest req,
 			CustomerNotExistsException exception) {
-
+		logger.debug(exception.getMessage(), exception);
 		return new ErrorInfo(req.getRequestURL().toString(), exception.getMessage());
 
 	}
@@ -64,7 +65,7 @@ public class DatabaseExceptionControllerAdvice {
 	@ExceptionHandler({ MessDeckServiceInfoNotExistException.class })
 	public @ResponseBody ErrorInfo handleMessDeckServiceInfoNotExistException(HttpServletRequest req,
 			MessDeckServiceInfoNotExistException exception) {
-
+		logger.debug(exception.getMessage(), exception);
 		return new ErrorInfo(req.getRequestURL().toString(), exception.getMessage());
 
 	}
@@ -74,7 +75,7 @@ public class DatabaseExceptionControllerAdvice {
 	public @ResponseBody List<ValidationErrrorInfo> handleValidationExceptions(HttpServletRequest req,
 			ValidationException exception) {
 		// exception.printStackTrace();
-
+		logger.debug(exception.getMessage(), exception);
 		return exception.getViolationList();
 
 	}

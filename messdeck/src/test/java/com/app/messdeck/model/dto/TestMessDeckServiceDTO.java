@@ -2,8 +2,9 @@ package com.app.messdeck.model.dto;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.junit.Before;
@@ -16,7 +17,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
 import com.app.messdeck.test.data.MessDeckServiceInfoDTODataSample;
-import com.app.messdeck.test.utils.TestUtils;
 
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -63,8 +63,8 @@ public class TestMessDeckServiceDTO {
 
 	@Test
 	public void testStartTimeGreaterThanEndTime() {
-		Date startTime = TestUtils.getTime(20, 0, 0);
-		Date endTime = TestUtils.getTime(18, 0, 0);
+		LocalTime startTime = LocalTime.now();
+		LocalTime endTime = startTime.minus(2, ChronoUnit.HOURS);
 		dto.setStartTime(startTime);
 		dto.setEndTime(endTime);
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
@@ -75,10 +75,7 @@ public class TestMessDeckServiceDTO {
 	@Test
 	public void testServiceWithPastDate() {
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH - 1));
-		Date date = calendar.getTime();
-		dto.setDate(date);
+		dto.setDate(LocalDate.now().minus(2, ChronoUnit.DAYS));
 
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
 		assertEquals("Date must be greate than eq to current date & must be less than laste date in next month",
@@ -89,10 +86,7 @@ public class TestMessDeckServiceDTO {
 	@Test
 	public void testServiceWithDateAboveThreshold() {
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 2);
-		Date date = calendar.getTime();
-		dto.setDate(date);
+		dto.setDate(LocalDate.now().plus(65, ChronoUnit.DAYS));
 
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
 		assertEquals("Date must be greate than eq to current date & must be less than laste date in next month",
@@ -103,10 +97,7 @@ public class TestMessDeckServiceDTO {
 	@Test
 	public void testServiceWithDateBetweenCurrentAndThreshold() {
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-		Date date = calendar.getTime();
-		dto.setDate(date);
+		dto.setDate(LocalDate.now().plus(10, ChronoUnit.DAYS));
 
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
 		assertEquals(0, listOfVilolation.size());
@@ -119,16 +110,5 @@ public class TestMessDeckServiceDTO {
 		assertEquals(0, listOfVilolation.size());
 
 	}
-
-	// @Test
-	// public void testInvalidDate_DateBeforeCurrentDate() {
-	// Date d = new Date();
-	//
-	// List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-	// assertEquals("Vendor can not be null,Only vendors are allowed to publish
-	// service",
-	// listOfVilolation.get(0).getMessage());
-	//
-	// }
 
 }

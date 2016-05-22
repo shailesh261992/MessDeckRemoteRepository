@@ -15,6 +15,10 @@ import com.app.messdeck.configuration.AOPConfiguration;
 import com.app.messdeck.configuration.OvalConfiguration;
 import com.app.messdeck.configuration.StaticResourceConfiguration;
 import com.app.messdeck.test.data.IntegrationTestData;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 
 @Configuration
 @EnableWebMvc
