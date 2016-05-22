@@ -4,7 +4,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -45,19 +44,22 @@ public class MessDeckServiceController {
 		return messDeckService.getMessDeckService(id);
 	}
 
-	// @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	// public ResponseEntity<?> updateMessDeckService(@RequestBody
-	// MessDeckServiceInfoDTO messDeckServiceDTO) {
-	// messDeckService.updateMessDeckService(messDeckServiceDTO);
-	// return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
-	//
-	// }
-	//
-	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	// public ResponseEntity<?> deleteMessDeckService(@PathVariable long id) {
-	// messDeckService.deleteMessDeckService(id);
-	// return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
-	//
-	// }
+	@RequestMapping(value = "/", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateMessDeckService(@RequestBody MessDeckServiceInfoDTO messDeckServiceDTO) {
+		long id = messDeckServiceDTO.getId();
+		messDeckService.updateMessDeckService(messDeckServiceDTO);
+		MessDeckServiceInfoDTO fetchedMessDeckService = messDeckService.getMessDeckService(id);
+		Resource<MessDeckServiceInfoDTO> resource = new Resource<MessDeckServiceInfoDTO>(fetchedMessDeckService);
+		resource.add(linkTo(methodOn(MessDeckServiceController.class).getMessDeckService(id)).withSelfRel());
+		return new ResponseEntity<Object>(resource, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteMessDeckService(@PathVariable long id) {
+		messDeckService.deleteMessDeckService(id);
+		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+
+	}
 
 }
