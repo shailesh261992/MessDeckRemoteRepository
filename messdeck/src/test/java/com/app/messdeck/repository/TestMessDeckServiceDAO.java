@@ -41,7 +41,8 @@ public class TestMessDeckServiceDAO {
 
 	@Before
 	public void setUp() throws Exception {
-		messDeckService = DTOConverter.getMessDeckServiceInfo(MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO());
+		messDeckService = DTOConverter
+				.getMessDeckServiceInfo(MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO());
 	}
 
 	@Test
@@ -123,6 +124,11 @@ public class TestMessDeckServiceDAO {
 	@Test(expected = MessDeckServiceInfoNotExistException.class)
 	@Transactional
 	public void testUpdateNonExistingMessDeckService() {
+		Vendor vendor = DTOConverter.getVendor(VendorDTODataSample.getVendorDTO());
+		Long vendorId = vendorDao.create(vendor);
+		vendor.setId(vendorId);
+		messDeckService.setVendor(vendor);
+
 		messDeckService.setId(Long.MAX_VALUE);
 		dao.update(messDeckService);
 	}

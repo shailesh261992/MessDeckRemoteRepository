@@ -18,14 +18,14 @@ import com.app.messdeck.configuration.HibernateConfiguration;
 import com.app.messdeck.configuration.OvalConfiguration;
 import com.app.messdeck.configuration.StaticResourceConfiguration;
 import com.app.messdeck.controller.CustomerController;
-import com.app.messdeck.controller.MessDeckServiceController;
+import com.app.messdeck.service.MessDeckService;
 import com.app.messdeck.service.VendorService;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
 		"com.app.messdeck.controller" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {
-				CustomerController.class,MessDeckServiceController.class }) )
+				CustomerController.class }) )
 
 @EnableTransactionManagement()
 @Import({ HibernateConfiguration.class, StaticResourceConfiguration.class, OvalConfiguration.class,
@@ -45,6 +45,11 @@ public class UnitTestConfigurationForControllers extends WebMvcConfigurerAdapter
 	@Bean
 	public VendorService vendorServiceMock() {
 		return Mockito.mock(VendorService.class);
+	}
+
+	@Bean
+	public MessDeckService messDeckServiceMock() {
+		return Mockito.mock(MessDeckService.class);
 	}
 
 }

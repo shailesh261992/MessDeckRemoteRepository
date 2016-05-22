@@ -4,8 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import com.app.messdeck.customvalidations.IsValidMessDeckServiceDate;
+import com.app.messdeck.deserializer.TimeDeserializer;
 import com.app.messdeck.entity.ServiceType;
+import com.app.messdeck.serializer.DateSerializer;
+import com.app.messdeck.serializer.TimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
 
 import net.sf.oval.constraint.Assert;
 import net.sf.oval.constraint.CheckWith;
@@ -25,13 +31,17 @@ public class MessDeckServiceInfoDTO {
 	private Integer capacityOfMembers;
 
 	@JsonDeserialize(using = TimeDeserializer.class)
+	@JsonSerialize(using = TimeSerializer.class)
 	@Assert(expr = "_this.startTime < _this.endTime", lang = "js", message = "Service start time must be less than end time")
 	private Date startTime;
 
 	@JsonDeserialize(using = TimeDeserializer.class)
+	@JsonSerialize(using = TimeSerializer.class)
 	private Date endTime;
 
 	@CheckWith(value = IsValidMessDeckServiceDate.class, message = "Date must be greate than eq to current date & must be less than laste date in next month")
+	@JsonSerialize(using = DateSerializer.class)
+	@JsonDeserialize(using = DateDeserializer.class)
 	private Date date;
 
 	private List<ItemDTO> meal;
@@ -45,7 +55,8 @@ public class MessDeckServiceInfoDTO {
 
 	}
 
-	public MessDeckServiceInfoDTO(VendorDTO vendor, ServiceType serviceType, Date date, List<ItemDTO> meal, double cost) {
+	public MessDeckServiceInfoDTO(VendorDTO vendor, ServiceType serviceType, Date date, List<ItemDTO> meal,
+			double cost) {
 		super();
 		this.vendor = vendor;
 		this.serviceType = serviceType;

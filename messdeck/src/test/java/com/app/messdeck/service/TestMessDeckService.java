@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.businessException.MessDeckServiceInfoNotExistException;
+import com.app.messdeck.businessException.ValidationException;
 import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForServices;
 import com.app.messdeck.entity.MessDeckServiceInfo;
@@ -55,6 +56,16 @@ public class TestMessDeckService {
 		when(daoMock.create(messDeckService)).thenReturn(1l);
 		Long id = service.createMessDeckService(messDeckServiceDTO);
 		assertEquals(new Long(1), id);
+
+	}
+
+	@Test(expected = ValidationException.class)
+	public void testCreateWithInvalidData() {
+		MessDeckServiceInfoDTO messDeckServiceDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
+		messDeckServiceDTO.setCost(-2);
+		MessDeckServiceInfo messDeckService = DTOConverter.getMessDeckServiceInfo(messDeckServiceDTO);
+		when(daoMock.create(messDeckService)).thenReturn(1l);
+		service.createMessDeckService(messDeckServiceDTO);
 
 	}
 

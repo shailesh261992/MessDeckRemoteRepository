@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.app.messdeck.businessException.CustomerNotExistsException;
+import com.app.messdeck.businessException.MessDeckServiceInfoNotExistException;
 import com.app.messdeck.businessException.ValidationException;
 import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.controller.exceptions.ErrorInfo;
@@ -60,6 +61,15 @@ public class DatabaseExceptionControllerAdvice {
 	}
 
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({ MessDeckServiceInfoNotExistException.class })
+	public @ResponseBody ErrorInfo handleMessDeckServiceInfoNotExistException(HttpServletRequest req,
+			MessDeckServiceInfoNotExistException exception) {
+
+		return new ErrorInfo(req.getRequestURL().toString(), exception.getMessage());
+
+	}
+
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({ ValidationException.class, })
 	public @ResponseBody List<ValidationErrrorInfo> handleValidationExceptions(HttpServletRequest req,
 			ValidationException exception) {
@@ -74,7 +84,7 @@ public class DatabaseExceptionControllerAdvice {
 	public @ResponseBody ErrorInfo handleHttpMessageNotReadableException(HttpServletRequest req,
 			HttpMessageNotReadableException exception) {
 		logger.debug("Unable to convert Json Into DTO", exception);
-        
+
 		return new ErrorInfo(req.getRequestURL().toString(), exception.getMessage());
 
 	}

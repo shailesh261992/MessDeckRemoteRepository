@@ -1,5 +1,7 @@
 package com.app.messdeck.repository;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,7 @@ public class MessDeckServiceInfoDAOImpl implements MessDeckServiceInfoDAO {
 	private VendorDAO vendorDao;
 
 	@Override
+	@Transactional
 	public Long create(MessDeckServiceInfo messDeckService) {
 		Vendor vendor = vendorDao.get(messDeckService.getVendor().getId());
 		messDeckService.setVendor(vendor);
@@ -28,6 +31,7 @@ public class MessDeckServiceInfoDAOImpl implements MessDeckServiceInfoDAO {
 	}
 
 	@Override
+	@Transactional
 	public void update(MessDeckServiceInfo messDeckService) {
 		Vendor vendor = vendorDao.get(messDeckService.getVendor().getId());
 		messDeckService.setVendor(vendor);
@@ -46,12 +50,14 @@ public class MessDeckServiceInfoDAOImpl implements MessDeckServiceInfoDAO {
 		}
 	}
 
+	@Transactional
 	public void delete(MessDeckServiceInfo messDeckService) {
 		template.delete(messDeckService);
 
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		MessDeckServiceInfo messDeckService = get(id);
 		template.delete(messDeckService);

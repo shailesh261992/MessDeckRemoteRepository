@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.messdeck.aspects.ValidateWithOval;
 import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.repository.MessDeckServiceInfoDAO;
 import com.app.messdeck.repository.VendorDAO;
@@ -22,6 +23,7 @@ public class MessDeckServiceImpl implements MessDeckService {
 	VendorDAO vendorDAO;
 
 	@Override
+	@ValidateWithOval
 	public Long createMessDeckService(MessDeckServiceInfoDTO messDeckServiceDTO) {
 		return messDeckServiceDAO.create(DTOConverter.getMessDeckServiceInfo(messDeckServiceDTO));
 
@@ -33,6 +35,7 @@ public class MessDeckServiceImpl implements MessDeckService {
 	}
 
 	@Override
+	@ValidateWithOval
 	public void updateMessDeckService(MessDeckServiceInfoDTO messDeckServiceDTO) {
 
 		messDeckServiceDAO.update(DTOConverter.getMessDeckServiceInfo(messDeckServiceDTO));
