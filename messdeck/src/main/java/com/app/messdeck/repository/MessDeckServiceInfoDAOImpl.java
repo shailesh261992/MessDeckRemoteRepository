@@ -7,6 +7,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.app.messdeck.businessException.MessDeckServiceInfoNotExistException;
+import com.app.messdeck.businessException.NotVendorWhoCreatesServiceException;
 import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.entity.Vendor;
 
@@ -33,10 +34,16 @@ public class MessDeckServiceInfoDAOImpl implements MessDeckServiceInfoDAO {
 	@Override
 	@Transactional
 	public void update(MessDeckServiceInfo messDeckService) {
-		Vendor vendor = vendorDao.get(messDeckService.getVendor().getId());
-		messDeckService.setVendor(vendor);
-		get(messDeckService.getId());
-		template.merge(messDeckService);
+
+		MessDeckServiceInfo fetchedmessDeckServiceInfo = get(messDeckService.getId());
+		if (fetchedmessDeckServiceInfo.getVendor().equals(messDeckService.getVendor())){
+			messDeckService.setVendor(fetchedmessDeckServiceInfo.getVendor());
+			template.merge(messDeckService);
+		}else{
+			throw new NotVendorWhoCreatesServiceException(messDeckService);
+		}
+		
+		
 
 	}
 

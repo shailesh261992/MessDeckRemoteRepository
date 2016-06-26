@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.businessException.MessDeckServiceInfoNotExistException;
+import com.app.messdeck.businessException.NotVendorWhoCreatesServiceException;
 import com.app.messdeck.businessException.ValidationException;
 import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForServices;
@@ -43,55 +44,53 @@ public class TestMessDeckService {
 	@Autowired
 	VendorDAO vendorDaoMock;
 
+	private MessDeckServiceInfoDTO messDeckServiceInfoDTO;
+	private MessDeckServiceInfo messDeckServiceInfo;
+
 	@Before
 	public void setUp() throws Exception {
 		Mockito.reset(daoMock);
+		messDeckServiceInfoDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
+		messDeckServiceInfo = DTOConverter.getMessDeckServiceInfo(messDeckServiceInfoDTO);
 	}
 
 	@Test
 	public void testCreate() {
-		MessDeckServiceInfoDTO messDeckServiceDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
-		com.app.messdeck.entity.MessDeckServiceInfo messDeckService = DTOConverter
-				.getMessDeckServiceInfo(messDeckServiceDTO);
-		when(daoMock.create(messDeckService)).thenReturn(1l);
-		Long id = service.createMessDeckService(messDeckServiceDTO);
+
+		when(daoMock.create(messDeckServiceInfo)).thenReturn(1l);
+		Long id = service.createMessDeckService(messDeckServiceInfoDTO);
 		assertEquals(new Long(1), id);
 
 	}
 
 	@Test(expected = ValidationException.class)
 	public void testCreateWithInvalidData() {
-		MessDeckServiceInfoDTO messDeckServiceDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
-		messDeckServiceDTO.setCost(-2);
-		MessDeckServiceInfo messDeckService = DTOConverter.getMessDeckServiceInfo(messDeckServiceDTO);
-		when(daoMock.create(messDeckService)).thenReturn(1l);
-		service.createMessDeckService(messDeckServiceDTO);
+
+		messDeckServiceInfoDTO.setCost(-2);
+		when(daoMock.create(messDeckServiceInfo)).thenReturn(1l);
+		service.createMessDeckService(messDeckServiceInfoDTO);
 
 	}
 
 	@Test(expected = VendorNotExistException.class)
 	public void tesCreateWithNonExistingVendor() {
 
-		MessDeckServiceInfoDTO messDeckServiceDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
-		messDeckServiceDTO.setId(1);
-		com.app.messdeck.entity.MessDeckServiceInfo messDeckService = DTOConverter
-				.getMessDeckServiceInfo(messDeckServiceDTO);
+		messDeckServiceInfoDTO.setId(1);
 
-		when(daoMock.create(messDeckService)).thenThrow(new VendorNotExistException(1));
-		service.createMessDeckService(messDeckServiceDTO);
+		when(daoMock.create(messDeckServiceInfo)).thenThrow(new VendorNotExistException(1));
+		service.createMessDeckService(messDeckServiceInfoDTO);
 
 	}
 
 	@Test
 	public void testGetMessDeckService() {
-		MessDeckServiceInfoDTO messDeckServiceDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
-		messDeckServiceDTO.setId(1);
-		com.app.messdeck.entity.MessDeckServiceInfo messDeckService = DTOConverter
-				.getMessDeckServiceInfo(messDeckServiceDTO);
-		when(daoMock.get(1l)).thenReturn(messDeckService);
 
-		messDeckServiceDTO.equals(service.getMessDeckService(1l));
-		assertEquals(messDeckServiceDTO, service.getMessDeckService(1l));
+		messDeckServiceInfoDTO.setId(1);
+
+		when(daoMock.get(1l)).thenReturn(messDeckServiceInfo);
+
+		messDeckServiceInfoDTO.equals(service.getMessDeckService(1l));
+		assertEquals(messDeckServiceInfoDTO, service.getMessDeckService(1l));
 	}
 
 	@Test(expected = MessDeckServiceInfoNotExistException.class)
@@ -116,11 +115,10 @@ public class TestMessDeckService {
 
 	@Test
 	public void testUpdate() {
-		MessDeckServiceInfoDTO messDeckServiceDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
 
 		MessDeckServiceInfoDTO updatedMessDeckServiceDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
 		updatedMessDeckServiceDTO.setCost(244);
-		when(daoMock.get(1l)).thenReturn(DTOConverter.getMessDeckServiceInfo(messDeckServiceDTO))
+		when(daoMock.get(1l)).thenReturn(DTOConverter.getMessDeckServiceInfo(messDeckServiceInfoDTO))
 				.thenReturn(DTOConverter.getMessDeckServiceInfo(updatedMessDeckServiceDTO));
 		service.getMessDeckService(1l);
 		service.updateMessDeckService(updatedMessDeckServiceDTO);
@@ -133,7 +131,14 @@ public class TestMessDeckService {
 	@Transactional
 	public void testUpdateNonExistingMessDeckService() {
 		doThrow(MessDeckServiceInfoNotExistException.class).when(daoMock).update(any(MessDeckServiceInfo.class));
-		MessDeckServiceInfoDTO messDeckServiceInfoDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
+		service.updateMessDeckService(messDeckServiceInfoDTO);
+	}
+
+	@Test(expected = NotVendorWhoCreatesServiceException.class)
+	@Transactional
+	public void testUpdateWithVendorOtherThanVendorWhichCreatesService() throws Exception {
+		doThrow(NotVendorWhoCreatesServiceException.class).when(daoMock).update(messDeckServiceInfo);
+
 		service.updateMessDeckService(messDeckServiceInfoDTO);
 	}
 

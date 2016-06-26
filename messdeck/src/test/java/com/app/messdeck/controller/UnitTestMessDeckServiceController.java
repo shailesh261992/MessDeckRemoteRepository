@@ -178,4 +178,15 @@ public class UnitTestMessDeckServiceController {
 
 	}
 
+	@Test
+	public void testUpdateWithVendorOtherThanVendorWhichCreatesService() throws Exception {
+		doThrow(MessDeckServiceInfoNotExistException.class).when(serviceMock)
+				.updateMessDeckService(messDeckServiceInfoDTO);
+
+		mockMvc.perform(put("/messdeckservice/").contentType(contentType)
+				.content(TestUtils.convertObjectToJsonString(messDeckServiceInfoDTO)).accept(contentType))
+				.andDo(print()).andExpect(status().isBadRequest());
+
+	}
+
 }
