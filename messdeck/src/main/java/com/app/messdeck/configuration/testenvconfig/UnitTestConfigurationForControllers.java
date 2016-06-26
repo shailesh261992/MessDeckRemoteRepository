@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -31,6 +32,7 @@ import com.app.messdeck.service.VendorService;
 @Import({ HibernateConfiguration.class, StaticResourceConfiguration.class, OvalConfiguration.class,
 		AOPConfiguration.class })
 @EnableAspectJAutoProxy
+
 public class UnitTestConfigurationForControllers extends WebMvcConfigurerAdapter {
 
 	@Bean
