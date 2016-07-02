@@ -1,30 +1,24 @@
 package com.app.messdeck.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.app.messdeck.serializer.LocalDateTimeAttributeConverter;
 
 @Entity
-public class Vendor {
+public class Vendor extends AbstractEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	// @Id
+	// @GeneratedValue(strategy = GenerationType.AUTO)
+	// private long id;
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -121,31 +115,6 @@ public class Vendor {
 	public String toString() {
 		return "Vendor [id=" + id + ", name=" + name + ", vendorAddress=" + vendorAddress + ", emailID=" + emailID
 				+ ", registrationDate=" + registrationDate + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((emailID == null) ? 0 : emailID.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Vendor other = (Vendor) obj;
-		if (emailID == null) {
-			if (other.emailID != null)
-				return false;
-		} else if (!emailID.equals(other.emailID))
-			return false;
-		return true;
 	}
 
 }

@@ -15,28 +15,20 @@ import javax.annotation.PostConstruct;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.app.messdeck.configuration.testenvconfig.IntegrationTestConfiguration;
 import com.app.messdeck.model.dto.EmailIDDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 import com.app.messdeck.test.data.IntegrationTestData;
 import com.app.messdeck.test.data.VendorDTODataSample;
 import com.app.messdeck.test.utils.TestUtils;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { IntegrationTestConfiguration.class })
-@WebAppConfiguration
-public class IntegrationTestVendorController {
+public class IntegrationTestVendorController extends AbstractIntegrationTest {
 
 	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
 			MediaType.APPLICATION_JSON.getSubtype());
@@ -48,15 +40,15 @@ public class IntegrationTestVendorController {
 
 	@Autowired
 	private IntegrationTestData testData;
-	
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		testData.initializeTestData();
 	}
 
 	@Before
 	public void setUp() {
-		
+
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 	}
