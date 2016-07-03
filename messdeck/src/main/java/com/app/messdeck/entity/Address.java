@@ -3,9 +3,6 @@ package com.app.messdeck.entity;
 import javax.persistence.Basic;
 import javax.persistence.MappedSuperclass;
 
-//@Entity
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-
 @MappedSuperclass
 public class Address {
 	@Basic

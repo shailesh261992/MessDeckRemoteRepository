@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<Vendor id="1" emailId="mmccoy0@amazon.co.uk" name="Photofeed"
+		registrationDate="2016-05-21" />
+	<Vendor id="2" emailId="jgreene1@livejournal.com" name="Eamia"
+		registrationDate="2015-10-25" />
+	<Vendor id="3" emailId="crichards2@thetimes.co.uk" name="Quire"
+		registrationDate="2015-07-31" />
+	<Vendor id="4" emailId="fgonzales3@is.gd" name="Devpoint"
+		registrationDate="2015-11-12" />
+	<Vendor id="5" emailId="rross4@typepad.com" name="Photospace"
+		registrationDate="2015-12-30" />
+	<Vendor id="6" emailId="ahansen5@netvibes.com" name="Edgeify"
+		registrationDate="2015-07-08" />
+	<Vendor id="7" emailId="rjackson6@webs.com" name="Kazu"
+		registrationDate="2015-12-08" />
+	<Vendor id="8" emailId="adiaz7@msn.com" name="Kaymbo"
+		registrationDate="2015-12-20" />
+	<Vendor id="9" emailId="sortiz8@stanford.edu" name="Gabcube"
+		registrationDate="2016-02-11" />
+	<Vendor id="10" emailId="swilliams9@hatena.ne.jp" name="Kaymbo"
+		registrationDate="2016-06-07" />
+</dataset>

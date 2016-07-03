@@ -46,7 +46,7 @@ public class HibernateConfiguration {
 	}
 
 	@Bean
-	public HibernateTransactionManager txManager() throws IOException {
+	public HibernateTransactionManager transactionManager() throws IOException {
 		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
 		hibernateTransactionManager.setSessionFactory(sessionFactory());
 

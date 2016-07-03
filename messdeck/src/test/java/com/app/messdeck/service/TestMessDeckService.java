@@ -77,7 +77,8 @@ public class TestMessDeckService {
 
 		messDeckServiceInfoDTO.setId(1);
 
-		when(daoMock.create(messDeckServiceInfo)).thenThrow(new VendorNotExistException(1));
+		when(daoMock.create(DTOConverter.getMessDeckServiceInfo(messDeckServiceInfoDTO)))
+				.thenThrow(new VendorNotExistException(1));
 		service.createMessDeckService(messDeckServiceInfoDTO);
 
 	}
