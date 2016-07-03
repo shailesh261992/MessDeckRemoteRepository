@@ -10,7 +10,7 @@ import com.app.messdeck.entity.Item;
 @Repository
 @Transactional
 public class ItemDAO {
-	@Autowired
+	//@Autowired
 	private HibernateTemplate template;
 
 	public void create(Item obj) {

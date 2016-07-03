@@ -16,7 +16,7 @@ import com.app.messdeck.entity.VendorAddress;
 @Transactional
 public class VenderDAOImpl implements VendorDAO {
 
-	@Autowired
+	//@Autowired
 	private HibernateTemplate template;
 
 	public Long create(Vendor vendor) {

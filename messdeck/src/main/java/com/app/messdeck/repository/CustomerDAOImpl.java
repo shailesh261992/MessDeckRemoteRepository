@@ -16,7 +16,7 @@ import com.app.messdeck.entity.Vendor;
 @Transactional
 public class CustomerDAOImpl implements CustomerDAO {
 
-	@Autowired
+	//@Autowired
 	private HibernateTemplate template;
 
 	@Autowired

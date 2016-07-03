@@ -15,7 +15,7 @@ import com.app.messdeck.entity.Vendor;
 
 public class MessDeckServiceInfoDAOImpl implements MessDeckServiceInfoDAO {
 
-	@Autowired
+	//@Autowired
 	private HibernateTemplate template;
 
 	@Autowired

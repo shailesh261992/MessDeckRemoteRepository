@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class EmailID {
-	@Column(unique = true,nullable=false)
+	@Column(unique = true,nullable=false,name="email_id")
 	private String emailId;
 
 	public EmailID() {
