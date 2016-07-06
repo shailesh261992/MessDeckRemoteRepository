@@ -1,5 +1,6 @@
 package com.app.messdeck.configuration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
@@ -33,6 +35,12 @@ public class MessDeckConfiguration extends WebMvcConfigurerAdapter {
 		viewResolver.setSuffix(".jsp");
 
 		return viewResolver;
+	}
+
+	@Bean
+	// @Scope(scopeName = "prototype")
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
 	}
 
 }

@@ -5,12 +5,13 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.entity.ServiceType;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.ItemDTO;
 import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 
-public class MessDeckServiceInfoDTODataSample {
+public class MessDeckServiceInfoDataSample {
 	public static MessDeckServiceInfoDTO getMessDeckServiceInfoDTO() {
 		MessDeckServiceInfoDTO dto = new MessDeckServiceInfoDTO();
 		dto.setCapacityOfMembers(50);
@@ -20,7 +21,7 @@ public class MessDeckServiceInfoDTODataSample {
 		dto.setStartTime(LocalTime.now().minus(2, ChronoUnit.MINUTES));
 		dto.setEndTime(LocalTime.now());
 		dto.setServiceType(ServiceType.DINNER);
-		dto.setVendor(VendorDTODataSample.getVendorDTO());
+		dto.setVendor(1);
 
 		ArrayList<ItemDTO> items = new ArrayList<>();
 		ItemDTO itemDTO1 = new ItemDTO();
@@ -41,10 +42,6 @@ public class MessDeckServiceInfoDTODataSample {
 		items.add(itemDTO1);
 		items.add(itemDTO2);
 		items.add(itemDTO3);
-
-		ArrayList<CustomerDTO> subscribers = new ArrayList<>();
-		subscribers.add(CustomerDTODataSample.getCustomerDTO());
-		dto.setSubscribers(subscribers);
 
 		dto.setMeal(items);
 

@@ -5,7 +5,7 @@ import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class Person {
+public class Person extends AbstractEntity {
 
 	@Embedded
 	private Name name;

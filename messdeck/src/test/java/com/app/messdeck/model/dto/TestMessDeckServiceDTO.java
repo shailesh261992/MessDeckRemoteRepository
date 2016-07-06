@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForControllers;
-import com.app.messdeck.test.data.MessDeckServiceInfoDTODataSample;
+import com.app.messdeck.test.data.MessDeckServiceInfoDataSample;
 
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -33,14 +33,14 @@ public class TestMessDeckServiceDTO {
 
 	@Before
 	public void setUp() throws Exception {
-		dto = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
+		dto = MessDeckServiceInfoDataSample.getMessDeckServiceInfoDTO();
 	}
 
 	@Test
 	public void testNullVendor() {
-		dto.setVendor(null);
+		dto.setVendor(0);
 		List<ConstraintViolation> listOfVilolation = validator.validate(dto);
-		assertEquals("Vendor can not be null,Only vendors are allowed to publish service",
+		assertEquals("VendorId can not be less than equal to zero,Only vendors are allowed to publish service",
 				listOfVilolation.get(0).getMessage());
 
 	}

@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
@@ -16,41 +19,54 @@ import com.app.messdeck.entity.Customer;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.VendorDTO;
+import com.app.messdeck.modelmapper.DTOConverter;
+import com.app.messdeck.modelmapper.EntityConverter;
 import com.app.messdeck.repository.VendorDAO;
-import com.app.messdeck.utility.DTOConverter;
-import com.app.messdeck.utility.EntityConverter;
+import com.app.messdeck.repository.VendorRepository;
 
 @Service
 @Transactional
 public class VendorServiceImpl implements VendorService {
+
 	@Autowired
-	private VendorDAO dao;
+	VendorRepository repository;
 
 	public VendorDTO getVendorSummary(Long id) throws VendorNotExistException {
-		Vendor vendor = dao.get(id);
-		if (vendor != null) {
-			return EntityConverter.getVendorSummaryDTO(vendor);
+
+		Optional<Vendor> vendor = Optional.ofNullable(repository.findOne(id));
+
+		if (vendor.isPresent()) {
+			return EntityConverter.getVendorSummaryDTO(vendor.get());
 		} else {
 			throw new VendorNotExistException(id);
 		}
+
 	}
 
 	@Override
 	public VendorDTO getVendorDetails(Long id) throws VendorNotExistException {
-		Vendor vendor = dao.get(id);
 
-		return EntityConverter.getVendorDetailsDTO(vendor);
+		Optional<Vendor> vendor = Optional.ofNullable(repository.findOne(id));
+
+		if (vendor.isPresent()) {
+			return EntityConverter.getVendorDetailsDTO(vendor.get());
+		} else {
+			throw new VendorNotExistException(id);
+		}
+
+		// Vendor vendor = dao.get(id);
+		//
+		// return EntityConverter.getVendorDetailsDTO(vendor);
 
 	}
 
 	@Override
 	@ValidateWithOval
 	public Long createVendor(VendorDTO vendorDTO) {
-		System.out.println("*** dto = " + vendorDTO);
 		Vendor vendor = DTOConverter.getVendor(vendorDTO);
 		vendor.setRegistrationDate(LocalDateTime.now());
-		System.out.println("*** vendor = " + vendor);
-		return dao.create(vendor);
+		Vendor savedVendor = repository.save(vendor);
+		return savedVendor.getId();
 
 	}
 
@@ -58,15 +74,21 @@ public class VendorServiceImpl implements VendorService {
 	@ValidateWithOval
 	public void updateVendor(VendorDTO dto) {
 
-		dao.update(DTOConverter.getVendor(dto));
+		boolean exists = repository.exists(dto.getId());
+		if (exists) {
+			repository.save(DTOConverter.getVendor(dto));
+		} else {
+			throw new VendorNotExistException(dto.getId());
+		}
 
 	}
 
 	@Override
 	public void deleteVendor(Long id) {
-		Vendor vendor = dao.get(id);
-		if (vendor != null) {
-			dao.delete(vendor);
+
+		boolean exists = repository.exists(id);
+		if (exists) {
+			repository.delete(id);
 		} else {
 			throw new VendorNotExistException(id);
 		}
@@ -75,27 +97,30 @@ public class VendorServiceImpl implements VendorService {
 
 	@Override
 	public List<VendorDTO> getAllVendorsSummary() {
-		List<Vendor> vendors = dao.getAll();
-		List<VendorDTO> dtoList = new ArrayList<>();
-		if (vendors != null) {
-			for (Vendor vendor : vendors) {
-				dtoList.add(EntityConverter.getVendorSummaryDTO(vendor));
-			}
+		Optional<List<Vendor>> vendors = Optional.ofNullable(repository.findAll());
+		if (vendors.isPresent()) {
+			List<VendorDTO> dtoList = vendors.get().stream().map(x -> EntityConverter.getVendorSummaryDTO(x))
+					.collect(Collectors.toList());
 			return dtoList;
 		}
-
 		return null;
 	}
 
 	@Override
 	public List<CustomerDTO> getCustomrs(Long id) {
-		Vendor vendor = dao.get(id);
-		List<Customer> customers = vendor.getCustomers();
-		List<CustomerDTO> customrsDto = new ArrayList<>();
-		for (Customer c : customers) {
-			customrsDto.add(EntityConverter.getCustomorSummaryDTO(c));
+		Optional<Vendor> vendor = Optional.ofNullable(repository.findOne(id));
+
+		if (vendor.isPresent()) {
+			Optional<List<Customer>> customers = Optional.ofNullable(vendor.get().getCustomers());
+			if (customers.isPresent()) {
+				return customers.get().stream().map(x -> EntityConverter.getCustomorSummaryDTO(x))
+						.collect(Collectors.toList());
+			}
+		} else {
+			throw new VendorNotExistException(id);
 		}
-		return customrsDto;
+
+		return null;
 	}
 
 }

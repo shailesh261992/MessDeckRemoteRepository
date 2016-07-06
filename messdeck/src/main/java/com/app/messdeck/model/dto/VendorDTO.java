@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import net.sf.oval.constraint.AssertValid;
@@ -17,9 +15,8 @@ import net.sf.oval.constraint.MatchPattern;
 import net.sf.oval.constraint.NotNull;
 
 @JsonInclude(Include.NON_EMPTY)
-public class VendorDTO {
+public class VendorDTO extends AbstractDTO {
 
-	private long id;
 	@MatchPattern(pattern = "^[a-zA-Z ]*$", message = "Only Alphabets are allowed")
 	@NotNull
 	private String name;

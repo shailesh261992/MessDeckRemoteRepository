@@ -5,8 +5,8 @@ import javax.persistence.Id;
 
 @Entity
 public class CustomerAddress extends Address {
-	@Id
-	private long id;
+//	@Id
+//	private long id;
 
 	public long getId() {
 		return id;

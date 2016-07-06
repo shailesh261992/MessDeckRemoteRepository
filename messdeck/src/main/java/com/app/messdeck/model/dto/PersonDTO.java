@@ -5,7 +5,7 @@ import com.app.messdeck.entity.Gender;
 import net.sf.oval.constraint.AssertValid;
 import net.sf.oval.constraint.MatchPattern;
 
-public class PersonDTO {
+public class PersonDTO extends AbstractDTO {
 
 	@AssertValid
 	private NameDTO name;
@@ -16,8 +16,6 @@ public class PersonDTO {
 	@AssertValid
 	private EmailIDDTO emailID;
 	private Gender gender;
-	
-
 
 	public NameDTO getName() {
 		return name;

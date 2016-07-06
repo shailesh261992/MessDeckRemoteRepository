@@ -1,4 +1,4 @@
-package com.app.messdeck.utility;
+package com.app.messdeck.modelmapper;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -72,19 +72,7 @@ public class EntityConverter {
 	public static MessDeckServiceInfoDTO getMessDeckServiceInfoDTO(MessDeckServiceInfo messDeckService) {
 
 		ModelMapper modelMapper = new ModelMapper();
-
-		modelMapper.addMappings(new PropertyMap<MessDeckServiceInfo, MessDeckServiceInfoDTO>() {
-
-			@Override
-			protected void configure() {
-				skip().getVendor().setCustomers(null);
-				skip().getVendor().setServices(null);
-				skip().getVendor().setOwner(null);
-				// skip().setMeal(null);
-
-			}
-		});
-
+		modelMapper.addMappings(new MessDeckServiceInfoMap());
 		MessDeckServiceInfoDTO dto = modelMapper.map(messDeckService, MessDeckServiceInfoDTO.class);
 		return dto;
 	}

@@ -17,16 +17,15 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 public class Customer extends Person {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	// @Id
+	// @GeneratedValue(strategy = GenerationType.AUTO)
+	// private long id;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	// @PrimaryKeyJoinColumn
 	private CustomerAddress customerAddress;
 
 	@ManyToOne
-	@JoinColumn(name = "vendorID")
 	private Vendor vendor;
 
 	@ManyToMany

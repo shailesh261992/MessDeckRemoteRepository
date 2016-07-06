@@ -11,62 +11,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
+import com.app.messdeck.abstracttest.AbstractIntegrationTest;
 import com.app.messdeck.model.dto.EmailIDDTO;
 import com.app.messdeck.model.dto.VendorDTO;
-import com.app.messdeck.test.data.IntegrationTestData;
 import com.app.messdeck.test.data.VendorDTODataSample;
 import com.app.messdeck.test.utils.TestUtils;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+
+
+
+@DatabaseSetup("/dbunit/testdata/VendorData.xml")
 
 public class IntegrationTestVendorController extends AbstractIntegrationTest {
 
-	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-			MediaType.APPLICATION_JSON.getSubtype());
-
-	private MockMvc mockMvc;
-
-	@Autowired
-	private WebApplicationContext webApplicationContext;
-
-	@Autowired
-	private IntegrationTestData testData;
-
-	@PostConstruct
-	public void init() {
-		testData.initializeTestData();
-	}
-
-	@Before
-	public void setUp() {
-
-		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-
-	}
-
 	@Test
+
 	public void testGetVendorSummary() throws Exception {
-		System.out.println("*** testGetVendorSummary start  ****");
 		mockMvc.perform(get("/vendors/1")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.id", is(1)))
 				.andExpect(jsonPath("$.name", is("Sai Mess")))
 				.andExpect(jsonPath("$.vendorAddress.pinCode", is("410507")));
-		System.out.println("*** testGetVendorSummary end ****");
 	}
 
 	@Test
 	public void testGetVendorSummaryForNonExistingVendor() throws Exception {
-		System.out.println("*** testGetVendorSummaryForNonExistingVendor start  ****");
 		mockMvc.perform(get("/vendors/15")).andDo(print()).andExpect(status().isBadRequest());
-		System.out.println("*** testGetVendorSummaryForNonExistingVendor end ****");
 
 	}
 
@@ -85,40 +55,28 @@ public class IntegrationTestVendorController extends AbstractIntegrationTest {
 	}
 
 	@Test
-	@Rollback(true)
 	public void testCreateVendor() throws Exception {
-		System.out.println("*** testCreateVendor start  ****");
 		VendorDTO vendor = VendorDTODataSample.getVendorDTO();
 		vendor.setName("Arya mess");
 		vendor.getOwner().setEmailID(new EmailIDDTO("arya@gmail.com"));
-
-		System.out.println("Vendor json = " + TestUtils.convertObjectToJsonString(vendor));
-
 		mockMvc.perform(post("/vendors").contentType(contentType).content(TestUtils.convertObjectToJsonString(vendor)))
 				.andDo(print()).andExpect(status().isCreated());
-
-		System.out.println("*** testCreateVendor end ****");
 
 	}
 
 	@Test
 	public void testCreateVendorWithConstraintViolation() throws Exception {
-		System.out.println("*** testCreateVendorWithConstraintViolation start  ****");
 		VendorDTO vendor = VendorDTODataSample.getVendorDTO();
-
 		vendor.setName("Sai9 Dhaba");
 		vendor.getOwner().setEmailID(new EmailIDDTO("sai9@gmail.com"));
 
 		mockMvc.perform(post("/vendors").contentType(contentType).content(TestUtils.convertObjectToJsonString(vendor)))
 				.andDo(print()).andExpect(status().isBadRequest()).andExpect(jsonPath("$[0].fieldName", is("name")));
 
-		System.out.println("*** testCreateVendorWithConstraintViolation end ****");
-
 	}
 
 	@Test
 	public void testCreateVendorWithConstraintViolation2() throws Exception {
-		System.out.println("*** testCreateVendorWithConstraintViolation2 start ****");
 		VendorDTO vendor = VendorDTODataSample.getVendorDTO();
 
 		vendor.getVendorAddress().setCountry("US");
@@ -127,9 +85,6 @@ public class IntegrationTestVendorController extends AbstractIntegrationTest {
 		mockMvc.perform(post("/vendors").contentType(contentType).content(TestUtils.convertObjectToJsonString(vendor)))
 				.andExpect(status().isBadRequest()).andDo(print())
 				.andExpect(jsonPath("$[0].fieldName", is("vendorAddress")));
-
-		System.out.println("*** testCreateVendorWithConstraintViolation2 end ****");
-
 	}
 
 	@Test
@@ -185,12 +140,12 @@ public class IntegrationTestVendorController extends AbstractIntegrationTest {
 
 	}
 
-	@Test
-	public void testGetCustomers() throws Exception {
-		mockMvc.perform(get("/vendors/1/customers").accept(contentType)).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].mobileNo", is("7770092161")));
-
-	}
+	// @Test
+	// public void testGetCustomers() throws Exception {
+	// mockMvc.perform(get("/vendors/1/customers").accept(contentType)).andDo(print()).andExpect(status().isOk())
+	// .andExpect(jsonPath("$[0].mobileNo", is("7770092161")));
+	//
+	// }
 
 	@Test
 	public void testGetCustomersForNonExistingVendor() throws Exception {

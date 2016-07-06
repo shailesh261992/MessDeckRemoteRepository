@@ -15,7 +15,6 @@ import net.sf.oval.constraint.AssertValid;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerDTO extends PersonDTO {
 
-	private long id;
 
 	@AssertValid(message = "Invalid Customer Address")
 	private CustomerAddressDTO customerAddress;

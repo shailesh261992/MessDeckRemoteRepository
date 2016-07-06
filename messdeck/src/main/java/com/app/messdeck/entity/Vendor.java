@@ -22,11 +22,11 @@ public class Vendor extends AbstractEntity {
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+//	@PrimaryKeyJoinColumn
 	private VendorAddress vendorAddress;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	// @PrimaryKeyJoinColumn
 	private Owner owner;
 
 	@OneToMany(mappedBy = "vendor")
@@ -46,13 +46,13 @@ public class Vendor extends AbstractEntity {
 		this.registrationDate = LocalDateTime.now();
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	// public long getId() {
+	// return id;
+	// }
+	//
+	// public void setId(long id) {
+	// this.id = id;
+	// }
 
 	public String getName() {
 		return name;

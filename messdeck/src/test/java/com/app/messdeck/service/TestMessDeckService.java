@@ -25,10 +25,10 @@ import com.app.messdeck.businessException.VendorNotExistException;
 import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForServices;
 import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
+import com.app.messdeck.modelmapper.DTOConverter;
 import com.app.messdeck.repository.MessDeckServiceInfoDAO;
 import com.app.messdeck.repository.VendorDAO;
-import com.app.messdeck.test.data.MessDeckServiceInfoDTODataSample;
-import com.app.messdeck.utility.DTOConverter;
+import com.app.messdeck.test.data.MessDeckServiceInfoDataSample;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UnitTestConfigurationForServices.class })
@@ -50,7 +50,7 @@ public class TestMessDeckService {
 	@Before
 	public void setUp() throws Exception {
 		Mockito.reset(daoMock);
-		messDeckServiceInfoDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
+		messDeckServiceInfoDTO = MessDeckServiceInfoDataSample.getMessDeckServiceInfoDTO();
 		messDeckServiceInfo = DTOConverter.getMessDeckServiceInfo(messDeckServiceInfoDTO);
 	}
 
@@ -117,7 +117,7 @@ public class TestMessDeckService {
 	@Test
 	public void testUpdate() {
 
-		MessDeckServiceInfoDTO updatedMessDeckServiceDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
+		MessDeckServiceInfoDTO updatedMessDeckServiceDTO = MessDeckServiceInfoDataSample.getMessDeckServiceInfoDTO();
 		updatedMessDeckServiceDTO.setCost(244);
 		when(daoMock.get(1l)).thenReturn(DTOConverter.getMessDeckServiceInfo(messDeckServiceInfoDTO))
 				.thenReturn(DTOConverter.getMessDeckServiceInfo(updatedMessDeckServiceDTO));

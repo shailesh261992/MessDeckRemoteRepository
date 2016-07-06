@@ -16,7 +16,7 @@ import com.app.messdeck.entity.VendorAddress;
 @Transactional
 public class VenderDAOImpl implements VendorDAO {
 
-	//@Autowired
+	// @Autowired
 	private HibernateTemplate template;
 
 	public Long create(Vendor vendor) {
@@ -44,7 +44,7 @@ public class VenderDAOImpl implements VendorDAO {
 		if (v != null) {
 			vendor.getOwner().setId(v.getOwner().getId());
 			vendor.getOwner().getOwnerAddress().setId(v.getOwner().getOwnerAddress().getId());
-			vendor.getVendorAddress().setId(v.getVendorAddress().getId());
+			// vendor.getVendorAddress().setId(v.getVendorAddress().getId());
 			template.merge(vendor);
 		} else {
 			throw new VendorNotExistException(vendor.getId());
@@ -81,7 +81,7 @@ public class VenderDAOImpl implements VendorDAO {
 		System.out.println("**** vendor = " + vendor);
 		vendor.getOwner().setId(vendor.getId());
 		vendor.getOwner().getOwnerAddress().setId(vendor.getId());
-		vendor.getVendorAddress().setId(vendor.getId());
+		// vendor.getVendorAddress().setId(vendor.getId());
 		return vendor;
 	}
 }

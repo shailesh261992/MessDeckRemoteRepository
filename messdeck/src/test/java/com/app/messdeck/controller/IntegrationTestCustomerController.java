@@ -12,54 +12,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
+import com.app.messdeck.abstracttest.AbstractIntegrationTest;
 import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.test.data.CustomerDTODataSample;
-import com.app.messdeck.test.data.IntegrationTestData;
 import com.app.messdeck.test.utils.TestUtils;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 
-
+@DatabaseSetup(value = { "/dbunit/testdata/CustomersData.xml" })
 public class IntegrationTestCustomerController extends AbstractIntegrationTest {
 
-	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-			MediaType.APPLICATION_JSON.getSubtype());
-
-	private MockMvc mockMvc;
-
-	@Autowired
-	private WebApplicationContext webApplicationContext;
-
-	@Autowired
-	private IntegrationTestData testData;
-
-	@PostConstruct
-	public void init() {
-		testData.initializeTestData();
-	}
-
-	@Before
-	public void setUp() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-
-	}
-
 	@Test
+
 	public void testGetCustomerSummary() throws Exception {
 
 		mockMvc.perform(get("/customers/1").accept(contentType)).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.name.firstName", is("Ganesh")))
-				.andExpect(jsonPath("$.links[*].rel", containsInAnyOrder("self")));
+				.andExpect(jsonPath("$.name.firstName", is("Ganesh")));
+
 	}
 
 	@Test
@@ -102,19 +74,19 @@ public class IntegrationTestCustomerController extends AbstractIntegrationTest {
 
 	}
 
-	@Test()
+	@Test
 	public void testDeleteCustomer() throws Exception {
 		mockMvc.perform(delete("/customers/2")).andDo(print()).andExpect(status().isNoContent());
 
 	}
 
-	@Test()
+	@Test
 	public void testDeleteNonExistingCustomer() throws Exception {
 		mockMvc.perform(delete("/customers/" + Integer.MAX_VALUE)).andDo(print()).andExpect(status().isBadRequest());
 
 	}
 
-	@Test()
+	@Test
 	public void testUpdateCustomer() throws IOException, Exception {
 
 		MvcResult result = mockMvc.perform(get("/customers/3").accept(contentType)).andReturn();
@@ -141,7 +113,7 @@ public class IntegrationTestCustomerController extends AbstractIntegrationTest {
 
 	}
 
-	@Test()
+	@Test
 	public void testUpdateNonExistingVendorReferredByCustomer() throws IOException, Exception {
 		MvcResult result = mockMvc.perform(get("/customers/3").accept(contentType)).andReturn();
 		MockHttpServletResponse response = result.getResponse();

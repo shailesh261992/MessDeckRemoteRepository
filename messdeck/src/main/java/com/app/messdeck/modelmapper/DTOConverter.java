@@ -1,15 +1,13 @@
-package com.app.messdeck.utility;
+package com.app.messdeck.modelmapper;
 
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
 import com.app.messdeck.entity.Customer;
-import com.app.messdeck.entity.Item;
 import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.entity.Vendor;
 import com.app.messdeck.model.dto.CustomerDTO;
-import com.app.messdeck.model.dto.ItemDTO;
 import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 
@@ -53,22 +51,10 @@ public class DTOConverter {
 	}
 
 	public static MessDeckServiceInfo getMessDeckServiceInfo(MessDeckServiceInfoDTO dto) {
-		logger.debug("MessDeckServiceDTO : " + dto);
 		ModelMapper modelMapper = new ModelMapper();
-
-		modelMapper.addMappings(new PropertyMap<ItemDTO, Item>() {
-
-			@Override
-			protected void configure() {
-				skip().setId(0);
-
-			}
-		});
-
-		MessDeckServiceInfo messDeckService = modelMapper.map(dto, MessDeckServiceInfo.class);
-		logger.debug("Converted MessDeckService : " + messDeckService);
-		return messDeckService;
-
+		modelMapper.addMappings(new MessDeckServiceDTOMap());
+		modelMapper.addMappings(new ItemDTOMap());
+		return modelMapper.map(dto, MessDeckServiceInfo.class);
 	}
 
 }

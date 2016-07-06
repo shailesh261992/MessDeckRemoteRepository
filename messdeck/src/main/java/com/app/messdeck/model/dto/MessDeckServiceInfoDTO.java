@@ -17,12 +17,10 @@ import net.sf.oval.constraint.Assert;
 import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.NotNull;
 
-public class MessDeckServiceInfoDTO {
+public class MessDeckServiceInfoDTO extends AbstractDTO {
 
-	private long id;
-
-	@NotNull(message = "Vendor can not be null,Only vendors are allowed to publish service")
-	private VendorDTO vendor;
+	@Assert(expr = "_this.vendorId > 0", lang = "js", message = "VendorId can not be less than equal to zero,Only vendors are allowed to publish service")
+	private long vendorId;
 
 	@NotNull(message = "Service Type can not be null")
 	private ServiceType serviceType;
@@ -49,16 +47,14 @@ public class MessDeckServiceInfoDTO {
 	@Assert(expr = "_this.cost > 0", lang = "js", message = "Cost must be greater than 0(Zero)")
 	private double cost;
 
-	private List<CustomerDTO> subscribers;
-
 	public MessDeckServiceInfoDTO() {
 
 	}
 
-	public MessDeckServiceInfoDTO(VendorDTO vendor, ServiceType serviceType, LocalDate date, List<ItemDTO> meal,
+	public MessDeckServiceInfoDTO(long vendorId, ServiceType serviceType, LocalDate date, List<ItemDTO> meal,
 			double cost) {
 		super();
-		this.vendor = vendor;
+		this.vendorId = vendorId;
 		this.serviceType = serviceType;
 		this.date = date;
 		this.meal = meal;
@@ -105,12 +101,12 @@ public class MessDeckServiceInfoDTO {
 		this.id = id;
 	}
 
-	public VendorDTO getVendor() {
-		return vendor;
+	public long getVendorId() {
+		return vendorId;
 	}
 
-	public void setVendor(VendorDTO vendor) {
-		this.vendor = vendor;
+	public void setVendor(long vendorId) {
+		this.vendorId = vendorId;
 	}
 
 	public LocalDate getDate() {
@@ -137,82 +133,11 @@ public class MessDeckServiceInfoDTO {
 		this.cost = cost;
 	}
 
-	public List<CustomerDTO> getSubscribers() {
-		return subscribers;
-	}
-
-	public void setSubscribers(List<CustomerDTO> subscribers) {
-		this.subscribers = subscribers;
-	}
-
 	@Override
 	public String toString() {
-		return "MessDeckServiceDTO [id=" + id + ", vendor=" + vendor + ", serviceType=" + serviceType
+		return "MessDeckServiceDTO [id=" + id + ", vendor=" + vendorId + ", serviceType=" + serviceType
 				+ ", capacityOfMembers=" + capacityOfMembers + ", startTime=" + startTime + ", endTime=" + endTime
 				+ ", date=" + date + ", meal=" + meal + ", cost=" + cost + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((capacityOfMembers == null) ? 0 : capacityOfMembers.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(cost);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
-		result = prime * result + ((meal == null) ? 0 : meal.hashCode());
-		result = prime * result + ((serviceType == null) ? 0 : serviceType.hashCode());
-		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
-		result = prime * result + ((vendor == null) ? 0 : vendor.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MessDeckServiceInfoDTO other = (MessDeckServiceInfoDTO) obj;
-		if (capacityOfMembers == null) {
-			if (other.capacityOfMembers != null)
-				return false;
-		} else if (!capacityOfMembers.equals(other.capacityOfMembers))
-			return false;
-		if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
-			return false;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (endTime == null) {
-			if (other.endTime != null)
-				return false;
-		} else if (!endTime.equals(other.endTime))
-			return false;
-		if (meal == null) {
-			if (other.meal != null)
-				return false;
-		} else if (!meal.equals(other.meal))
-			return false;
-		if (serviceType != other.serviceType)
-			return false;
-		if (startTime == null) {
-			if (other.startTime != null)
-				return false;
-		} else if (!startTime.equals(other.startTime))
-			return false;
-		if (vendor == null) {
-			if (other.vendor != null)
-				return false;
-		} else if (!vendor.equals(other.vendor))
-			return false;
-		return true;
 	}
 
 }

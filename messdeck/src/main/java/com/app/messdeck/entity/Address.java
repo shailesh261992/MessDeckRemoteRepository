@@ -4,7 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class Address {
+public class Address extends AbstractEntity {
 	@Basic
 	private String street;
 	@Basic

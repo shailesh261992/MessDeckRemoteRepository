@@ -4,21 +4,23 @@ import java.util.regex.Pattern;
 
 import net.sf.oval.constraint.MatchPattern;
 
-public class AddressDTO {
-
+public class AddressDTO extends AbstractDTO {
 
 	private String street;
 
-	@MatchPattern(pattern="Pune",flags={Pattern.CASE_INSENSITIVE},message="Only Supported in Pune. Valid values list [Pune]")
+	@MatchPattern(pattern = "Pune", flags = {
+			Pattern.CASE_INSENSITIVE }, message = "Only Supported in Pune. Valid values list [Pune]")
 	private String city;
 
-	@MatchPattern(pattern="Maharashtra",flags={Pattern.CASE_INSENSITIVE},message="Only Supported in Maharashtra. Valid values list [Maharashtra]")
+	@MatchPattern(pattern = "Maharashtra", flags = {
+			Pattern.CASE_INSENSITIVE }, message = "Only Supported in Maharashtra. Valid values list [Maharashtra]")
 	private String state;
 
-	@MatchPattern(pattern="india",flags={Pattern.CASE_INSENSITIVE},message="Only Supported in India. Valid values list [India]")
+	@MatchPattern(pattern = "india", flags = {
+			Pattern.CASE_INSENSITIVE }, message = "Only Supported in India. Valid values list [India]")
 	private String country;
-	
-	@MatchPattern(pattern="^[1-9][0-9]{5}$",message="Invalid Pincode")
+
+	@MatchPattern(pattern = "^[1-9][0-9]{5}$", message = "Invalid Pincode")
 	private String pinCode;
 
 	public AddressDTO() {

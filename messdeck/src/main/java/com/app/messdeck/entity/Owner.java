@@ -2,30 +2,28 @@ package com.app.messdeck.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Owner extends Person {
-	@Id
-	private long id;
+	// @Id
+	// private long id;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+//	@PrimaryKeyJoinColumn
 	private OwnerAddress ownerAddress;
 
 	public Owner() {
 		this.ownerAddress = new OwnerAddress();
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	// public long getId() {
+	// return id;
+	// }
+	//
+	// public void setId(long id) {
+	// this.id = id;
+	// }
 
 	public OwnerAddress getOwnerAddress() {
 		return ownerAddress;

@@ -1,17 +1,16 @@
-package com.app.messdeck.entity;
+package com.app.messdeck.model.dto;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
-public class AbstractEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+import com.app.messdeck.entity.AbstractEntity;
+
+public abstract class AbstractDTO {
+
 	public long id;
 
-	public AbstractEntity() {
+	public AbstractDTO() {
 	}
 
 	public long getId() {

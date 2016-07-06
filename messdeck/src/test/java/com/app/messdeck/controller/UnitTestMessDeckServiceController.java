@@ -40,11 +40,11 @@ import com.app.messdeck.configuration.testenvconfig.UnitTestConfigurationForCont
 import com.app.messdeck.entity.MessDeckServiceInfo;
 import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.model.dto.ValidationErrrorInfo;
+import com.app.messdeck.modelmapper.DTOConverter;
+import com.app.messdeck.modelmapper.EntityConverter;
 import com.app.messdeck.service.MessDeckService;
-import com.app.messdeck.test.data.MessDeckServiceInfoDTODataSample;
+import com.app.messdeck.test.data.MessDeckServiceInfoDataSample;
 import com.app.messdeck.test.utils.TestUtils;
-import com.app.messdeck.utility.DTOConverter;
-import com.app.messdeck.utility.EntityConverter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UnitTestConfigurationForControllers.class })
@@ -68,7 +68,7 @@ public class UnitTestMessDeckServiceController {
 	public void setUp() {
 		Mockito.reset(serviceMock);
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-		messDeckServiceInfoDTO = MessDeckServiceInfoDTODataSample.getMessDeckServiceInfoDTO();
+		messDeckServiceInfoDTO = MessDeckServiceInfoDataSample.getMessDeckServiceInfoDTO();
 		messDeckServiceInfoDTO.setId(1);
 		messDeckServiceInfo = DTOConverter.getMessDeckServiceInfo(messDeckServiceInfoDTO);
 
