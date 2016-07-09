@@ -1,10 +1,7 @@
 package com.app.messdeck.model.dto;
 
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -15,41 +12,21 @@ import net.sf.oval.constraint.AssertValid;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerDTO extends PersonDTO {
 
-
 	@AssertValid(message = "Invalid Customer Address")
 	private CustomerAddressDTO customerAddress;
 
 	@NotNull
-	private VendorDTO vendor;
-
-	@JsonIgnore
-	private List<MessDeckServiceInfoDTO> subscribedServices;
+	private Long vendorId;
 
 	public CustomerDTO() {
 	}
 
-	public long getId() {
-		return id;
+	public Long getVendorId() {
+		return vendorId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public VendorDTO getVendor() {
-		return vendor;
-	}
-
-	public void setVendor(VendorDTO vendor) {
-		this.vendor = vendor;
-	}
-
-	public List<MessDeckServiceInfoDTO> getSubscribedServices() {
-		return subscribedServices;
-	}
-
-	public void setSubscribedServices(List<MessDeckServiceInfoDTO> subscribedServices) {
-		this.subscribedServices = subscribedServices;
+	public void setVendorId(Long vendor) {
+		this.vendorId = vendor;
 	}
 
 	public CustomerAddressDTO getCustomerAddress() {
@@ -62,7 +39,7 @@ public class CustomerDTO extends PersonDTO {
 
 	@Override
 	public String toString() {
-		return "CustomerDTO [id=" + id + ", customerAddress=" + customerAddress + ", vendor=" + vendor + ", person"
+		return "CustomerDTO [id=" + id + ", customerAddress=" + customerAddress + ", vendor=" + vendorId + ", person"
 				+ super.toString() + "]";
 	}
 

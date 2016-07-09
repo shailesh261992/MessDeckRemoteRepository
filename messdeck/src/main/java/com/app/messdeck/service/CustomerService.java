@@ -12,4 +12,6 @@ public interface CustomerService {
 
 	void deleteCustomer(Long id);
 
+	boolean subScribeMessDeckService(Long id, Long serviceId);
+
 }

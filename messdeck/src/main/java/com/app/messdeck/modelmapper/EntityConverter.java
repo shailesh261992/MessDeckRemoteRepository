@@ -51,21 +51,8 @@ public class EntityConverter {
 
 	public static CustomerDTO getCustomorSummaryDTO(Customer customer) {
 		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.addMappings(new PropertyMap<Customer, CustomerDTO>() {
-
-			@Override
-			protected void configure() {
-				skip().setSubscribedServices(null);
-				skip().getVendor().setCustomers(null);
-				skip().getVendor().setOwner(null);
-				skip().getVendor().setServices(null);
-
-			}
-		});
-
-		CustomerDTO customerDTO = modelMapper.map(customer, CustomerDTO.class);
-		System.out.println("CustomerDTO Summary = " + customer);
-		return customerDTO;
+		modelMapper.addMappings(new CustomerMap());
+		return modelMapper.map(customer, CustomerDTO.class);
 
 	}
 

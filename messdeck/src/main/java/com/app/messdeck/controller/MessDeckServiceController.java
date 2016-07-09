@@ -3,6 +3,8 @@ package com.app.messdeck.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.messdeck.annotations.Loggable;
+import com.app.messdeck.model.dto.CustomerDTO;
 import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.service.MessDeckService;
 
@@ -31,10 +34,11 @@ public class MessDeckServiceController {
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Resource<?> createMessDeckService(@RequestBody MessDeckServiceInfoDTO messDeckServiceDTO,
 			HttpServletRequest request) {
-		Long id = messDeckService.createMessDeckService(messDeckServiceDTO);
-		MessDeckServiceInfoDTO fetchedMessDeckService = messDeckService.getMessDeckService(id);
-		Resource<MessDeckServiceInfoDTO> resource = new Resource<MessDeckServiceInfoDTO>(fetchedMessDeckService);
-		resource.add(linkTo(methodOn(MessDeckServiceController.class).getMessDeckService(id)).withSelfRel());
+
+		MessDeckServiceInfoDTO messDeckServiceInfo = messDeckService.createMessDeckService(messDeckServiceDTO);
+		Resource<MessDeckServiceInfoDTO> resource = new Resource<MessDeckServiceInfoDTO>(messDeckServiceInfo);
+		resource.add(linkTo(methodOn(MessDeckServiceController.class).getMessDeckService(messDeckServiceInfo.getId()))
+				.withSelfRel());
 		return resource;
 	}
 
@@ -46,11 +50,11 @@ public class MessDeckServiceController {
 
 	@RequestMapping(value = "/", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateMessDeckService(@RequestBody MessDeckServiceInfoDTO messDeckServiceDTO) {
-		long id = messDeckServiceDTO.getId();
-		messDeckService.updateMessDeckService(messDeckServiceDTO);
-		MessDeckServiceInfoDTO fetchedMessDeckService = messDeckService.getMessDeckService(id);
-		Resource<MessDeckServiceInfoDTO> resource = new Resource<MessDeckServiceInfoDTO>(fetchedMessDeckService);
-		resource.add(linkTo(methodOn(MessDeckServiceController.class).getMessDeckService(id)).withSelfRel());
+
+		MessDeckServiceInfoDTO updateMessDeckService = messDeckService.updateMessDeckService(messDeckServiceDTO);
+		Resource<MessDeckServiceInfoDTO> resource = new Resource<MessDeckServiceInfoDTO>(updateMessDeckService);
+		resource.add(linkTo(methodOn(MessDeckServiceController.class).getMessDeckService(updateMessDeckService.getId()))
+				.withSelfRel());
 		return new ResponseEntity<Object>(resource, HttpStatus.OK);
 
 	}
@@ -60,6 +64,12 @@ public class MessDeckServiceController {
 		messDeckService.deleteMessDeckService(id);
 		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 
+	}
+
+	@Loggable
+	@RequestMapping(value = "/{id}/subscribers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public List<CustomerDTO> getMessDeckServiceSubscribers(@PathVariable Long id) {
+		return messDeckService.getSubscribedCustomers(id);
 	}
 
 }

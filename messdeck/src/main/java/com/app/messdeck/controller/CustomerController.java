@@ -66,4 +66,11 @@ public class CustomerController {
 
 	}
 
+	@RequestMapping(value = "/{id}/subscribe/messdeckservice/{serviceId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> subscribeService(@PathVariable long id, @PathVariable long serviceId) {
+
+		return new ResponseEntity<Boolean>(service.subScribeMessDeckService(id, serviceId), HttpStatus.OK);
+
+	}
+
 }

@@ -1,7 +1,5 @@
 package com.app.messdeck.businessException;
 
-import java.util.List;
-
 public class InvalidDateFormatException extends RuntimeException {
 
 	/**

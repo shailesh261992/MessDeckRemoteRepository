@@ -1,7 +1,6 @@
 package com.app.messdeck.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 public class OwnerAddress extends Address {

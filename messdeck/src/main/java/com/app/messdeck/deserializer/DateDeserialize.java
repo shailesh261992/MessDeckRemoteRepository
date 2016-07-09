@@ -16,13 +16,14 @@ public class DateDeserialize extends JsonDeserializer<Date> {
 	@Override
 	public Date deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 		String text = p.getText();
+		Date date = null;
 		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			Date date = ft.parse(text);
+			date = ft.parse(text);
 		} catch (ParseException e) {
 			throw new InvalidFormatException(e.getMessage(), text, Date.class);
 		}
-		return null;
+		return date;
 	}
 
 }

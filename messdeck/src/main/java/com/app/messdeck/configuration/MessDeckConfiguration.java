@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = { "com.app.messdeck.repository", "com.app.messdeck.controller",
 		"com.app.messdeck.service" })
 @EnableTransactionManagement()
-@Import({ StaticResourceConfiguration.class, OvalConfiguration.class, AOPConfiguration.class })
+@Import({ StaticResourceConfiguration.class, OvalConfiguration.class, AOPConfiguration.class, SecurityConfig.class })
 @EnableAspectJAutoProxy
 @EnableJpaRepositories(basePackages = { "com.app.messdeck.repository" })
 @EnableAutoConfiguration
@@ -38,7 +38,7 @@ public class MessDeckConfiguration extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	// @Scope(scopeName = "prototype")
+	@Scope(scopeName = "prototype")
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}

@@ -1,9 +1,5 @@
 package com.app.messdeck.model.dto;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.app.messdeck.entity.AbstractEntity;
 
 public abstract class AbstractDTO {

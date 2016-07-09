@@ -1,6 +1,5 @@
 package com.app.messdeck.modelmapper;
 
-import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 
@@ -12,7 +11,7 @@ import com.app.messdeck.model.dto.MessDeckServiceInfoDTO;
 import com.app.messdeck.model.dto.VendorDTO;
 
 public class DTOConverter {
-	private static Logger logger = Logger.getLogger(DTOConverter.class);
+	// private static Logger logger = Logger.getLogger(DTOConverter.class);
 
 	public static Vendor getVendor(VendorDTO dto) {
 		ModelMapper modelMapper = new ModelMapper();
@@ -32,21 +31,9 @@ public class DTOConverter {
 	public static Customer getCustomer(CustomerDTO dto) {
 
 		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.addMappings(new PropertyMap<CustomerDTO, Customer>() {
+		modelMapper.addMappings(new CustomerDTOMap());
 
-			@Override
-			protected void configure() {
-
-				skip().setSubscribedServices(null);
-				skip().getVendor().setCustomers(null);
-				skip().getVendor().setOwner(null);
-				skip().getVendor().setServices(null);
-
-			}
-		});
-
-		Customer customer = modelMapper.map(dto, Customer.class);
-		return customer;
+		return modelMapper.map(dto, Customer.class);
 
 	}
 

@@ -90,4 +90,11 @@ public class DatabaseExceptionControllerAdvice {
 
 	}
 
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({ RuntimeException.class, })
+	public @ResponseBody ErrorInfo handleRunTimeExceptions(HttpServletRequest req, RuntimeException exception) {
+		logger.debug(exception.getMessage(), exception);
+		return new ErrorInfo(req.getRequestURL().toString(), exception.getMessage());
+
+	}
 }
