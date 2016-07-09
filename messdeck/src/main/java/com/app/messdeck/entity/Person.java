@@ -2,6 +2,9 @@ package com.app.messdeck.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
@@ -42,31 +45,6 @@ public class Person extends AbstractEntity {
 
 	public void setEmailID(EmailID emailID) {
 		this.emailID = emailID;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((emailID == null) ? 0 : emailID.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Person other = (Person) obj;
-		if (emailID == null) {
-			if (other.emailID != null)
-				return false;
-		} else if (!emailID.equals(other.emailID))
-			return false;
-		return true;
 	}
 
 	public Gender getGender() {

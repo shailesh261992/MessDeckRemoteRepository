@@ -7,6 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -15,17 +18,12 @@ import com.app.messdeck.serializer.LocalDateTimeAttributeConverter;
 @Entity
 public class Vendor extends AbstractEntity {
 
-	// @Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
-	// private long id;
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
-//	@PrimaryKeyJoinColumn
 	private VendorAddress vendorAddress;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	// @PrimaryKeyJoinColumn
 	private Owner owner;
 
 	@OneToMany(mappedBy = "vendor")
@@ -37,21 +35,12 @@ public class Vendor extends AbstractEntity {
 	@Embedded
 	private EmailID emailID;
 
-	// @Temporal(TemporalType.TIMESTAMP)
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime registrationDate;
 
 	public Vendor() {
 		this.registrationDate = LocalDateTime.now();
 	}
-
-	// public long getId() {
-	// return id;
-	// }
-	//
-	// public void setId(long id) {
-	// this.id = id;
-	// }
 
 	public String getName() {
 		return name;

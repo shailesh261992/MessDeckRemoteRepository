@@ -65,8 +65,7 @@ public class Item {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Category == null) ? 0 : Category.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -78,16 +77,8 @@ public class Item {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Item other = (Item) obj;
-		if (Category == null) {
-			if (other.Category != null)
-				return false;
-		} else if (!Category.equals(other.Category))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		AbstractEntity other = (AbstractEntity) obj;
+		if (id != other.id)
 			return false;
 		return true;
 	}

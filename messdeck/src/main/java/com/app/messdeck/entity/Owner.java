@@ -6,24 +6,14 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Owner extends Person {
-	// @Id
-	// private long id;
+	
 
 	@OneToOne(cascade = CascadeType.ALL)
-//	@PrimaryKeyJoinColumn
 	private OwnerAddress ownerAddress;
 
 	public Owner() {
 		this.ownerAddress = new OwnerAddress();
 	}
-
-	// public long getId() {
-	// return id;
-	// }
-	//
-	// public void setId(long id) {
-	// this.id = id;
-	// }
 
 	public OwnerAddress getOwnerAddress() {
 		return ownerAddress;
